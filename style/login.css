@@ -1,0 +1,100 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+header{
+    padding: 1rem;
+    text-align: center;
+    border-bottom: 1px solid #5B5449;
+}
+h1{
+    font-family: 'Crimson Text';
+    font-weight: 400;
+    letter-spacing: 5px;
+    font-size: 50px;
+}
+html, body {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+
+section {
+    flex: 1;
+    display: flex;
+    flex-direction: column; /* Stack elements vertically */
+    align-items: center;
+    justify-content: center;
+    padding: 2rem; /* Prevents content from touching edges */
+}
+
+header h1{
+    font-weight: 400;
+    color: #5B5449;
+    letter-spacing: 5px;
+    font-size: 39px;
+}
+section p{
+    font-family: 'Roboto';
+    font-weight: 400;
+    font-size: 21px;
+    padding: 1rem 0 2rem 0; /*top right bottom left*/
+}
+form{
+    font-family: 'Roboto';
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    max-width: 400px;
+}
+form input{
+
+    font-weight: 400;
+    padding: 1rem;
+    margin: 1rem 0;
+    border: 1px solid #fff;
+    border-radius: 5px;
+    font-size: 1rem;
+}
+form input:hover{
+    border: 1px solid #5B5449;
+    transition: 0.4s;
+}
+form a{
+    padding: 0.5rem 0;
+    font-weight: 500;
+    text-align: end;
+    font-size: 0.9rem;
+    text-decoration: none;
+    text-decoration-line: none;
+    color: #000;
+}
+button[type="submit"]{
+    font-family: 'Roboto';
+    font-weight: 500!important;
+    padding: 1rem;
+    margin: 1rem 0;
+    border: 1px solid #5B5449;
+    border-radius: 5px;
+    font-size: 1rem;
+    background-color: #5B5449;
+    color: #fff;
+    font-weight: 500;
+    cursor: pointer;
+}
+
+button[type="button"]{
+    font-family: 'Roboto';
+    font-weight: 500!important;
+    padding: 1rem;
+    margin: 1rem 0;
+    border: 1px solid #E3DED5;
+    border-radius: 5px;
+    font-size: 1rem;
+    background-color: #E3DED5;
+    color: #5B5449;
+    font-weight: 500;
+    cursor: pointer;
+}

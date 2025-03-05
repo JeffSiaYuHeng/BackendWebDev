@@ -16,10 +16,10 @@ if (isset($_SESSION["user_id"])) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/style/register.css">
-    <link rel="stylesheet" href="/style/transition.css">
+    <link rel="stylesheet" href="/BackendWebDev/style/register.css">
+    <link rel="stylesheet" href="/BackendWebDev/style/transition.css">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap" rel="stylesheet">
-    <script src="/script/transition.js"></script>
+    <script src="/BackendWebDev/script/transition.js"></script>
     <title>Eternal Elegant Bridal - Register</title>
 </head>
 

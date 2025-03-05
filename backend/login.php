@@ -7,18 +7,22 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $password = trim($_POST["password"]);
 
     // Prepare SQL statement to fetch user data
-    $stmt = $conn->prepare("SELECT id, password FROM users WHERE email = ?");
+    $stmt = $conn->prepare("SELECT id, first_name, last_name, password FROM users WHERE email = ?");
     $stmt->bind_param("s", $email);
     $stmt->execute();
-    $result = $stmt->get_result();
-    
-    if ($result->num_rows === 1) {
-        $row = $result->fetch_assoc();
-        
+    $stmt->store_result();
+
+    if ($stmt->num_rows > 0) {
+        $stmt->bind_result($user_id, $first_name, $last_name, $hashed_password);
+        $stmt->fetch();
+
         // Verify password with hashed version in DB
-        if (password_verify($password, $row["password"])) {
-            $_SESSION["user_id"] = $row["id"];
+        if (password_verify($password, $hashed_password)) {
+            $_SESSION["user_id"] = $user_id;
             $_SESSION["email"] = $email;
+            $_SESSION["first_name"] = $first_name;  // ✅ Store first_name in session
+            $_SESSION["last_name"] = $last_name;    // ✅ Store last_name in session
+            $_SESSION["user_name"] = $first_name . " " . $last_name;
 
             // ✅ Redirect to dashboard after successful login
             header("Location: /page/dashboard.php");

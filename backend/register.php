@@ -42,6 +42,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         // Store session variables
         $_SESSION["user_id"] = $stmt->insert_id; // Store user ID in session
         $_SESSION["email"] = $email;
+        $_SESSION["first_name"] = $first_name; // ✅ Add this line
+        $_SESSION["last_name"] = $last_name;  // Optional, in case you need it
         $_SESSION["user_name"] = $first_name . " " . $last_name; // Store user's full name in session
 
         // Redirect to dashboard

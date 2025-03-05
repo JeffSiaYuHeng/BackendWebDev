@@ -1,0 +1,94 @@
+/* General Styling */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f8f8f8;
+    text-align: center;
+}
+
+/* Header Styling */
+header {
+    background-color: #fff;
+    padding: 20px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+    margin: 0;
+    font-size: 28px;
+    color: #333;
+}
+
+/* Accessories Section */
+.accessories-container {
+    padding: 20px;
+}
+
+h2 {
+    margin-top: 30px;
+    font-size: 24px;
+    color: #444;
+}
+
+/* Accessories Grid */
+.accessory-grid {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 20px;
+    margin: 20px 0;
+}
+
+/* Accessory Card */
+.accessory {
+    background: white;
+    padding: 15px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    width: 250px;
+    text-align: center;
+    transition: transform 0.3s ease;
+}
+
+.accessory:hover {
+    transform: translateY(-5px);
+}
+
+/* Image Styling */
+.accessory img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 8px;
+}
+
+/* Button Styling */
+button {
+    background-color: #d4a373;
+    color: white;
+    border: none;
+    padding: 10px;
+    width: 100%;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 10px;
+    font-size: 16px;
+    transition: background 0.3s ease;
+}
+
+button:hover {
+    background-color: #b67a4e;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .accessory-grid {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .accessory {
+        width: 90%;
+    }
+}

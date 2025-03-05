@@ -24,9 +24,12 @@ $first_name = $_SESSION["first_name"] ?? "Guest";
     <link rel="stylesheet" href="/BackendWebDev/style/dashboard.css">
     <link rel="stylesheet" href="/style/dashboard.css">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <title>Dashboard</title>
     <script src="/BackendWebDev/script/transition.js"></script>
     <script src="/script/transition.js"></script>
+    <script src="/script/slider.js"></script>
+    <script src="/BackendWebDev/script/slider.js"></script>
 </head>
 
 <body>
@@ -34,9 +37,11 @@ $first_name = $_SESSION["first_name"] ?? "Guest";
         <h1>Eternal Elegant Bridal</h1>
         <div class="dropdown">
             <button class="dropbtn">
-                <span>Welcome <br><?php echo htmlspecialchars($first_name); ?></span>
+                <span>Me <i class="fa fa-angle-down" aria-hidden="true"></i></span>
             </button>
             <div class="dropdown-content">
+                <p>Hello <?php echo htmlspecialchars($first_name); ?>!</p>
+                <div class="line"></div>
                 <a href="/backend/logout.php">Logout</a>
             </div>
         </div>
@@ -47,7 +52,20 @@ $first_name = $_SESSION["first_name"] ?? "Guest";
         <a class="blink" href="">About</a> |
         <a class="blink" href="">Contact</a>
     </nav>
-
+    <section>
+        <div class="slider-wrapper">
+            <div class="slider">
+                <img id="slide1" src="/image/banner1.webp" alt="">
+                <img id="slide2" src="/image/banner2.webp" alt="">
+                <img id="slide3" src="/image/banner3.webp" alt="">
+            </div>
+            <div class="slider-nav">
+                <a href="#slide1"></a>
+                <a href="#slide2"></a>
+                <a href="#slide3"></a>
+            </div>
+        </div>
+    </section>
     <a href="login.php">login test</a>
     <a href="/backend/logout.php">Logout</a>
 </body>

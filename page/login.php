@@ -37,7 +37,7 @@ if (isset($_SESSION["user_id"])) {
             <input type="email" name="email" placeholder="Enter your Email" required>
             <label>Password</label>
             <input type="password" name="password" placeholder="Enter your Password" required>
-            <a href="forgotpassword.html">Forgot Password</a>
+            <a href="forgotPassword.html">Forgot Password</a>
             <button type="submit">Sign In</button>
             <button type="button" onclick="window.location.href='register.php'">Register</button>
         </form>

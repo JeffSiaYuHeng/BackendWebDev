@@ -1,0 +1,96 @@
+/* General Styles */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 20px;
+    background-color: #f9f9f9;
+}
+
+/* Container */
+.product-container {
+    display: flex;
+    flex-wrap: wrap;
+    max-width: 900px;
+    margin: auto;
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Left Side - Bridal Image */
+.image-container {
+    flex: 1;
+    text-align: center;
+    min-width: 300px;
+}
+
+.image-container img {
+    max-width: 100%;
+    border-radius: 10px;
+}
+
+/* Right Side - Bridal Details */
+.details-container {
+    flex: 1;
+    padding-left: 20px;
+    min-width: 300px;
+}
+
+/* Title & Text */
+h1, h3 {
+    margin: 10px 0;
+}
+
+/* Preview Box */
+.preview-container {
+    display: flex;
+    margin-top: 10px;
+    justify-content: center;
+}
+
+.preview-box {
+    width: 80px;
+    height: 80px;
+    border: 2px solid black;
+    position: relative;
+    background-color: white;
+    overflow: hidden;
+}
+
+/* Ensure fabric overlay doesn't block color */
+.fabric-overlay {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    opacity: 0.3;
+    pointer-events: none; /* Allows clicks to pass through */
+}
+
+/* Fabric Textures */
+.fabric1 {
+    background-image: repeating-linear-gradient(45deg, rgba(0,0,0,0.2), transparent 10px);
+}
+
+.fabric2 {
+    background-image: repeating-linear-gradient(90deg, rgba(0,0,0,0.2), transparent 5px);
+}
+
+.fabric3 {
+    background-image: repeating-linear-gradient(135deg, rgba(0,0,0,0.2), transparent 15px);
+}
+
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .product-container {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .details-container {
+        padding-left: 0;
+    }
+}

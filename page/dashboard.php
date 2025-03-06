@@ -67,6 +67,7 @@ $first_name = $_SESSION["first_name"] ?? "Guest";
         </div>
     </section>
     <a href="login.php">login test</a>
+    <a href="ProductDetailPage.php">product page</a>
     <a href="/backend/logout.php">Logout</a>
 </body>
 

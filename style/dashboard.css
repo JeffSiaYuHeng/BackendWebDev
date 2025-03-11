@@ -130,28 +130,52 @@ nav a{
 
 /*slider*/
 
-
+/* Slider Container */
 .slider {
-    width: 100vw; /* Full screen width */
+    width: 100vw;
+    height: 50rem;
     overflow: hidden;
-    position: relative;
+    position: relative; /* Ensures button stays inside */
 }
 
+/* Slide Wrapper */
 .slides {
     display: flex;
-    width: 300%; /* Each image is 100%, total 300% for 3 images */
+    width: 300%; /* 3 slides, each 100% */
+    height: 100%; /* Ensure same height as slider */
     animation: slide 15s infinite;
 }
 
+/* Individual Slide */
 .slides img {
-    width: 100vw; /* Each image takes full width of viewport */
-    height: auto;
-    object-fit: cover;
+    flex: 1 0 100vw; /* Ensures each image is exactly 100% of the viewport width */
+    width: 100vw; /* Force each image to match slider width */
+    height: 100%; /* Matches slider height */
+    object-fit: cover; /* Ensures full coverage without distortion */
 }
 
+/* Keyframes to Slide */
 @keyframes slide {
     0% { transform: translateX(0); }
-    33.33% { transform: translateX(-100vw); } /* Move one full viewport width */
-    66.66% { transform: translateX(-200vw); } /* Move two full viewport widths */
+    33.33% { transform: translateX(-100vw); } /* Move exactly 1 full slide */
+    66.66% { transform: translateX(-200vw); } /* Move exactly 2 full slides */
     100% { transform: translateX(0); } /* Reset to start */
+}
+
+
+/* Button Styling */
+.banner button {
+    position: absolute;
+    bottom: 5%; /* Keeps it inside the banner */
+    left: 5%; /* Adjust position relative to banner */
+    padding: 1rem 2rem;
+    font-size: 20px;
+    background-color: #8F7F65;
+    color: white;
+    border: none;
+    cursor: pointer;
+    border-radius: 0.5rem;
+    font-family: 'Crimson Text';
+    font-weight: 400;
+    max-width: 90%; /* Ensures button does not go out */
 }

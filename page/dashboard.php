@@ -52,13 +52,16 @@ $first_name = $_SESSION["first_name"] ?? "Guest";
         <a class="blink" href="">About</a> |
         <a class="blink" href="">Contact</a>
     </nav>
-    <div class="slider">
-        <div class="slides">
-            <img src="/image/banner1.webp" alt="Banner 1">
-            <img src="/image/banner2.webp" alt="Banner 2">
-            <img src="/image/banner3.webp" alt="Banner 3">
+    <section class="banner">
+        <div class="slider">
+            <div class="slides">
+                <img src="/image/banner1.webp" alt="Banner 1">
+                <img src="/image/banner2.webp" alt="Banner 2">
+                <img src="/image/banner3.webp" alt="Banner 3">
+            </div>
+            <button>Start Customizing Your Gown</button>
         </div>
-    </div>
+    </section>
 
     <a href="login.php">login test</a>
     <a href="ProductDetailPage.php">product page</a>

@@ -55,11 +55,40 @@ $first_name = $_SESSION["first_name"] ?? "Guest";
     <section class="banner">
         <div class="slider">
             <div class="slides">
-                <img src="/image/banner1.webp" alt="Banner 1">
-                <img src="/image/banner2.webp" alt="Banner 2">
-                <img src="/image/banner3.webp" alt="Banner 3">
+                <img src="/image/banner/banner1_s.png" alt="Banner 1">
+                <img src="/image/banner/banner2_s.png" alt="Banner 2">
+                <img src="/image/banner/banner3_s.png" alt="Banner 3">
             </div>
             <button>Start Customizing Your Gown</button>
+        </div>
+    </section>
+
+    <section class="product">
+        <h2>Our Products</h2>
+        <div class="product-container">
+            <div class="product-card">
+                <img src="/image/dress/dress1.jpg" alt="Product 1">
+                <div class="overlay"></div> <!-- Overlay inside product-card -->
+                <div class="product-content">
+                    <h3>Product 1</h3>
+                    <p>Price: $100</p>
+                    <button>View Details</button>
+                </div>
+            </div>
+            <div class="product-card">
+                <img src="/image/dress/dress2.jpg" alt="Product 2">
+                <div class="product-content">
+                    <h3>Product 1</h3>
+                    <p>Price: $100</p>
+                    <button>View Details</button>
+                </div>
+            </div>
+            <div class="product-card">
+                <img src="/image/dress/product3.webp" alt="Product 3">
+                <h3>Product 3</h3>
+                <p>Price: $300</p>
+                <button>View Details</button>
+            </div>
         </div>
     </section>
 

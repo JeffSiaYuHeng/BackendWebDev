@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 05, 2025 at 01:21 AM
+-- Generation Time: Mar 15, 2025 at 04:45 PM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -20,6 +20,30 @@ SET time_zone = "+00:00";
 --
 -- Database: `backendweb`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `products`
+--
+
+CREATE TABLE `products` (
+  `id` int(11) NOT NULL,
+  `name` varchar(255) NOT NULL,
+  `type` varchar(255) DEFAULT NULL,
+  `price` decimal(10,2) DEFAULT NULL,
+  `image` varchar(255) DEFAULT NULL,
+  `description` text DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `products`
+--
+
+INSERT INTO `products` (`id`, `name`, `type`, `price`, `image`, `description`) VALUES
+(1, 'Enchanted White Belle Dress', 'wedding dress', 3800.00, '/image/dress/dress1.jpg', 'Elegant white gown with lace details.'),
+(2, 'Majestic Pearl Elegance Gown', 'wedding dress', 4200.00, '/image/dress/dress2.jpg', 'A timeless pearl-colored wedding dress.'),
+(3, 'White Bow Puffy Mini Dress', 'cocktail dress', 2800.00, '/image/dress/dress3.jpg', 'A cute and stylish mini dress.');
 
 -- --------------------------------------------------------
 
@@ -52,6 +76,13 @@ INSERT INTO `users` (`id`, `first_name`, `last_name`, `email`, `phone_number`, `
 --
 
 --
+-- Indexes for table `products`
+--
+ALTER TABLE `products`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `name` (`name`);
+
+--
 -- Indexes for table `users`
 --
 ALTER TABLE `users`
@@ -61,6 +92,12 @@ ALTER TABLE `users`
 --
 -- AUTO_INCREMENT for dumped tables
 --
+
+--
+-- AUTO_INCREMENT for table `products`
+--
+ALTER TABLE `products`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `users`

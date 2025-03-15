@@ -11,6 +11,16 @@ if (!isset($_SESSION["user_id"])) {
 
 // Ensure first_name is set; fallback to "Guest"
 $first_name = $_SESSION["first_name"] ?? "Guest";
+
+include "../backend/db_connect.php"; // Include database connection
+
+
+// Fetch all products
+$sql = "SELECT id, name, price, image FROM products LIMIT 3";
+$result = $conn->query($sql);
+
+
+
 ?>
 
 <!DOCTYPE html>
@@ -66,29 +76,29 @@ $first_name = $_SESSION["first_name"] ?? "Guest";
     <section class="product">
         <h2>Our Products</h2>
         <div class="product-container">
-            <div class="product-card">
-                <img src="/image/dress/dress1.jpg" alt="Product 1">
-                <div class="overlay"></div> <!-- Overlay inside product-card -->
-                <div class="product-content">
-                    <h3>Product 1</h3>
-                    <p>Price: $100</p>
-                    <button>View Details</button>
-                </div>
-            </div>
-            <div class="product-card">
-                <img src="/image/dress/dress2.jpg" alt="Product 2">
-                <div class="product-content">
-                    <h3>Product 1</h3>
-                    <p>Price: $100</p>
-                    <button>View Details</button>
-                </div>
-            </div>
-            <div class="product-card">
-                <img src="/image/dress/product3.webp" alt="Product 3">
-                <h3>Product 3</h3>
-                <p>Price: $300</p>
-                <button>View Details</button>
-            </div>
+            <?php
+            if ($result->num_rows > 0) {
+                while ($row = $result->fetch_assoc()) {
+                    echo '
+                    <div class="product-card">
+                        <a href="ProductDetailPage.php?id=' . $row['id'] . '">
+                            <img src="' . htmlspecialchars($row['image']) . '" alt="' . htmlspecialchars($row['name']) . '">
+                        
+                            <div class="overlay"></div>
+                            <div class="product-content">
+                                <h3>' . htmlspecialchars($row['name']) . '</h3>
+                                <p>Starting from RM' . number_format($row['price'], 2) . '</p>
+                            </div>
+                        </a>
+                    </div>';
+                }
+            } else {
+                echo "<p>No products found.</p>";
+            }
+            
+            $conn->close();
+            ?>
+
         </div>
     </section>
 

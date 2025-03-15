@@ -1,37 +1,10 @@
-<?php
-include "../backend/db_connect.php"; // Adjust based on your setup
-
-// Check if 'id' is set in the URL
-if (!isset($_GET['id']) || empty($_GET['id'])) {
-    echo "Product not found.";
-    exit();
-}
-
-$product_id = intval($_GET['id']); // Sanitize ID input
-
-// Fetch product details from database
-$sql = "SELECT name, type, price, image, description FROM products WHERE id = ?";
-$stmt = $conn->prepare($sql);
-$stmt->bind_param("i", $product_id);
-$stmt->execute();
-$result = $stmt->get_result();
-
-if ($result->num_rows == 0) {
-    echo "Product not found.";
-    exit();
-}
-
-$product = $result->fetch_assoc();
-$conn->close();
-?>
-
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><?php echo htmlspecialchars($product['name']); ?></title>
+    <title>Wedding Gown Details</title>
     <script src="/BackendWebDev/script/transition.js"></script>
     <script src="/script/transition.js"></script>
     <link rel="stylesheet" href="/BackendWebDev/style/transition.css">
@@ -45,16 +18,17 @@ $conn->close();
     <div class="product-container">
         <!-- Left Side: Bridal Image -->
         <div class="image-container">
-            <img src="<?php echo htmlspecialchars($product['image']); ?>"
-                alt="<?php echo htmlspecialchars($product['name']); ?>" id="gownImage">
+            <img src="gown.jpg" alt="Wedding Gown" id="gownImage">
         </div>
 
         <!-- Right Side: Bridal Details -->
         <div class="details-container">
-            <h1 id="bridalTitle"><?php echo htmlspecialchars($product['name']); ?></h1>
-            <h3 id="bridalType">Type: <?php echo htmlspecialchars($product['type']); ?></h3>
-            <p id="bridalDescription"><?php echo htmlspecialchars($product['description']); ?></p>
-            <p id="bridalPrice">Price: RM<?php echo number_format($product['price'], 2); ?></p>
+            <h1 id="bridalTitle">Elegant Lace Wedding Gown</h1>
+            <h3 id="bridalType">Type: Ball Gown</h3>
+            <p id="bridalDescription">
+                This exquisite lace wedding gown features a full-length train and intricate floral embroidery.
+                Designed for elegance and comfort, perfect for your special day.
+            </p>
 
             <!-- Size Selection -->
             <label for="size">Size:</label>
@@ -91,7 +65,6 @@ $conn->close();
             </select>
         </div>
     </div>
-
     <script src="/BackendWebDev/script/productDetailPage.js"></script>
 
 </body>

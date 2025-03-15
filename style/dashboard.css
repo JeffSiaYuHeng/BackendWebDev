@@ -219,13 +219,14 @@ nav a{
     text-align: center;
     overflow: hidden; /* Prevents any unwanted overlay extension */
     border-radius: 1rem; /* Ensures corners match */
+    cursor: pointer;
 }
 
 
 .product-card img {
-    width: 20rem;
-    height: auto;
-    object-fit: cover;
+    width: 20rem; /* Fixed width (same as card width) */
+    height: 35rem; /* Fixed height for a portrait ratio */
+    object-fit: cover; /* Ensures image fills the space while maintaining aspect ratio */
     border-radius: 1rem; /* Ensures rounded corners */
     display: block; /* Removes unwanted spacing issues */
 }
@@ -236,7 +237,7 @@ nav a{
     top: 0;
     left: 0;
     width: 20rem; /* Matches image width */
-    height: 100%; /* Matches image height */
+    height: 35rem; /* Matches image height */
     background: rgba(0, 0, 0, 0.6); /* Transparent black */
     opacity: 0; /* Initially hidden */
     transition: opacity 0.5s ease-in-out;

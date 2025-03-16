@@ -58,7 +58,7 @@ $result = $conn->query($sql);
     </header>
     <nav>
         <a class="blink" href="#">Home</a> |
-        <a class="blink" href="">Wedding Dress</a> |
+        <a class="blink" href="ProductPage.php">Wedding Dress</a> |
         <a class="blink" href="">About</a> |
         <a class="blink" href="">Contact</a>
     </nav>

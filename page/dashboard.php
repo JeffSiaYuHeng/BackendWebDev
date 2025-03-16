@@ -57,7 +57,7 @@ $result = $conn->query($sql);
         </div>
     </header>
     <nav>
-        <a class="blink" href="">Home</a> |
+        <a class="blink" href="#">Home</a> |
         <a class="blink" href="">Wedding Dress</a> |
         <a class="blink" href="">About</a> |
         <a class="blink" href="">Contact</a>

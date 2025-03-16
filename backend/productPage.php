@@ -22,13 +22,13 @@ $item = $row["total"];
 
 function fetchProducts($conn) {
     // Fetch products sorted by price (high to low)
-    $sql_products = "SELECT name, price, image FROM products ORDER BY price DESC";
+    $sql_products = "SELECT id, name, price, image FROM products ORDER BY price DESC";
     $result_products = $conn->query($sql_products);
 
     if ($result_products->num_rows > 0) {
         while ($product = $result_products->fetch_assoc()) {
             echo '<div class="product-card">
-                    <a href="#">
+                    <a href="/page/ProductDetailPage.php?id=' . urlencode($product["id"]) . '">
                         <img src="' . htmlspecialchars($product["image"]) . '" alt="' . htmlspecialchars($product["name"]) . '">
                         <div class="product-content">
                             <p class="product-name">' . htmlspecialchars($product["name"]) . '</p>
@@ -41,4 +41,5 @@ function fetchProducts($conn) {
         echo "<p>No products found.</p>";
     }
 }
+
 ?>

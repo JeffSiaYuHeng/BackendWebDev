@@ -12,12 +12,7 @@ if (!isset($_SESSION["user_id"])) {
 // Ensure first_name is set; fallback to "Guest"
 $first_name = $_SESSION["first_name"] ?? "Guest";
 
-include "../backend/db_connect.php"; // Include database connection
-
-
-// Fetch all products
-$sql = "SELECT id, name, price, image FROM products LIMIT 3";
-$result = $conn->query($sql);
+include "../backend/main.php"; // Include database connection
 
 
 
@@ -104,7 +99,7 @@ $result = $conn->query($sql);
 
         </div>
     </section>
-
+            
     <a href="login.php">login test</a>
     <a href="ProductDetailPage.php">product page</a>
     <a href="/backend/logout.php">Logout</a>

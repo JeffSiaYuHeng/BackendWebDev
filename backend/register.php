@@ -46,8 +46,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $_SESSION["last_name"] = $last_name;  // Optional, in case you need it
         $_SESSION["user_name"] = $first_name . " " . $last_name; // Store user's full name in session
 
-        // Redirect to dashboard
-        header("Location: /page/dashboard.php");
+        // Redirect to main
+        header("Location: /page/main.php");
         exit();
     } else {
         echo "<script>alert('Error: Could not register user. Please try again later.'); window.location.href='/page/register.php';</script>";

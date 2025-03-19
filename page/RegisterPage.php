@@ -1,11 +1,11 @@
 <?php
 session_start();
 
-// If user is already logged in, redirect to dashboard
+// If user is already logged in, redirect to main
 if (isset($_SESSION["user_id"])) {
     echo "<script>
         alert('Logout first to access this page.');
-        window.location.href = 'dashboard.php';
+        window.location.href = 'main.php';
     </script>";
     exit();
 }

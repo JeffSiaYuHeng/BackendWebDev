@@ -4,7 +4,7 @@ session_start();
 if (!isset($_SESSION["user_id"])) {
     echo "<script>
         alert('Your session has expired or you are not logged in. Please log in again.');
-        window.location.href = 'login.php';
+        window.location.href = 'LoginPage.php';
     </script>";
     exit();
 }
@@ -31,11 +31,11 @@ $result = $conn->query($sql);
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/BackendWebDev/style/transitions.css">
     <link rel="stylesheet" href="/style/transitions.css">
-    <link rel="stylesheet" href="/BackendWebDev/style/dashboard.css">
-    <link rel="stylesheet" href="/style/dashboard.css">
+    <link rel="stylesheet" href="/BackendWebDev/style/main.css">
+    <link rel="stylesheet" href="/style/main.css">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <title>Dashboard</title>
+    <title>main</title>
     <script src="/BackendWebDev/script/transition.js"></script>
     <script src="/script/transition.js"></script>
     <script src="/script/slider.js"></script>
@@ -58,16 +58,21 @@ $result = $conn->query($sql);
     </header>
     <nav>
         <a class="blink" href="#">Home</a> |
-        <a class="blink" href="ProductPage.php">Wedding Dress</a> |
+        <a class="blink" href="WeddingDressPage.php">Wedding Dress</a> |
         <a class="blink" href="">About</a> |
         <a class="blink" href="">Contact</a>
     </nav>
     <section class="banner">
         <div class="slider">
             <div class="slides">
-                <img src="/image/banner/banner1_s.png" alt="Banner 1">
-                <img src="/image/banner/banner2_s.png" alt="Banner 2">
-                <img src="/image/banner/banner3_s.png" alt="Banner 3">
+                <img src="/image/banner/banner1_s.png" srcset="/BackendWebDev/image/banner/banner1_s.png"
+                    alt="Banner 1">
+
+                <img src="/image/banner/banner2_s.png" srcset="/BackendWebDev/image/banner/banner2_s.png"
+                    alt="Banner 2">
+
+                <img src="/image/banner/banner3_s.png" srcset="/BackendWebDev/image/banner/banner3_s.png"
+                    alt="Banner 3">
             </div>
             <button>Start Customizing Your Gown</button>
         </div>
@@ -82,7 +87,9 @@ $result = $conn->query($sql);
                     echo '
                     <div class="product-card">
                         <a href="ProductDetailPage.php?id=' . $row['id'] . '">
-                            <img src="' . htmlspecialchars($row['image']) . '" alt="' . htmlspecialchars($row['name']) . '">
+                            <img src="' . htmlspecialchars($row['image']) . '"
+                            srcset="/BackendWebDev/' . htmlspecialchars($row['image']) . '"
+                            alt="' . htmlspecialchars($row['name']) . '">
                         
                             <div class="overlay"></div>
                             <div class="product-content">

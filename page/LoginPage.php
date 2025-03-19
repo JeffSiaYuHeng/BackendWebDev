@@ -1,11 +1,11 @@
 <?php
 session_start();
 
-// If user is already logged in, redirect to dashboard
+// If user is already logged in, redirect to main
 if (isset($_SESSION["user_id"])) {
     echo "<script>
         alert('You are already logged in.');
-        window.location.href = 'dashboard.php';
+        window.location.href = 'MainPage.php';
     </script>";
     exit();
 }
@@ -40,7 +40,7 @@ if (isset($_SESSION["user_id"])) {
             <input type="email" name="email" placeholder="Enter your Email" required>
             <label>Password</label>
             <input type="password" name="password" placeholder="Enter your Password" required>
-            <a href="forgotPassword.html">Forgot Password</a>
+            <a href="ForgotPasswordPage.html">Forgot Password</a>
             <button type="submit">Sign In</button>
             <button type="button" onclick="window.location.href='register.php'">Register</button>
         </form>

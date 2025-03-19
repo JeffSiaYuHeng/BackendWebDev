@@ -3,7 +3,7 @@ session_start();
 
 // If user is already logged in, redirect to main
 if (isset($_SESSION["user_id"])) {
-    header("Location: /BackendWebDev/page/MainPage.php");
+    header("Location: /BackendWebDev/userpage/MainPage.php");
     exit();
 }
 ?>
@@ -31,8 +31,8 @@ if (isset($_SESSION["user_id"])) {
             <button>Get Started</button>
         </div>
     </section>
-    <a href="/BackendWebDev/page/LoginPage.php">Login</a>
-    <a href="/BackendWebDev/page/RegisterPage.php">Register</a>
+    <a href="/BackendWebDev/userpage/LoginPage.php">Login</a>
+    <a href="/BackendWebDev/userpage/RegisterPage.php">Register</a>
 </body>
 
 </html>

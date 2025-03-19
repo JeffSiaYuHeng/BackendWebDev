@@ -28,7 +28,7 @@ function fetchProducts($conn) {
     if ($result_products->num_rows > 0) {
         while ($product = $result_products->fetch_assoc()) {
             echo '<div class="product-card">
-                    <a href="/BackendWebDev/page/ProductDetailPage.php?id=' . urlencode($product["id"]) . '">
+                    <a href="/BackendWebDev/userpage/ProductDetailPage.php?id=' . urlencode($product["id"]) . '">
                         <img src="' . htmlspecialchars($product["image"]) . '" alt="' . htmlspecialchars($product["name"]) . '">
                         <div class="product-content">
                             <p class="product-name">' . htmlspecialchars($product["name"]) . '</p>

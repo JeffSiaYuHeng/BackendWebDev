@@ -7,10 +7,10 @@
     <title>Wedding Gown Details</title>
     <script src="/BackendWebDev/script/transition.js"></script>
      
-    <link rel="stylesheet" href="/BackendWebDev/style/transition.css">
-    <link rel="stylesheet" href="/BackendWebDev/style/productDetailPage.css">
+    <link rel="stylesheet" href="/BackendWebDev/userstyle/transition.css">
+    <link rel="stylesheet" href="/BackendWebDev/userstyle/productDetailPage.css">
  
-    <link rel="stylesheet" href="/style/productDetailPage.css">
+    <link rel="stylesheet" href="/userstyle/productDetailPage.css">
 </head>
 
 <body>

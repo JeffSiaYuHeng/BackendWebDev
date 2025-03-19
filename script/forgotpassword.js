@@ -25,7 +25,7 @@ $(document).ready(function() {
             var response = JSON.parse(data);
             if (response.status === "success") {
                 alert(response.message);
-                window.location.href = "/page/resetPassword.php";
+                window.location.href = "/userpage/resetPassword.php";
             } else {
                 alert(response.message);
             }

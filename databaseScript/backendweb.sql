@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 15, 2025 at 04:45 PM
+-- Generation Time: Mar 19, 2025 at 02:33 AM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -41,9 +41,9 @@ CREATE TABLE `products` (
 --
 
 INSERT INTO `products` (`id`, `name`, `type`, `price`, `image`, `description`) VALUES
-(1, 'Enchanted White Belle Dress', 'wedding dress', 3800.00, '/image/dress/dress1.jpg', 'Elegant white gown with lace details.'),
-(2, 'Majestic Pearl Elegance Gown', 'wedding dress', 4200.00, '/image/dress/dress2.jpg', 'A timeless pearl-colored wedding dress.'),
-(3, 'White Bow Puffy Mini Dress', 'cocktail dress', 2800.00, '/image/dress/dress3.jpg', 'A cute and stylish mini dress.');
+(1, 'Enchanted White Belle Dress', 'wedding dress', 3800.00, '/BackendWebDev/image/dress/dress1.jpg', 'Elegant white gown with lace details.'),
+(2, 'Majestic Pearl Elegance Gown', 'wedding dress', 4200.00, '/BackendWebDev/image/dress/dress2.jpg', 'A timeless pearl-colored wedding dress.'),
+(3, 'White Bow Puffy Mini Dress', 'cocktail dress', 2800.00, '/BackendWebDev/image/dress/dress3.jpg', 'A cute and stylish mini dress.');
 
 -- --------------------------------------------------------
 

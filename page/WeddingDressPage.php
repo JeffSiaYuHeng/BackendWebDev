@@ -36,8 +36,8 @@ include "../backend/weddingDress.php";
         </div>
     </header>
     <nav>
-        <a class="blink" href="#">Home</a> |
-        <a class="blink" href="">Wedding Dress</a> |
+        <a class="blink" href="MainPage.php">Home</a> |
+        <a class="blink" href="#">Wedding Dress</a> |
         <a class="blink" href="">About</a> |
         <a class="blink" href="">Contact</a>
     </nav>

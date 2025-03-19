@@ -17,7 +17,7 @@ include "../backend/weddingDress.php";
     <title>Product Page</title>
     <link rel="stylesheet" href="/BackendWebDev/userstyle/weddingDress.css">
     <link rel="stylesheet" href="/BackendWebDev/userstyle/transition.css">
-    <script src="/BackendWebDev/script/transition.js"></script>
+    <script src="/BackendWebDev/userscript/transition.js"></script>
 
 </head>
 

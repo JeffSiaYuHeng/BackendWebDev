@@ -21,7 +21,7 @@ if (isset($_SESSION["user_id"])) {
     <link rel="stylesheet" href="/BackendWebDev/userstyle/register.css">
     <link rel="stylesheet" href="/BackendWebDev/userstyle/transition.css">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap" rel="stylesheet">
-    <script src="/BackendWebDev/script/transition.js"></script>
+    <script src="/BackendWebDev/userscript/transition.js"></script>
      
     <title>Eternal Elegant Bridal - Register</title>
 </head>

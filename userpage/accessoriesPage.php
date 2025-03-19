@@ -6,7 +6,7 @@
     <title>Bridal Accessories | Eternal Elegant Bridal</title>
     <link rel="stylesheet" href="/BackendWebDev/userstyle/accessories.css">
     <link rel="stylesheet" href="/userstyle/accessories.css">
-    <script src="/BackendWebDev/script/transition.js"></script>
+    <script src="/BackendWebDev/userscript/transition.js"></script>
      
     <link rel="stylesheet" href="/BackendWebDev/userstyle/transition.css">
  

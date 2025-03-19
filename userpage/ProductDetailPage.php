@@ -10,7 +10,7 @@ include "../backend/productDetail.php";
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><?php echo htmlspecialchars($product['name']); ?></title>
-    <script src="/BackendWebDev/script/transition.js"></script>
+    <script src="/BackendWebDev/userscript/transition.js"></script>
 
     <link rel="stylesheet" href="/BackendWebDev/userstyle/transition.css">
     <link rel="stylesheet" href="/BackendWebDev/userstyle/productDetailPage.css">
@@ -69,7 +69,7 @@ include "../backend/productDetail.php";
         </div>
     </div>
 
-    <script src="/BackendWebDev/script/productDetailPage.js"></script>
+    <script src="/BackendWebDev/userscript/productDetailPage.js"></script>
 
 </body>
 

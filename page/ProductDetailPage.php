@@ -1,28 +1,6 @@
 <?php
-include "../backend/db_connect.php"; // Adjust based on your setup
 
-// Check if 'id' is set in the URL
-if (!isset($_GET['id']) || empty($_GET['id'])) {
-    echo "Product not found.";
-    exit();
-}
-
-$product_id = intval($_GET['id']); // Sanitize ID input
-
-// Fetch product details from database
-$sql = "SELECT name, type, price, image, description FROM products WHERE id = ?";
-$stmt = $conn->prepare($sql);
-$stmt->bind_param("i", $product_id);
-$stmt->execute();
-$result = $stmt->get_result();
-
-if ($result->num_rows == 0) {
-    echo "Product not found.";
-    exit();
-}
-
-$product = $result->fetch_assoc();
-$conn->close();
+include "../backend/productDetail.php"; 
 ?>
 
 <!DOCTYPE html>
@@ -33,11 +11,10 @@ $conn->close();
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><?php echo htmlspecialchars($product['name']); ?></title>
     <script src="/BackendWebDev/script/transition.js"></script>
-    <script src="/script/transition.js"></script>
+
     <link rel="stylesheet" href="/BackendWebDev/style/transition.css">
     <link rel="stylesheet" href="/BackendWebDev/style/productDetailPage.css">
-    <link rel="stylesheet" href="/style/transition.css">
-    <link rel="stylesheet" href="/style/productDetailPage.css">
+
 </head>
 
 <body>

@@ -7,9 +7,9 @@
     <link rel="stylesheet" href="/BackendWebDev/style/accessories.css">
     <link rel="stylesheet" href="/style/accessories.css">
     <script src="/BackendWebDev/script/transition.js"></script>
-    <script src="/script/transition.js"></script>
+     
     <link rel="stylesheet" href="/BackendWebDev/style/transition.css">
-    <link rel="stylesheet" href="/style/transition.css">
+ 
 </head>
 <body>
     <header>

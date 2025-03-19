@@ -6,10 +6,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Wedding Gown Details</title>
     <script src="/BackendWebDev/script/transition.js"></script>
-    <script src="/script/transition.js"></script>
+     
     <link rel="stylesheet" href="/BackendWebDev/style/transition.css">
     <link rel="stylesheet" href="/BackendWebDev/style/productDetailPage.css">
-    <link rel="stylesheet" href="/style/transition.css">
+ 
     <link rel="stylesheet" href="/style/productDetailPage.css">
 </head>
 

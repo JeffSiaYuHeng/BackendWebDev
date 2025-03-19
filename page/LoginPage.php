@@ -18,12 +18,12 @@ if (isset($_SESSION["user_id"])) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/style/login.css">
-    <link rel="stylesheet" href="/style/transition.css">
+ 
     <link rel="stylesheet" href="/BackendWebDev/style/login.css">
     <link rel="stylesheet" href="/BackendWebDev/style/transition.css">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap" rel="stylesheet">
     <script src="/BackendWebDev/script/transition.js"></script>
-    <script src="/script/transition.js"></script>
+     
 
     <title>Eternal Elegant Bridal - Login</title>
 </head>
@@ -35,7 +35,7 @@ if (isset($_SESSION["user_id"])) {
     <section>
         <h1>Welcome Back</h1>
         <p style="color:#808080">Enter your email and password to access your account</p>
-        <form action="/backend/login.php" method="POST" class="form">
+        <form action="/BackendWebDev/backend/login.php" method="POST" class="form">
             <label>Email</label>
             <input type="email" name="email" placeholder="Enter your Email" required>
             <label>Password</label>

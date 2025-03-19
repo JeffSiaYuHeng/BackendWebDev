@@ -11,7 +11,7 @@ $(document).ready(function() {
                 var response = JSON.parse(data);
                 alert(response.message);
                 if (response.status === "success") {
-                    window.location.href = "/page/login.php";
+                    window.location.href = "/page/LoginPage.php";
                 }
         });
     });

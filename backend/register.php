@@ -24,7 +24,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $check_email->store_result();
 
     if ($check_email->num_rows > 0) {
-        echo "<script>alert('Email already exists! Please use another email.'); window.location.href='/page/register.php';</script>";
+        echo "<script>alert('Email already exists! Please use another email.'); window.location.href='/BackendWebDev/page/RegisterPage.php';</script>";
         exit();
     }
     $check_email->close();
@@ -47,10 +47,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $_SESSION["user_name"] = $first_name . " " . $last_name; // Store user's full name in session
 
         // Redirect to main
-        header("Location: /page/main.php");
+        header("Location: /BackendWebDev/page/MainPage.php");
         exit();
     } else {
-        echo "<script>alert('Error: Could not register user. Please try again later.'); window.location.href='/page/register.php';</script>";
+        echo "<script>alert('Error: Could not register user. Please try again later.'); window.location.href='/BackendWebDev/page/RegisterPage.php';</script>";
     }
 
     $stmt->close();

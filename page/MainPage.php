@@ -37,7 +37,7 @@ $result = $conn->query($sql);
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <title>main</title>
     <script src="/BackendWebDev/script/transition.js"></script>
-    <script src="/script/transition.js"></script>
+
     <script src="/script/slider.js"></script>
     <script src="/BackendWebDev/script/slider.js"></script>
 </head>
@@ -52,7 +52,7 @@ $result = $conn->query($sql);
             <div class="dropdown-content">
                 <p>Hello <?php echo htmlspecialchars($first_name); ?>!</p>
                 <div class="line"></div>
-                <a href="/backend/logout.php">Logout</a>
+                <a href="/BackendWebDev/backend/logout.php">Logout</a>
             </div>
         </div>
     </header>
@@ -65,16 +65,13 @@ $result = $conn->query($sql);
     <section class="banner">
         <div class="slider">
             <div class="slides">
-                <img src="/image/banner/banner1_s.png" srcset="/BackendWebDev/image/banner/banner1_s.png"
-                    alt="Banner 1">
+                <img src="/BackendWebDev/image/banner/banner1_s.png" alt="Banner 1">
 
-                <img src="/image/banner/banner2_s.png" srcset="/BackendWebDev/image/banner/banner2_s.png"
-                    alt="Banner 2">
+                <img src="/BackendWebDev/image/banner/banner2_s.png" alt="Banner 2">
 
-                <img src="/image/banner/banner3_s.png" srcset="/BackendWebDev/image/banner/banner3_s.png"
-                    alt="Banner 3">
+                <img src="/BackendWebDev/image/banner/banner3_s.png" alt="Banner 3">
             </div>
-            <button>Start Customizing Your Gown</button>
+            <button onclick="window.location.href='WeddingDressPage.php'">Start Customizing Your Gown</button>
         </div>
     </section>
 
@@ -88,7 +85,6 @@ $result = $conn->query($sql);
                     <div class="product-card">
                         <a href="ProductDetailPage.php?id=' . $row['id'] . '">
                             <img src="' . htmlspecialchars($row['image']) . '"
-                            srcset="/BackendWebDev/' . htmlspecialchars($row['image']) . '"
                             alt="' . htmlspecialchars($row['name']) . '">
                         
                             <div class="overlay"></div>

@@ -1,6 +1,7 @@
 <?php
 session_start();
-include "db_connect.php"; // Include database connection
+include "../../db_connect.php"; // Goes back two folders
+
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Sanitize and validate input data
@@ -24,7 +25,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $check_email->store_result();
 
     if ($check_email->num_rows > 0) {
-        echo "<script>alert('Email already exists! Please use another email.'); window.location.href='/BackendWebDev/userpage/RegisterPage.php';</script>";
+        echo "<script>alert('Email already exists! Please use another email.'); window.location.href='../../../BackendWebDev/userpage/RegisterPage.php';</script>";
         exit();
     }
     $check_email->close();

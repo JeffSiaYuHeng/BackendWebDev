@@ -1,6 +1,6 @@
 <?php
 session_start();
-include "db_connect.php"; // Include database connection
+include "../../db_connect.php"; // Goes back two folders
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $email = trim($_POST["email"]);

@@ -47,6 +47,7 @@ include "../backend/main.php"; // Include database connection
             <div class="dropdown-content">
                 <p>Hello <?php echo htmlspecialchars($first_name); ?>!</p>
                 <div class="line"></div>
+                <a href="ProfilePage.php">Profile</a>
                 <a href="/BackendWebDev/backend/logout.php">Logout</a>
             </div>
         </div>

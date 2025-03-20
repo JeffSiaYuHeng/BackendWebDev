@@ -46,8 +46,9 @@ include "backend/index.php";
             ?>
         </div>
     </section>
-    <a href="/BackendWebDev/userpage/LoginPage.php">Login</a>
-    <a href="/BackendWebDev/userpage/RegisterPage.php">Register</a>
+    <footer>
+        <p>&copy; 2021 Eternal Elegant Bridal. All rights reserved.</p>
+    </footer>
 </body>
 
 </html>

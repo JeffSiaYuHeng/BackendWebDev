@@ -42,7 +42,7 @@ if (isset($_SESSION["user_id"])) {
             <input type="password" name="password" placeholder="Enter your Password" required>
             <a href="ForgotPasswordPage.html">Forgot Password</a>
             <button type="submit">Sign In</button>
-            <button type="button" onclick="window.location.href='register.php'">Register</button>
+            <button type="button" onclick="window.location.href='RegisterPage.php'">Register</button>
         </form>
     </section>
 </body>

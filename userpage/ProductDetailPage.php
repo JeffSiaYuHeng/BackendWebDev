@@ -9,78 +9,89 @@ $reviews = [
     ["username" => "EmilyR", "rating" => 5, "content" => "Perfect for my wedding! Highly recommend."],
     ["username" => "Michael", "rating" => 2, "content" => "Not what I expected. The fabric feels cheap."],
 ];
+
+// Fabric prices
+$fabric_prices = [
+    "None" => 0,
+    "fabric1" => 50,  // Lace adds RM50
+    "fabric2" => 70,  // Satin adds RM70
+    "fabric3" => 40,  // Tulle adds RM40
+];
+
+$base_price = $product['price'];
 ?>
 
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><?php echo htmlspecialchars($product['name']); ?></title>
-
-    <script src="/BackendWebDev/script/transition.js"></script>
-    
-    <link rel="stylesheet" href="/BackendWebDev/style/transition.css">
-    <link rel="stylesheet" href="/BackendWebDev/style/productDetailPage.css">
-
+    <title><?= htmlspecialchars($product['name']) ?></title>
+    <script src="/BackendWebDev/userscript/transition.js"></script>
+    <link rel="stylesheet" href="/BackendWebDev/userstyle/transition.css">
+    <link rel="stylesheet" href="/BackendWebDev/userstyle/productDetailPage.css">
 </head>
-
 <body>
-
     <div class="product-container">
-        <!-- Left Side: Bridal Image -->
         <div class="image-container">
-            <img src="<?php echo htmlspecialchars($product['image']); ?>" 
-                alt="<?php echo htmlspecialchars($product['name']); ?>" id="gownImage">
+            <img src="<?= htmlspecialchars($product['image']) ?>" alt="<?= htmlspecialchars($product['name']) ?>" id="gownImage">
         </div>
 
-        <!-- Right Side: Bridal Details -->
         <div class="details-container">
-            <h1 id="bridalTitle"><?php echo htmlspecialchars($product['name']); ?></h1>
-            <h3 id="bridalType">Type: <?php echo htmlspecialchars($product['type']); ?></h3>
-            <p id="bridalDescription"><?php echo htmlspecialchars($product['description']); ?></p>
-            <p id="bridalPrice">Price: RM<?php echo number_format($product['price'], 2); ?></p>
+            <h1 id="bridalTitle"> <?= htmlspecialchars($product['name']) ?> </h1>
+            <h3 id="bridalType">Type: <?= htmlspecialchars($product['type']) ?> </h3>
+            <p id="bridalDescription"> <?= htmlspecialchars($product['description']) ?> </p>
+            <p id="bridalPrice">Price: RM<span id="dynamicPrice"> <?= number_format($base_price, 2) ?> </span></p>
+            <input type="hidden" id="basePrice" value="<?= $base_price ?>">
 
-            <!-- Size Selection -->
-            <label for="size">Size:</label>
-            <select id="size">
-                <option value="S">Small</option>
-                <option value="M">Medium</option>
-                <option value="L">Large</option>
-                <option value="XL">X-Large</option>
-            </select>
+            <form action="accessoriesPage.php" method="POST">
+                <label for="size">Size:</label>
+                <select name="size" id="size">
+                    <option value="S">Small</option>
+                    <option value="M">Medium</option>
+                    <option value="L">Large</option>
+                    <option value="XL">X-Large</option>
+                </select>
 
-            <!-- Color Selection -->
-            <label for="colorPicker">Select Color:</label>
-            <select id="colorPicker">
-                <option value="#FFFFFF">White</option>
-                <option value="#F5F5DC">Ivory</option>
-                <option value="#EAE0C8">Champagne</option>
-                <option value="#FAEBD7">Antique White</option>
-            </select>
+                <div class="preview-container">
+                    <div class="preview-box" id="previewBox">
+                        <div class="fabric-overlay" id="fabricPreview"></div>
+                    </div>
+                </div>
 
-            <!-- Fabric Selection -->
-            <label for="fabricPicker">Select Fabric:</label>
-            <select id="fabricPicker">
-                <option value="none">None</option>
-                <option value="fabric1">Lace</option>
-                <option value="fabric2">Satin</option>
-                <option value="fabric3">Tulle</option>
-            </select>
+                <label for="colorPicker">Select Color:</label>
+                <select name="color" id="colorPicker">
+                    <option value="White">White</option>
+                    <option value="Ivory">Ivory</option>
+                    <option value="Champagne">Champagne</option>
+                    <option value="Antique White">Antique White</option>
+                </select>
+
+                <label for="fabricPicker">Select Fabric:</label>
+                <select name="fabric" id="fabricPicker">
+                    <option value="None">None</option>
+                    <option value="fabric1">Lace</option>
+                    <option value="fabric2">Satin</option>
+                    <option value="fabric3">Tulle</option>
+                </select>
+
+                <input type="hidden" name="product_name" value="<?= htmlspecialchars($product['name']) ?>">
+                <input type="hidden" name="product_type" value="<?= htmlspecialchars($product['type']) ?>">
+                <input type="hidden" id="finalPrice" name="product_price" value="<?= number_format((float) $base_price, 2, '.', '') ?>">
+
+                <button type="submit">Continue</button>
+            </form>
         </div>
     </div>
 
-    <!-- Review Section -->
     <div class="review-section">
         <h2>Customer Reviews</h2>
-        
-        <?php if (count($reviews) > 0): ?>
+        <?php if (!empty($reviews)): ?>
             <?php foreach ($reviews as $review): ?>
                 <div class="review">
-                    <p class="username"><?php echo htmlspecialchars($review["username"]); ?></p>
-                    <p class="stars"><?php echo str_repeat("★", $review["rating"]) . str_repeat("☆", 5 - $review["rating"]); ?></p>
-                    <p class="review-content"><?php echo htmlspecialchars($review["content"]); ?></p>
+                    <p class="username"> <?= htmlspecialchars($review["username"]) ?> </p>
+                    <p class="stars"> <?= str_repeat("★", $review["rating"]) . str_repeat("☆", 5 - $review["rating"]) ?> </p>
+                    <p class="review-content"> <?= htmlspecialchars($review["content"]) ?> </p>
                 </div>
             <?php endforeach; ?>
         <?php else: ?>
@@ -88,8 +99,6 @@ $reviews = [
         <?php endif; ?>
     </div>
 
-    <script src="/BackendWebDev/script/productDetailPage.js"></script>
-
+    <script src="/BackendWebDev/userscript/productDetailPage.js"></script>
 </body>
-
 </html>

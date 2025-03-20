@@ -1,64 +1,72 @@
-/* General Styling */
+/* Global Styles */
 body {
-    font-family: Arial, sans-serif;
+    font-family: 'Poppins', sans-serif;
     margin: 0;
     padding: 0;
-    background-color: #f8f8f8;
+    background-color: #fdf8f5;
+    color: #333;
     text-align: center;
 }
 
-/* Header Styling */
+/* Header Styles */
 header {
     background-color: #fff;
     padding: 20px;
-    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 }
 
 h1 {
     margin: 0;
-    font-size: 28px;
-    color: #333;
+    font-size: 30px;
+    font-weight: 600;
+    color: #5a3e2b;
 }
 
 /* Accessories Section */
 .accessories-container {
-    padding: 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 40px 20px;
 }
 
 h2 {
-    margin-top: 30px;
-    font-size: 24px;
-    color: #444;
+    margin-top: 40px;
+    font-size: 26px;
+    font-weight: 500;
+    color: #5a3e2b;
+    border-bottom: 2px solid #d4a373;
+    display: inline-block;
+    padding-bottom: 5px;
 }
 
 /* Accessories Grid */
 .accessory-grid {
-    display: flex;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 25px;
+    margin: 30px 0;
     justify-content: center;
-    flex-wrap: wrap;
-    gap: 20px;
-    margin: 20px 0;
+    align-items: center;
 }
 
 /* Accessory Card */
 .accessory {
-    background: white;
-    padding: 15px;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    width: 250px;
-    text-align: center;
-    transition: transform 0.3s ease;
+    background: #fff;
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .accessory:hover {
-    transform: translateY(-5px);
+    transform: translateY(-8px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
 }
 
 /* Image Styling */
 .accessory img {
     width: 100%;
-    height: 200px;
+    height: 220px;
     object-fit: cover;
     border-radius: 8px;
 }
@@ -66,28 +74,30 @@ h2 {
 /* Button Styling */
 button {
     background-color: #d4a373;
-    color: white;
+    color: #fff;
     border: none;
-    padding: 10px;
+    padding: 12px;
     width: 100%;
-    border-radius: 5px;
+    border-radius: 6px;
     cursor: pointer;
-    margin-top: 10px;
+    margin-top: 12px;
     font-size: 16px;
-    transition: background 0.3s ease;
+    font-weight: 500;
+    transition: background 0.3s ease, transform 0.2s;
 }
 
 button:hover {
     background-color: #b67a4e;
+    transform: scale(1.05);
 }
 
 /* Responsive Design */
 @media (max-width: 768px) {
     .accessory-grid {
+        display: flex;
         flex-direction: column;
         align-items: center;
     }
-
     .accessory {
         width: 90%;
     }

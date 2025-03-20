@@ -34,7 +34,7 @@ if (isset($_SESSION["user_id"])) {
         <h1>Register</h1>
         <p style="color:#808080">Create your account to get started</p>
 
-        <form action="/backend/register.php" method="POST">
+        <form action="/BackendWebDev/backend/register.php" method="POST">
             <div class="form-group">
                 <div class="input-box">
                     <label for="first_name">First Name</label>
@@ -98,7 +98,7 @@ if (isset($_SESSION["user_id"])) {
             </div>
 
             <button type="submit">Register</button>
-            <button type="button" onclick="window.location.href='login.php'">Sign In</button>
+            <button type="button" onclick="window.location.href='LoginPage.php'">Sign In</button>
         </form>
     </section>
 </body>

@@ -23,6 +23,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $_SESSION["first_name"] = $first_name;  // ✅ Store first_name in session
             $_SESSION["last_name"] = $last_name;    // ✅ Store last_name in session
             $_SESSION["user_name"] = $first_name . " " . $last_name;
+            
 
             // ✅ Redirect to main after successful login
             header("Location: /BackendWebDev/userpage/MainPage.php");

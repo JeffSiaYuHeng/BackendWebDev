@@ -15,7 +15,8 @@ include "../backend/db_connect.php"; // Include database connection
 $first_name = $_SESSION["first_name"] ?? "Guest";
 $last_name = $_SESSION["last_name"] ?? "";
 $email = $_SESSION["email"] ?? "";
-$phone = $_SESSION["phone"] ?? "";
+$phone = $_SESSION["phone_number"] ?? "";
+include "../backend/profile.php"; // Include database connection
 ?>
 <!DOCTYPE html>
 <html lang="en">

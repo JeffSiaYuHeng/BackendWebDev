@@ -25,13 +25,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $_SESSION["user_name"] = $first_name . " " . $last_name;
 
             // ✅ Redirect to main after successful login
-            header("Location: /BackendWebDev/page/MainPage.php");
+            header("Location: /BackendWebDev/userpage/MainPage.php");
             exit();
         } else {
-            echo "<script>alert('Invalid email or password'); window.location.href='/BackendWebDev/page/LoginPage.php';</script>";
+            echo "<script>alert('Invalid email or password'); window.location.href='/BackendWebDev/userpage/LoginPage.php';</script>";
         }
     } else {
-        echo "<script>alert('Invalid email or password'); window.location.href='/BackendWebDev/page/LoginPage.php';</script>";
+        echo "<script>alert('Invalid email or password'); window.location.href='/BackendWebDev/userpage/LoginPage.php';</script>";
     }
 
     $stmt->close();

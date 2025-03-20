@@ -15,9 +15,9 @@ include "../backend/weddingDress.php";
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <title>Product Page</title>
-    <link rel="stylesheet" href="/BackendWebDev/style/weddingDress.css">
-    <link rel="stylesheet" href="/BackendWebDev/style/transition.css">
-    <script src="/BackendWebDev/script/transition.js"></script>
+    <link rel="stylesheet" href="/BackendWebDev/userstyle/weddingDress.css">
+    <link rel="stylesheet" href="/BackendWebDev/userstyle/transition.css">
+    <script src="/BackendWebDev/userscript/transition.js"></script>
 
 </head>
 
@@ -31,13 +31,13 @@ include "../backend/weddingDress.php";
             <div class="dropdown-content">
                 <p>Hello <?php echo htmlspecialchars($first_name); ?>!</p>
                 <div class="line"></div>
-                <a href="/backend/logout.php">Logout</a>
+                <a href="/BackendWebDev/backend/logout.php">Logout</a>
             </div>
         </div>
     </header>
     <nav>
-        <a class="blink" href="#">Home</a> |
-        <a class="blink" href="">Wedding Dress</a> |
+        <a class="blink" href="MainPage.php">Home</a> |
+        <a class="blink" href="#">Wedding Dress</a> |
         <a class="blink" href="">About</a> |
         <a class="blink" href="">Contact</a>
     </nav>

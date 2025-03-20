@@ -6,6 +6,8 @@ if (isset($_SESSION["user_id"])) {
     header("Location: /BackendWebDev/userpage/MainPage.php");
     exit();
 }
+
+include "backend/index.php";
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -16,7 +18,7 @@ if (isset($_SESSION["user_id"])) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="index.css">
+    <link rel="stylesheet" href="style/index.css">
     <script src="userscript/transition.js"></script>
     <link rel="stylesheet" href="userstyle/transition.css">
     <title>Welcome to Eternal Elegant Bridal</title>
@@ -33,11 +35,20 @@ if (isset($_SESSION["user_id"])) {
                 <img src="/BackendWebDev/image/banner/banner2_s.png" alt="Banner 2">
                 <img src="/BackendWebDev/image/banner/banner3_s.png" alt="Banner 3">
             </div>
-            <button>Let's Start</button>
+            <button onclick="window.location.href = 'userpage/LoginPage.php';">Let's Start</button>
         </div>
     </section>
-    <a href="/BackendWebDev/userpage/LoginPage.php">Login</a>
-    <a href="/BackendWebDev/userpage/RegisterPage.php">Register</a>
+    <section class="product">
+        <h2>Our Best Products</h2>
+        <div class="product-container">
+            <?php
+            fetch3product($conn);
+            ?>
+        </div>
+    </section>
+    <footer>
+        <p>&copy; 2021 Eternal Elegant Bridal. All rights reserved.</p>
+    </footer>
 </body>
 
 </html>

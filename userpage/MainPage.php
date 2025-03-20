@@ -47,6 +47,7 @@ include "../backend/main.php"; // Include database connection
             <div class="dropdown-content">
                 <p>Hello <?php echo htmlspecialchars($first_name); ?>!</p>
                 <div class="line"></div>
+                <a href="ProfilePage.php">Profile</a>
                 <a href="/BackendWebDev/backend/logout.php">Logout</a>
             </div>
         </div>
@@ -74,32 +75,12 @@ include "../backend/main.php"; // Include database connection
         <h2>Our Products</h2>
         <div class="product-container">
             <?php
-            if ($result->num_rows > 0) {
-                while ($row = $result->fetch_assoc()) {
-                    echo '
-                    <div class="product-card">
-                        <a href="ProductDetailPage.php?id=' . $row['id'] . '">
-                            <img src="' . htmlspecialchars($row['image']) . '"
-                            alt="' . htmlspecialchars($row['name']) . '">
-                        
-                            <div class="overlay"></div>
-                            <div class="product-content">
-                                <h3>' . htmlspecialchars($row['name']) . '</h3>
-                                <p>Starting from RM' . number_format($row['price'], 2) . '</p>
-                            </div>
-                        </a>
-                    </div>';
-                }
-            } else {
-                echo "<p>No products found.</p>";
-            }
-            
-            $conn->close();
+            fetch3product($conn);
             ?>
 
         </div>
     </section>
-            
+
     <a href="login.php">login test</a>
     <a href="ProductDetailPage.php">product page</a>
     <a href="/backend/logout.php">Logout</a>

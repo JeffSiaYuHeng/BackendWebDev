@@ -1,6 +1,14 @@
 <?php
+include "../backend/productDetail.php";
 
-include "../backend/productDetail.php"; 
+// Dummy reviews (replace with database values later)
+$reviews = [
+    ["username" => "Alice", "rating" => 5, "content" => "Absolutely loved this dress! The quality is amazing."],
+    ["username" => "JohnDoe", "rating" => 4, "content" => "Beautiful fabric and design, but the size runs a bit small."],
+    ["username" => "Sophia", "rating" => 3, "content" => "It's decent, but I expected better stitching."],
+    ["username" => "EmilyR", "rating" => 5, "content" => "Perfect for my wedding! Highly recommend."],
+    ["username" => "Michael", "rating" => 2, "content" => "Not what I expected. The fabric feels cheap."],
+];
 ?>
 
 <!DOCTYPE html>
@@ -10,8 +18,9 @@ include "../backend/productDetail.php";
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><?php echo htmlspecialchars($product['name']); ?></title>
-    <script src="/BackendWebDev/script/transition.js"></script>
 
+    <script src="/BackendWebDev/script/transition.js"></script>
+    
     <link rel="stylesheet" href="/BackendWebDev/style/transition.css">
     <link rel="stylesheet" href="/BackendWebDev/style/productDetailPage.css">
 
@@ -22,7 +31,7 @@ include "../backend/productDetail.php";
     <div class="product-container">
         <!-- Left Side: Bridal Image -->
         <div class="image-container">
-            <img src="<?php echo htmlspecialchars($product['image']); ?>"
+            <img src="<?php echo htmlspecialchars($product['image']); ?>" 
                 alt="<?php echo htmlspecialchars($product['name']); ?>" id="gownImage">
         </div>
 
@@ -42,13 +51,6 @@ include "../backend/productDetail.php";
                 <option value="XL">X-Large</option>
             </select>
 
-            <!-- Color & Fabric Preview -->
-            <div class="preview-container">
-                <div class="preview-box" id="previewBox">
-                    <div class="fabric-overlay" id="fabricPreview"></div>
-                </div>
-            </div>
-
             <!-- Color Selection -->
             <label for="colorPicker">Select Color:</label>
             <select id="colorPicker">
@@ -67,6 +69,23 @@ include "../backend/productDetail.php";
                 <option value="fabric3">Tulle</option>
             </select>
         </div>
+    </div>
+
+    <!-- Review Section -->
+    <div class="review-section">
+        <h2>Customer Reviews</h2>
+        
+        <?php if (count($reviews) > 0): ?>
+            <?php foreach ($reviews as $review): ?>
+                <div class="review">
+                    <p class="username"><?php echo htmlspecialchars($review["username"]); ?></p>
+                    <p class="stars"><?php echo str_repeat("★", $review["rating"]) . str_repeat("☆", 5 - $review["rating"]); ?></p>
+                    <p class="review-content"><?php echo htmlspecialchars($review["content"]); ?></p>
+                </div>
+            <?php endforeach; ?>
+        <?php else: ?>
+            <p>No reviews yet. Be the first to review!</p>
+        <?php endif; ?>
     </div>
 
     <script src="/BackendWebDev/script/productDetailPage.js"></script>

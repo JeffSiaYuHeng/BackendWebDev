@@ -92,3 +92,89 @@ header h1 {
     background-color: #5B5449;
     color: white;
 }
+/* Product Section */
+.product {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 2rem;
+    background-color: #f1f1f1;
+}
+.product h2 {
+    font-family: 'Crimson Text';
+    font-weight: 400;
+
+    letter-spacing: 5px;
+    font-size: 39px;
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+/* Product Grid */
+.product-container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* 3 equal columns */
+    gap: 2rem; /* Adds spacing between items */
+    width: max-content; /* Ensures grid only takes necessary width */
+    margin: 0 auto; /* Centers the grid horizontally */
+}
+
+/* Ensure all cards have equal size */
+.product-card {
+    width: 20rem; /* Fixed width */
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    overflow: hidden; /* Prevents any unwanted overlay extension */
+    border-radius: 1rem; /* Ensures corners match */
+    cursor: pointer;
+}
+
+
+.product-card img {
+    width: 20rem; /* Fixed width (same as card width) */
+    height: 35rem; /* Fixed height for a portrait ratio */
+    object-fit: cover; /* Ensures image fills the space while maintaining aspect ratio */
+    border-radius: 1rem; /* Ensures rounded corners */
+    display: block; /* Removes unwanted spacing issues */
+}
+
+/* Overlay Effect (Aligned with Image) */
+.product-card .overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 20rem; /* Matches image width */
+    height: 35rem; /* Matches image height */
+    background: rgba(0, 0, 0, 0.6); /* Transparent black */
+    opacity: 0; /* Initially hidden */
+    transition: opacity 0.5s ease-in-out;
+    border-radius: 1rem; /* Ensures it matches image corners */
+}
+
+/* Show overlay on hover */
+.product-card:hover .overlay {
+    opacity: 1;
+}
+
+/* Text Styling */
+.product-content {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: white;
+    font-size: 1.2rem;
+    text-align: center;
+    opacity: 0; /* Initially hidden */
+    transition: opacity 0.5s ease-in-out;
+    width: 100%; /* Ensures text is properly aligned */
+}
+
+/* Show text on hover */
+.product-card:hover .product-content {
+    opacity: 1;
+}

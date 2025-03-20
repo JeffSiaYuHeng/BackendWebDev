@@ -6,6 +6,8 @@ if (isset($_SESSION["user_id"])) {
     header("Location: /BackendWebDev/userpage/MainPage.php");
     exit();
 }
+
+include "backend/index.php";
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -33,7 +35,15 @@ if (isset($_SESSION["user_id"])) {
                 <img src="/BackendWebDev/image/banner/banner2_s.png" alt="Banner 2">
                 <img src="/BackendWebDev/image/banner/banner3_s.png" alt="Banner 3">
             </div>
-            <button>Let's Start</button>
+            <button onclick="window.location.href = 'userpage/LoginPage.php';">Let's Start</button>
+        </div>
+    </section>
+    <section class="product">
+        <h2>Our Best Products</h2>
+        <div class="product-container">
+            <?php
+            fetch3product($conn);
+            ?>
         </div>
     </section>
     <a href="/BackendWebDev/userpage/LoginPage.php">Login</a>

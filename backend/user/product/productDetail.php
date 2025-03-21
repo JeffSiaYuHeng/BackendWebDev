@@ -1,5 +1,5 @@
 <?php
-include "db_connect.php"; // Include database connection
+include "../../db_connect.php"; // Include database connection
 // Check if 'id' is set in the URL
 if (!isset($_GET['id']) || empty($_GET['id'])) {
     echo "Product not found.";

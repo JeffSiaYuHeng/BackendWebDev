@@ -1,12 +1,12 @@
 <?php
-include "db_connect.php"; // Include database connection
+include "../../db_connect.php"; // Include database connection
 session_start();
 
 // If user is NOT logged in, show an alert and redirect to login page
 if (!isset($_SESSION["user_id"])) {
     echo "<script>
         alert('Your session has expired or you are not logged in. Please log in again.');
-        window.location.href = '/BackendWebDev/login.php';
+        window.location.href = '../../../BackendWebDev/login.php';
     </script>";
     exit();
 }

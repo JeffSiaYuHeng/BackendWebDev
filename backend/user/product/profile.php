@@ -1,5 +1,5 @@
 <?php
-include "../backend/db_connect.php"; // Include database connection
+include "../../db_connect.php"; // Include database connection
 
 // Get user ID from session
 $user_id = $_SESSION["user_id"];

@@ -1,5 +1,6 @@
 <?php
-include "../../db_connect.php"; // Include database connection
+include __DIR__ . "/../../../backend/db_connect.php";
+
 
 function fetch3product($conn) {
     // Fetch 3 products from the database

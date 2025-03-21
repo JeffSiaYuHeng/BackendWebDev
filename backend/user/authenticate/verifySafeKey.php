@@ -1,6 +1,7 @@
 <?php
 session_start();
-include "../../db_connect.php";
+include __DIR__ . "/../../../backend/db_connect.php";
+
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $safe_key_answer = trim($_POST["safe_key_answer"]);

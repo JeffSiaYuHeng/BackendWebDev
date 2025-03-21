@@ -12,7 +12,7 @@ if (!isset($_SESSION["user_id"])) {
 // Ensure first_name is set; fallback to "Guest"
 $first_name = $_SESSION["first_name"] ?? "Guest";
 
-include "../backend/main.php"; // Include database connection
+include "../backend/user/product/main.php"; // Include database connection
 
 
 
@@ -48,7 +48,7 @@ include "../backend/main.php"; // Include database connection
                 <p>Hello <?php echo htmlspecialchars($first_name); ?>!</p>
                 <div class="line"></div>
                 <a href="ProfilePage.php">Profile</a>
-                <a href="/BackendWebDev/backend/logout.php">Logout</a>
+                <a href="../backend/user/authenticate/logout.php">Logout</a>
             </div>
         </div>
     </header>
@@ -81,9 +81,9 @@ include "../backend/main.php"; // Include database connection
         </div>
     </section>
 
-    <a href="login.php">login test</a>
+    <a href="LoginPAge.php">login test</a>
     <a href="ProductDetailPage.php">product page</a>
-    <a href="/backend/logout.php">Logout</a>
+    <a href="../backend/user/authenticate/logout.php">Logout</a>
 </body>
 
 </html>

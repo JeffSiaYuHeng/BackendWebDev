@@ -1,7 +1,7 @@
 <?php
 
 //make into productPage.php
-include "../backend/weddingDress.php"; 
+include "../backend/user/product/weddingDress.php"; 
 
 
 ?>
@@ -31,7 +31,7 @@ include "../backend/weddingDress.php";
             <div class="dropdown-content">
                 <p>Hello <?php echo htmlspecialchars($first_name); ?>!</p>
                 <div class="line"></div>
-                <a href="/BackendWebDev/backend/logout.php">Logout</a>
+                <a href="/BackendWebDev/backend/user/authenticate/logout.php">Logout</a>
             </div>
         </div>
     </header>

@@ -17,12 +17,12 @@ if (isset($_SESSION["user_id"])) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/userstyle/register.css">
- 
+
     <link rel="stylesheet" href="/BackendWebDev/userstyle/register.css">
     <link rel="stylesheet" href="/BackendWebDev/userstyle/transition.css">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap" rel="stylesheet">
     <script src="/BackendWebDev/userscript/transition.js"></script>
-     
+
     <title>Eternal Elegant Bridal - Register</title>
 </head>
 
@@ -34,7 +34,7 @@ if (isset($_SESSION["user_id"])) {
         <h1>Register</h1>
         <p style="color:#808080">Create your account to get started</p>
 
-        <form action="/BackendWebDev/backend/register.php" method="POST">
+        <form action="/BackendWebDev/backend/user/authenticate/register.php" method="POST">
             <div class="form-group">
                 <div class="input-box">
                     <label for="first_name">First Name</label>

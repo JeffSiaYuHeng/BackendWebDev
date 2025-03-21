@@ -35,7 +35,7 @@ if (isset($_SESSION["user_id"])) {
     <section>
         <h1>Welcome Back</h1>
         <p style="color:#808080">Enter your email and password to access your account</p>
-        <form action="/BackendWebDev/backend/login.php" method="POST" class="form">
+        <form action="/BackendWebDev/backend/user/authenticate/login.php" method="POST" class="form">
             <label>Email</label>
             <input type="email" name="email" placeholder="Enter your Email" required>
             <label>Password</label>

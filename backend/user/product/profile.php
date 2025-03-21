@@ -1,5 +1,11 @@
 <?php
-include "../../db_connect.php"; // Include database connection
+include __DIR__ . "/../../../backend/db_connect.php";
+
+// Ensure session variables are set
+$first_name = $_SESSION["first_name"] ?? "Guest";
+$last_name = $_SESSION["last_name"] ?? "";
+$email = $_SESSION["email"] ?? "";
+$phone = $_SESSION["phone_number"] ?? "";
 
 // Get user ID from session
 $user_id = $_SESSION["user_id"];

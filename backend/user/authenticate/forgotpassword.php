@@ -1,6 +1,7 @@
 <?php
 session_start();
-include "../../db_connect.php"; // Goes back two folders
+include __DIR__ . "/../../../backend/db_connect.php";
+
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $email = trim($_POST["email"]);

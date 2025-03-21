@@ -1,5 +1,6 @@
 <?php
-include "../../db_connect.php"; // Include database connection
+include __DIR__ . "/../../../backend/db_connect.php";
+
 session_start();
 
 // If user is NOT logged in, show an alert and redirect to login page

@@ -8,15 +8,11 @@ if (!isset($_SESSION["user_id"])) {
     </script>";
     exit();
 }
-include "../backend/db_connect.php"; // Include database connection
 
 
-// Ensure session variables are set
-$first_name = $_SESSION["first_name"] ?? "Guest";
-$last_name = $_SESSION["last_name"] ?? "";
-$email = $_SESSION["email"] ?? "";
-$phone = $_SESSION["phone_number"] ?? "";
-include "../backend/profile.php"; // Include database connection
+
+
+include "../backend/user/authenticate/profile.php"; // Include database connection
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -45,7 +41,7 @@ include "../backend/profile.php"; // Include database connection
                 <p>Hello <?php echo htmlspecialchars($first_name); ?>!</p>
                 <div class="line"></div>
                 <a href="#">Profile</a>
-                <a href="/BackendWebDev/backend/logout.php">Logout</a>
+                <a href="/BackendWebDev/backend/user/authenticate/logout.php">Logout</a>
             </div>
         </div>
     </header>

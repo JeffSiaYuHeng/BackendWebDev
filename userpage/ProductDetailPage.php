@@ -1,5 +1,5 @@
 <?php
-include "../backend/productDetail.php";
+include "../backend/user/product/productDetail.php";
 
 // Dummy reviews (replace with database values later)
 $reviews = [
@@ -23,6 +23,7 @@ $base_price = $product['price'];
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -31,10 +32,12 @@ $base_price = $product['price'];
     <link rel="stylesheet" href="/BackendWebDev/userstyle/transition.css">
     <link rel="stylesheet" href="/BackendWebDev/userstyle/productDetailPage.css">
 </head>
+
 <body>
     <div class="product-container">
         <div class="image-container">
-            <img src="<?= htmlspecialchars($product['image']) ?>" alt="<?= htmlspecialchars($product['name']) ?>" id="gownImage">
+            <img src="<?= htmlspecialchars($product['image']) ?>" alt="<?= htmlspecialchars($product['name']) ?>"
+                id="gownImage">
         </div>
 
         <div class="details-container">
@@ -77,7 +80,8 @@ $base_price = $product['price'];
 
                 <input type="hidden" name="product_name" value="<?= htmlspecialchars($product['name']) ?>">
                 <input type="hidden" name="product_type" value="<?= htmlspecialchars($product['type']) ?>">
-                <input type="hidden" id="finalPrice" name="product_price" value="<?= number_format((float) $base_price, 2, '.', '') ?>">
+                <input type="hidden" id="finalPrice" name="product_price"
+                    value="<?= number_format((float) $base_price, 2, '.', '') ?>">
 
                 <button type="submit">Continue</button>
             </form>
@@ -87,18 +91,19 @@ $base_price = $product['price'];
     <div class="review-section">
         <h2>Customer Reviews</h2>
         <?php if (!empty($reviews)): ?>
-            <?php foreach ($reviews as $review): ?>
-                <div class="review">
-                    <p class="username"> <?= htmlspecialchars($review["username"]) ?> </p>
-                    <p class="stars"> <?= str_repeat("★", $review["rating"]) . str_repeat("☆", 5 - $review["rating"]) ?> </p>
-                    <p class="review-content"> <?= htmlspecialchars($review["content"]) ?> </p>
-                </div>
-            <?php endforeach; ?>
+        <?php foreach ($reviews as $review): ?>
+        <div class="review">
+            <p class="username"> <?= htmlspecialchars($review["username"]) ?> </p>
+            <p class="stars"> <?= str_repeat("★", $review["rating"]) . str_repeat("☆", 5 - $review["rating"]) ?> </p>
+            <p class="review-content"> <?= htmlspecialchars($review["content"]) ?> </p>
+        </div>
+        <?php endforeach; ?>
         <?php else: ?>
-            <p>No reviews yet. Be the first to review!</p>
+        <p>No reviews yet. Be the first to review!</p>
         <?php endif; ?>
     </div>
 
     <script src="/BackendWebDev/userscript/productDetailPage.js"></script>
 </body>
+
 </html>

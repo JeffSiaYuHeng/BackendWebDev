@@ -17,8 +17,10 @@ $(document).ready(function() {
             function(data) {
                 var response = JSON.parse(data);
                 alert(response.message);
+                
                 if (response.status === "success") {
-                    window.location.href = "/BackendWebDev/userpage/LoginPage.php"; // Redirect to login
+                    // Always redirect to login page after password reset
+                    window.location.href = "/BackendWebDev/userpage/LoginPage.php"; 
                 }
         });
     });

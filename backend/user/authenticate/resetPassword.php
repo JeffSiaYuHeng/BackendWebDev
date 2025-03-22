@@ -1,14 +1,14 @@
 <?php
 session_start();
-include "../../db_connect.php"; // Ensure the path is correct
+include __DIR__ . "/../../../backend/db_connect.php";
 
-// Check if the user is authorized (e.g., session variable set after security question verification)
-if (!isset($_SESSION["reset_email"])) {
+// Allow password reset for both logged-in users & forgot password users
+if (!isset($_SESSION["reset_email"]) && !isset($_SESSION["user_id"])) {
     echo json_encode(["status" => "error", "message" => "Unauthorized request."]);
     exit();
 }
 
-// Get the new password from the request
+// Get new password from request
 $new_password = trim($_POST["new_password"]);
 
 // Basic password validation
@@ -17,18 +17,38 @@ if (strlen($new_password) < 8) {
     exit();
 }
 
-// Hash the new password before storing it in the database
+// Hash the new password
 $hashed_password = password_hash($new_password, PASSWORD_DEFAULT);
-$email = $_SESSION["reset_email"]; // Email stored in session during forgot password flow
 
-// Update the password in the database
+// Determine which email to use
+if (isset($_SESSION["reset_email"])) {
+    $email = $_SESSION["reset_email"]; // Forgot password flow
+} else {
+    // Fetch email from database using logged-in user ID
+    $stmt = $conn->prepare("SELECT email FROM users WHERE id = ?");
+    $stmt->bind_param("i", $_SESSION["user_id"]);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    if ($row = $result->fetch_assoc()) {
+        $email = $row["email"];
+    } else {
+        echo json_encode(["status" => "error", "message" => "User not found."]);
+        exit();
+    }
+    $stmt->close();
+}
+
+// Update password in database
 $stmt = $conn->prepare("UPDATE users SET password = ? WHERE email = ?");
 $stmt->bind_param("ss", $hashed_password, $email);
 
 if ($stmt->execute()) {
-    // Password updated successfully
-    unset($_SESSION["reset_email"]); // Remove reset session for security
-    echo json_encode(["status" => "success", "message" => "Password reset successful! Redirecting to login..."]);
+    // Destroy session to force logout
+    session_unset();
+    session_destroy();
+    session_start(); // Start a new session to avoid errors
+
+    echo json_encode(["status" => "success", "message" => "Password reset successful! Please log in again."]);
 } else {
     echo json_encode(["status" => "error", "message" => "Something went wrong. Please try again."]);
 }

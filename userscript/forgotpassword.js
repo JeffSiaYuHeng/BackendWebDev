@@ -1,4 +1,3 @@
-// Purpose: Contains the javascript for the forgot password page.
 $(document).ready(function() {
     // Handle email submission
     $("#email-form").submit(function(e) {
@@ -25,11 +24,10 @@ $(document).ready(function() {
             var response = JSON.parse(data);
             if (response.status === "success") {
                 alert(response.message);
-                window.location.href = "/BackendWebDev/userpage/ResetPasswordPage.html";
+                window.location.href = "/BackendWebDev/userpage/resetPasswordPage.php";
             } else {
                 alert(response.message);
             }
         });
     });
 });
-    

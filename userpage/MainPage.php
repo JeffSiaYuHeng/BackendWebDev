@@ -40,17 +40,20 @@ include "../backend/user/product/main.php"; // Include database connection
 <body>
     <header>
         <h1>Eternal Elegant Bridal</h1>
-        <div class="dropdown">
-            <button class="dropbtn">
-                <span>Me <i class="fa fa-angle-down" aria-hidden="true"></i></span>
-            </button>
-            <div class="dropdown-content">
-                <p>Hello <?php echo htmlspecialchars($first_name); ?>!</p>
-                <div class="line"></div>
-                <a href="ProfilePage.php">Profile</a>
-                <a href="../backend/user/authenticate/logout.php">Logout</a>
+        <!-- Right container for Cart & Dropdown -->
+        <div class="right-section">
+            <button class="cart-btn">Cart</button>
+            <div class="dropdown">
+                <button class="dropbtn" id="account-btn">
+                    <span>Me <i class="fa fa-angle-down" aria-hidden="true"></i></span>
+                </button>
+                <div class="dropdown-content">
+                    <p>Hello <?php echo htmlspecialchars($first_name); ?>!</p>
+                    <div class="line"></div>
+                    <a href="ProfilePage.php">Profile</a>
+                    <a href="../backend/user/authenticate/logout.php">Logout</a>
+                </div>
             </div>
-        </div>
     </header>
     <nav>
         <a class="blink" href="#">Home</a> |

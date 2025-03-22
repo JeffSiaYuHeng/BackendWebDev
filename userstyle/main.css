@@ -7,10 +7,9 @@
 
 header {
     display: flex;
-    justify-content: center; /* Center elements */
-    align-items: center; /* Align elements vertically */
+    align-items: center;
+    justify-content: space-between; /* Spread elements */
     padding: 1rem;
-    position: relative; /* Needed for absolute positioning */
 }
 
 h1{
@@ -32,15 +31,33 @@ header h1 {
     letter-spacing: 5px;
     font-size: 39px;
     text-align: center;
-    flex-grow: 1; /* Allows it to take available space */
+    flex-grow: 0;
 }
 
+/* Right section containing Cart and Dropdown */
+.right-section {
+    display: flex;
+    align-items: center;
+    gap: 2rem; /* Space between Cart and Dropdown */
+    margin-left: auto; /* Push right */
+}
+
+/* Cart Button */
+.cart-btn {
+    background-color: #8F7F65;
+    color: white;
+    padding: 1rem 2rem;
+    font-size: 16px;
+    border: none;
+    cursor: pointer;
+    border-radius: 2rem;
+    font-family: 'Crimson Text';
+    font-weight: 400;
+    margin-left: 10rem;
+}
 /* Dropdown container */
 .dropdown {
-    position: absolute;
-    right: 1rem; /* Positions dropdown at the right edge */
     display: inline-block;
-    margin-left: auto; /* Pushes the account div to the right */
 }
 
 /* Dropdown Button */
@@ -54,6 +71,8 @@ header h1 {
     border-radius: 2rem;
     font-family: 'Crimson Text';
     font-weight: 400;
+    display: flex;
+    align-items: center;
 }
 
 /* Dropdown Content (Hidden by Default) */
@@ -63,9 +82,8 @@ header h1 {
     background-color: #f1f1f1;
     box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
     z-index: 1;
-
-    transform: translateX(-50%); /* Shift back to center */
-    min-width: 15rem; /* Adjust width as needed */
+    transform: translateX(-50%);
+    min-width: 15rem;
     border-radius: 8px;
     overflow: hidden;
 }
@@ -104,6 +122,9 @@ header h1 {
   /* Change the background color of the dropdown button when the dropdown content is shown */
   .dropdown:hover .dropbtn {background-color: #6d6f65;}
 
+
+
+/*Nav bar*/
 nav{
     display: flex;
     justify-content: center;

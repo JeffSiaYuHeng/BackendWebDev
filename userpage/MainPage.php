@@ -42,7 +42,10 @@ include "../backend/user/product/main.php"; // Include database connection
         <h1>Eternal Elegant Bridal</h1>
         <!-- Right container for Cart & Dropdown -->
         <div class="right-section">
-            <button class="cart-btn">Cart</button>
+            <button class="cart-btn" id="open-btn">
+                <i class="fa fa-shopping-cart" aria-hidden="true"></i>
+                <span class="icon-button__badge"><?php ?></span>
+            </button>
             <div class="dropdown">
                 <button class="dropbtn" id="account-btn">
                     <span>Me <i class="fa fa-angle-down" aria-hidden="true"></i></span>

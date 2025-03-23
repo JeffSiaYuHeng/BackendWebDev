@@ -10,6 +10,7 @@ header {
     align-items: center;
     justify-content: space-between; /* Spread elements */
     padding: 1rem;
+    position: relative;
 }
 
 h1{
@@ -31,7 +32,7 @@ header h1 {
     letter-spacing: 5px;
     font-size: 39px;
     text-align: center;
-    flex-grow: 1;
+    flex-grow: 1 !important;
 }
 
 /* Right section containing Cart and Dropdown */
@@ -39,22 +40,38 @@ header h1 {
     display: flex;
     align-items: center;
     gap: 2rem; /* Space between Cart and Dropdown */
-    width: 20%;
+    margin-right: auto;
+    position: absolute;
+    right: 1rem;
 }
 
 /* Cart Button */
 .cart-btn {
     background-color: #8F7F65;
     color: white;
-    padding: 1rem 2rem;
-    font-size: 16px;
+    padding: .5rem 1.1rem;
     border: none;
     cursor: pointer;
     border-radius: 2rem;
-    font-family: 'Crimson Text';
-    font-weight: 400;
     margin-left: 10rem;
+    font-size: 2rem;
+    position: relative;
 }
+.icon-button__badge {
+    position: absolute;
+    font-size: 16px;
+    top: -10px;
+    right: -10px;
+    width: 25px;
+    height: 25px;
+    background: red;
+    color: #ffffff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+  }
+
 /* Dropdown container */
 .dropdown {
     display: inline-block;

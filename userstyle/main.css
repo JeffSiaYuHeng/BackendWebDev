@@ -31,7 +31,7 @@ header h1 {
     letter-spacing: 5px;
     font-size: 39px;
     text-align: center;
-    flex-grow: 0;
+    flex-grow: 1;
 }
 
 /* Right section containing Cart and Dropdown */
@@ -39,7 +39,7 @@ header h1 {
     display: flex;
     align-items: center;
     gap: 2rem; /* Space between Cart and Dropdown */
-    margin-left: auto; /* Push right */
+    width: 20%;
 }
 
 /* Cart Button */

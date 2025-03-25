@@ -102,7 +102,7 @@ CREATE TABLE `cart_items` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 
-CREATE TABLE `product_accessories` (
+CREATE TABLE `cart_accessories` (
   `id` INT(11) NOT NULL AUTO_INCREMENT,
   `cart_id` INT(11) NOT NULL,
   `cart_item_id` INT(11) NOT NULL,
@@ -171,17 +171,16 @@ CREATE TABLE `order_items` (
   FOREIGN KEY (`product_id`) REFERENCES `products` (`id`) ON DELETE CASCADE
 );
 
-CREATE TABLE `order_accessories` (
-  `id` INT(11) NOT NULL AUTO_INCREMENT,
-  `order_id` INT(11) NOT NULL,
-  `order_item_id` INT(11) NOT NULL,
-  `accessory_id` INT(11) NOT NULL,
-  PRIMARY KEY (`id`),
-  FOREIGN KEY (`order_id`) REFERENCES `orders` (`id`) ON DELETE CASCADE
-  FOREIGN KEY (`order_item_id`) REFERENCES `order_items` (`id`) ON DELETE CASCADE,
-  FOREIGN KEY (`accessory_id`) REFERENCES `accessories` (`id`) ON DELETE CASCADE
+CREATE TABLE `order_accessories` ( 
+    `id` INT(11) NOT NULL AUTO_INCREMENT, 
+    `order_id` INT(11) NOT NULL, 
+    `order_item_id` INT(11) NOT NULL, 
+    `accessory_id` INT(11) NOT NULL, 
+    PRIMARY KEY (`id`), 
+    FOREIGN KEY (`order_id`) REFERENCES `orders` (`id`) ON DELETE CASCADE, 
+    FOREIGN KEY (`order_item_id`) REFERENCES `order_items` (`id`) ON DELETE CASCADE, 
+    FOREIGN KEY (`accessory_id`) REFERENCES `accessories` (`id`) ON DELETE CASCADE 
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
 
 
 COMMIT;

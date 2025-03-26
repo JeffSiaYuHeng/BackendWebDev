@@ -14,21 +14,30 @@ $fabric_display = $fabric_options[$fabric] ?? $fabric;
 // Convert product price to float
 $product_price = (float) str_replace(',', '', $product_price);
 
-// Define accessory prices
-$accessory_prices = [
-    "Classic Lace Veil" => 100.00,
-    "Cathedral Veil" => 150.00,
-    "Birdcage Veil" => 80.00,
-    "Royal Crystal Tiara" => 120.00,
-    "Pearl Crown Tiara" => 140.00,
-    "Floral Gold Tiara" => 110.00,
-    "Ivory Satin Heels" => 200.00,
-    "Embroidered Flats" => 180.00,
-    "Crystal Stiletto" => 250.00
-];
+// Include the database connection
+include "../backend/db_connect.php"; 
 
-// Convert prices to JSON for JavaScript use
-$accessory_prices_json = json_encode($accessory_prices);
+// Initialize the accessories array
+$accessories = [];
+
+// Query to retrieve accessories from the database
+$sql = "SELECT * FROM accessories";
+$result = $conn->query($sql);
+
+// Check if there are results and store them in an array
+if ($result->num_rows > 0) {
+    while ($row = $result->fetch_assoc()) {
+        $accessories[] = $row;
+    }
+} else {
+    echo "No accessories found.";
+}
+
+// Close the database connection
+$conn->close();
+
+// Convert the accessories array to JSON for use in JavaScript
+$accessories_json = json_encode($accessories);
 ?>
 
 <!DOCTYPE html>
@@ -63,20 +72,40 @@ $accessory_prices_json = json_encode($accessory_prices);
     
     <section class="accessories-container">
         <?php 
+        // Categories for displaying accessories
         $categories = [
-            "Veils" => ["Classic Lace Veil" => "veil1.jpg", "Cathedral Veil" => "veil2.jpg", "Birdcage Veil" => "veil3.jpg"],
-            "Tiaras" => ["Royal Crystal Tiara" => "tiara1.jpg", "Pearl Crown Tiara" => "tiara2.jpg", "Floral Gold Tiara" => "tiara3.jpg"],
-            "Shoes" => ["Ivory Satin Heels" => "shoe1.jpg", "Embroidered Flats" => "shoe2.jpg", "Crystal Stiletto" => "shoe3.jpg"]
+            "Veils" => [],
+            "Tiaras" => [],
+            "Shoes" => []
         ];
-        
+
+        // Sort accessories by category
+        foreach ($accessories as $accessory) {
+            $name = $accessory['name'];
+            $price = $accessory['price'];
+            $image = $accessory['image'];
+            $category = $accessory['category'];
+
+            if (strpos(strtolower($name), 'veil') !== false) {
+                $categories['Veils'][] = ['name' => $name, 'price' => $price, 'image' => $image];
+            } elseif (strpos(strtolower($name), 'tiara') !== false) {
+                $categories['Tiaras'][] = ['name' => $name, 'price' => $price, 'image' => $image];
+            } elseif (strpos(strtolower($name), 'heel') !== false || strpos(strtolower($name), 'flat') !== false) {
+                $categories['Shoes'][] = ['name' => $name, 'price' => $price, 'image' => $image];
+            }
+        }
+
+        // Loop through each category and display accessories
         foreach ($categories as $category => $items) {
             echo "<h2>$category</h2><div class='accessory-grid'>";
-            foreach ($items as $name => $image) {
-                $price = $accessory_prices[$name] ?? 0;
+            foreach ($items as $item) {
+                $name = $item['name'];
+                $price = $item['price'];
+                $image = $item['image'] ?? 'default.jpg'; // Use a default image if none exists
                 echo "<div class='accessory'>
-                        <img src='$image' alt='$name'>
+                        <img src='/path/to/images/$image' alt='$name'>
                         <p>$name - RM $price</p>
-                        <button onclick=\"selectAccessory('$name', $price, '$image')\">Select</button>
+                        <button onclick=\"selectAccessory('$name', $price, '/path/to/images/$image')\">Select</button>
                       </div>";
             }
             echo "</div>";
@@ -84,7 +113,7 @@ $accessory_prices_json = json_encode($accessory_prices);
         ?>
     </section>
     
-    <form action="order.php" method="POST">
+    <form action="/BackendWebDev/backend/user/product/addToCart.php" method="POST">
         <input type="hidden" name="product_name" value="<?= htmlspecialchars($product_name) ?>">
         <input type="hidden" name="product_type" value="<?= htmlspecialchars($product_type) ?>">
         <input type="hidden" name="product_price" id="finalPrice" value="<?= number_format($product_price, 2) ?>">
@@ -93,7 +122,7 @@ $accessory_prices_json = json_encode($accessory_prices);
         <input type="hidden" name="fabric" value="<?= htmlspecialchars($fabric_display) ?>">
         <input type="hidden" name="accessories" id="selectedAccessories" value="">
         <button type="submit">Add to Cart</button>
-        </form>
+    </form>
 
     <script>
         const basePrice = parseFloat(<?= $product_price ?>);
@@ -101,7 +130,7 @@ $accessory_prices_json = json_encode($accessory_prices);
         let selectedAccessories = [];
 
         // Accessory Prices from PHP
-        const accessoryPrices = <?= $accessory_prices_json ?>;
+        const accessoryPrices = <?= $accessories_json ?>;
 
         function selectAccessory(name, price, image) {
             if (selectedAccessories.includes(name)) return;

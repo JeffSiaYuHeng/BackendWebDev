@@ -49,7 +49,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $_SESSION["user_name"] = $first_name . " " . $last_name; // Store user's full name in session
 
         // Redirect to main
-        header("Location: ../../../BackendWebDev/userpage/MainPage.php");
+        header("Location: ../../../userpage/MainPage.php");
         exit();
     } else {
         echo "<script>alert('Error: Could not register user. Please try again later.'); window.location.href='../../../BackendWebDev/userpage/RegisterPage.php';</script>";

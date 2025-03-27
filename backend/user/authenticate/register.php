@@ -7,6 +7,7 @@ include __DIR__ . "/../../../backend/db_connect.php";
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Sanitize and validate input data
     $first_name = trim(htmlspecialchars($_POST["first_name"]));
+    $username = trim(htmlspecialchars($_POST["username"]));
     $last_name = trim(htmlspecialchars($_POST["last_name"]));
     $email = filter_var(trim($_POST["email"]), FILTER_SANITIZE_EMAIL);
     $country_code = trim($_POST["country_code"]);
@@ -36,14 +37,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $hashed_safe_key_answer = password_hash($safe_key_answer, PASSWORD_BCRYPT);
 
     // Insert user data into the database
-    $stmt = $conn->prepare("INSERT INTO users (first_name, last_name, email, phone_number, address, password, safe_key_question, safe_key_answer) 
-                            VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
-    $stmt->bind_param("ssssssss", $first_name, $last_name, $email, $full_phone_number, $address, $hashed_password, $safe_key_question, $hashed_safe_key_answer);
+    $stmt = $conn->prepare("INSERT INTO users (username, first_name, last_name, email, phone_number, address, password, safe_key_question, safe_key_answer) 
+                            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)");
+    $stmt->bind_param("sssssssss", $username, $first_name, $last_name, $email, $full_phone_number, $address, $hashed_password, $safe_key_question, $hashed_safe_key_answer);
 
     if ($stmt->execute()) {
         // Store session variables
         $_SESSION["user_id"] = $stmt->insert_id; // Store user ID in session
         $_SESSION["email"] = $email;
+        $_SESSION["username"] = $username; // ✅ Add this line
         $_SESSION["first_name"] = $first_name; // ✅ Add this line
         $_SESSION["last_name"] = $last_name;  // Optional, in case you need it
         $_SESSION["user_name"] = $first_name . " " . $last_name; // Store user's full name in session

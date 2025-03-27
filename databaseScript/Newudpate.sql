@@ -25,6 +25,7 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 CREATE TABLE `users` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
+  `username` varchar(50) NOT NULL,
   `first_name` varchar(50) NOT NULL,
   `last_name` varchar(50) NOT NULL,
   `email` varchar(100) NOT NULL UNIQUE,
@@ -41,8 +42,8 @@ CREATE TABLE `users` (
 --
 -- Dumping data for table `users`
 --
-INSERT INTO `users` (`id`, `first_name`, `last_name`, `email`, `phone_number`, `address`, `password`, `created_at`, `safe_key_question`, `safe_key_answer`) VALUES
-(6, 'Lim', 'Chun Xin', 'moyasuxin@gmail.com', '+600129365933', 'Nilai University, Persiaran Kolej Bbn, Bandar Baru Nilai, Nilai, Negeri Sembilan, Malaysia', '$2y$10$OCVW64MA270S4tNLfDF1SOz4kG24ukjTtd9cal5lQ.1VRaITHwNPe', '2025-03-02 06:22:14', 'pet_name', '$2y$10$1wbKaaOP4pDXwvNo1XkF3elm9Q8kfwBGRkIcVm950MbUJ7qnrnTr.');
+INSERT INTO `users` (`id`, `username`,`first_name`, `last_name`, `email`, `phone_number`, `address`, `password`, `created_at`, `safe_key_question`, `safe_key_answer`) VALUES
+(6,'MonicaCheng', 'Lim', 'Chun Xin', 'moyasuxin@gmail.com', '+600129365933', 'Nilai University, Persiaran Kolej Bbn, Bandar Baru Nilai, Nilai, Negeri Sembilan, Malaysia', '$2y$10$OCVW64MA270S4tNLfDF1SOz4kG24ukjTtd9cal5lQ.1VRaITHwNPe', '2025-03-02 06:22:14', 'pet_name', '$2y$10$1wbKaaOP4pDXwvNo1XkF3elm9Q8kfwBGRkIcVm950MbUJ7qnrnTr.');
 
 -- --------------------------------------------------------
 -- Table structure for `products`
@@ -63,7 +64,9 @@ CREATE TABLE `products` (
 INSERT INTO `products` (`id`, `name`, `type`, `price`, `image`, `description`) VALUES
 (1, 'Enchanted White Belle Dress', 'wedding dress', 3800.00, '/BackendWebDev/image/dress/dress1.jpg', 'Elegant white gown with lace details.'),
 (2, 'Majestic Pearl Elegance Gown', 'wedding dress', 4200.00, '/BackendWebDev/image/dress/dress2.jpg', 'A timeless pearl-colored wedding dress.'),
-(3, 'White Bow Puffy Mini Dress', 'cocktail dress', 2800.00, '/BackendWebDev/image/dress/dress3.jpg', 'A cute and stylish mini dress.');
+(3, 'White Bow Puffy Mini Dress', 'cocktail dress', 2800.00, '/BackendWebDev/image/dress/dress3.jpg', 'A cute and stylish mini dress.'),
+(4, 'White Satin Strapless Puff Sleeve Wedding Dress', 'Wedding dress', 4000.00, NULL, 'A stunning off-shoulder satin wedding gown with a delicate bow detail.'),
+(5, 'Vintage White Satin Strapless Wedding Dress', 'Wedding dress', 4500.00, '/BackendWebDev/image/dress/dress5.jpg', 'A luxurious strapless wedding ball gown with a structured bodice and a voluminous skirt.');
 
 CREATE TABLE `accessories` (
   `id` INT(11) NOT NULL AUTO_INCREMENT,

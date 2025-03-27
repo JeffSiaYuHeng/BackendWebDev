@@ -35,6 +35,13 @@ if (isset($_SESSION["user_id"])) {
         <p style="color:#808080">Create your account to get started</p>
 
         <form action="/BackendWebDev/backend/user/authenticate/register.php" method="POST">
+
+            <div class="form-group">
+                <div class="input-box">
+                    <label for="username">Username</label>
+                    <input type="text" id="username" name="username" placeholder="Enter your Username" required>
+                </div>
+            </div>
             <div class="form-group">
                 <div class="input-box">
                     <label for="first_name">First Name</label>

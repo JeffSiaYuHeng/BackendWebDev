@@ -305,3 +305,48 @@ nav a{
 .product-card:hover .product-content {
     opacity: 1;
 }
+
+/* Responsive Product Grid */
+@media (max-width: 768px) {
+    .product-container {
+        grid-template-columns: repeat(2, 1fr); /* 2 columns */
+        gap: 1.5rem; /* Reduce gap */
+    }
+
+    .product-card {
+        width: 18rem; /* Reduce width for smaller screens */
+    }
+
+    .product-card img {
+        width: 18rem; /* Match card width */
+        height: 30rem; /* Adjust height */
+    }
+
+    .product-card .overlay {
+        width: 18rem;
+        height: 30rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .product-container {
+        grid-template-columns: 1fr; /* 1 column */
+    }
+
+    .product-card {
+        width: 100%; /* Full width */
+        max-width: 20rem; /* Prevent it from getting too big */
+    }
+
+    .product-card img {
+        width: 100%;
+        max-width: 20rem;
+        height: auto; /* Maintain aspect ratio */
+    }
+
+    .product-card .overlay {
+        width: 100%;
+        max-width: 20rem;
+        height: auto;
+    }
+}

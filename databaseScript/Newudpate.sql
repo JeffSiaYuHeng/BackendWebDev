@@ -77,6 +77,27 @@ CREATE TABLE `accessories` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+-- Insert Veils
+INSERT INTO `accessories` (`name`, `category`, `price`, `image`) 
+VALUES 
+('Classic Lace Veil', 'Veil', 149.99, 'classic_lace_veil.jpg'),
+('Embroidered Cathedral Veil', 'Veil', 199.50, 'embroidered_cathedral_veil.jpg'),
+('Beaded Edge Veil', 'Veil', 239.99, 'beaded_edge_veil.jpg');
+
+-- Insert Tiaras
+INSERT INTO `accessories` (`name`, `category`, `price`, `image`) 
+VALUES 
+('Crystal Princess Tiara', 'Tiara', 189.99, 'crystal_princess_tiara.jpg'),
+('Gold Floral Tiara', 'Tiara', 225.75, 'gold_floral_tiara.jpg'),
+('Silver Rhinestone Tiara', 'Tiara', 249.50, 'silver_rhinestone_tiara.jpg');
+
+-- Insert Shoes
+INSERT INTO `accessories` (`name`, `category`, `price`, `image`) 
+VALUES 
+('White Satin Heels', 'Shoes', 179.99, 'white_satin_heels.jpg'),
+('Lace Wedding Flats', 'Shoes', 129.50, 'lace_wedding_flats.jpg'),
+('Pearl Embellished Sandals', 'Shoes', 210.25, 'pearl_embellished_sandals.jpg');
+
 
 -- ------------/-------------------------------------------
 -- Table structure for `cart`
@@ -144,10 +165,12 @@ CREATE TABLE `orders` (
   `id` INT AUTO_INCREMENT PRIMARY KEY,
   `user_id` INT,
   `total_price` DECIMAL(10,2) NOT NULL,
+  `delivery_method` ENUM('Delivery', 'Collection') NOT NULL, -- Added delivery_method
   `status` ENUM('Pending', 'Processing', 'Shipped', 'Delivered', 'Cancelled') DEFAULT 'Pending',
   `created_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
   FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE
 );
+
 
 CREATE TABLE `payments` (
   `id` INT AUTO_INCREMENT PRIMARY KEY,

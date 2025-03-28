@@ -68,6 +68,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['cart_item_id'])) {
 
 $conn->close();
 
-header("Location: /BackendWebDev/userpage/CartPage.php");
+header("Location: /BackendWebDev/userpage/cart/CartPage.php");
 
 ?>

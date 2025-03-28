@@ -1,47 +1,23 @@
 <?php
-// Retrieve bridal details from POST request
-$product_name = $_POST['product_name'] ?? 'Unknown Bridal Gown';
-$product_type = $_POST['product_type'] ?? 'Unknown Type';
-$product_price = $_POST['product_price'] ?? '0.00';
-$size = $_POST['size'] ?? 'Not Selected';
-$color = $_POST['color'] ?? 'Default Color';
-$fabric = $_POST['fabric'] ?? 'Default Fabric';
-
-// Fabric mapping
-$fabric_options = ["fabric1" => "Lace", "fabric2" => "Satin", "fabric3" => "Tulle"];
-$fabric_display = $fabric_options[$fabric] ?? $fabric;
-
-// Convert product price to float
-$product_price = (float) str_replace(',', '', $product_price);
-
-// Include the database connection
-include "../backend/db_connect.php"; 
-
-// Initialize the accessories array
-$accessories = [];
-
-// Query to retrieve accessories from the database
-$sql = "SELECT * FROM accessories";
-$result = $conn->query($sql);
-
-// Check if there are results and store them in an array
-if ($result->num_rows > 0) {
-    while ($row = $result->fetch_assoc()) {
-        $accessories[] = $row;
-    }
-} else {
-    echo "No accessories found.";
+session_start();
+// If user is NOT logged in, show an alert and redirect to login page
+if (!isset($_SESSION["user_id"])) {
+    echo "<script>
+        alert('Your session has expired or you are not logged in. Please log in again.');
+        window.location.href = 'LoginPage.php';
+    </script>";
+    exit();
 }
 
-// Close the database connection
-$conn->close();
+// Ensure first_name is set; fallback to "Guest"
+$first_name = $_SESSION["first_name"] ?? "Guest";
 
-// Convert the accessories array to JSON for use in JavaScript
-$accessories_json = json_encode($accessories);
+include "../../backend/user/product/accessories.php"; // Include database connection
 ?>
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -49,11 +25,12 @@ $accessories_json = json_encode($accessories);
     <link rel="stylesheet" href="/BackendWebDev/userstyle/accessories.css">
     <script defer src="/BackendWebDev/userscript/accessories.js"></script>
 </head>
+
 <body>
     <header>
         <h1>Bridal Accessories</h1>
     </header>
-    
+
     <section class="bridal-details">
         <h2>Your Bridal Selection</h2>
         <p><strong>Gown:</strong> <?= htmlspecialchars($product_name) ?></p>
@@ -64,12 +41,12 @@ $accessories_json = json_encode($accessories);
         <p><strong>Base Price:</strong> RM<span id="basePrice"><?= number_format($product_price, 2) ?></span></p>
         <p><strong>Total Price:</strong> RM<span id="totalPrice"><?= number_format($product_price, 2) ?></span></p>
     </section>
-    
+
     <section>
         <h2>Selected Accessories</h2>
         <div id="selected-accessories"></div>
     </section>
-    
+
     <section class="accessories-container">
         <?php 
         // Categories for displaying accessories
@@ -112,8 +89,8 @@ $accessories_json = json_encode($accessories);
         }
         ?>
     </section>
-    
-    <form action="/BackendWebDev/backend/user/product/addToCart.php" method="POST">
+
+    <form action="/BackendWebDev/backend/user/cart/addToCart.php" method="POST">
         <input type="hidden" name="product_name" value="<?= htmlspecialchars($product_name) ?>">
         <input type="hidden" name="product_type" value="<?= htmlspecialchars($product_type) ?>">
         <input type="hidden" name="product_price" id="finalPrice" value="<?= number_format($product_price, 2) ?>">
@@ -125,46 +102,47 @@ $accessories_json = json_encode($accessories);
     </form>
 
     <script>
-        const basePrice = parseFloat(<?= $product_price ?>);
-        let totalPrice = basePrice;
-        let selectedAccessories = [];
+    const basePrice = parseFloat(<?= $product_price ?>);
+    let totalPrice = basePrice;
+    let selectedAccessories = [];
 
-        // Accessory Prices from PHP
-        const accessoryPrices = <?= $accessories_json ?>;
+    // Accessory Prices from PHP
+    const accessoryPrices = <?= $accessories_json ?>;
 
-        function selectAccessory(name, price, image) {
-            if (selectedAccessories.includes(name)) return;
+    function selectAccessory(name, price, image) {
+        if (selectedAccessories.includes(name)) return;
 
-            selectedAccessories.push(name);
-            totalPrice += price;
+        selectedAccessories.push(name);
+        totalPrice += price;
 
-            const selectedContainer = document.getElementById("selected-accessories");
-            const item = document.createElement("div");
-            item.classList.add("selected-item");
-            item.id = name;
-            
-            item.innerHTML = `
+        const selectedContainer = document.getElementById("selected-accessories");
+        const item = document.createElement("div");
+        item.classList.add("selected-item");
+        item.id = name;
+
+        item.innerHTML = `
                 <img src="${image}" alt="${name}">
                 <p>${name} - RM ${price.toFixed(2)}</p>
                 <button onclick="removeAccessory('${name}', ${price})">Remove</button>
             `;
 
-            selectedContainer.appendChild(item);
-            updateTotalPrice();
-        }
+        selectedContainer.appendChild(item);
+        updateTotalPrice();
+    }
 
-        function removeAccessory(name, price) {
-            selectedAccessories = selectedAccessories.filter(item => item !== name);
-            totalPrice -= price;
-            document.getElementById(name).remove();
-            updateTotalPrice();
-        }
+    function removeAccessory(name, price) {
+        selectedAccessories = selectedAccessories.filter(item => item !== name);
+        totalPrice -= price;
+        document.getElementById(name).remove();
+        updateTotalPrice();
+    }
 
-        function updateTotalPrice() {
-            document.getElementById("totalPrice").textContent = totalPrice.toFixed(2);
-            document.getElementById("finalPrice").value = totalPrice.toFixed(2);
-            document.getElementById("selectedAccessories").value = JSON.stringify(selectedAccessories);
-        }
+    function updateTotalPrice() {
+        document.getElementById("totalPrice").textContent = totalPrice.toFixed(2);
+        document.getElementById("finalPrice").value = totalPrice.toFixed(2);
+        document.getElementById("selectedAccessories").value = JSON.stringify(selectedAccessories);
+    }
     </script>
 </body>
+
 </html>

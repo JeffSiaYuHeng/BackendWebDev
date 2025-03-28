@@ -87,5 +87,5 @@ $stmt->close();
 $conn->close();
 
 // Redirect to cart page
-header("Location: /BackendWebDev/userpage/CartPage.php");
+header("Location: /BackendWebDev/userpage/cart/CartPage.php");
 exit();

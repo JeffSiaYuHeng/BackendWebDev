@@ -12,7 +12,7 @@ if (!isset($_SESSION["user_id"])) {
 
 
 
-include "../backend/user/product/profile.php"; // Include database connection
+include "../../backend/user/product/profile.php"; // Include database connection
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -76,9 +76,8 @@ include "../backend/user/product/profile.php"; // Include database connection
             <div id="security" class="section" style="display: none;">
                 <h2>Security</h2>
                 <p>Change your password and manage security settings.</p>
-                <p><strong>Password:</strong> ******** <a href="ResetpasswordPage.php
-"
-                        class="reset-password-btn">Change</a></p>
+                <p><strong>Password:</strong> ******** <a href="../authenticate/ResetpasswordPage.php
+" class="reset-password-btn">Change</a></p>
                 </p>
             </div>
 

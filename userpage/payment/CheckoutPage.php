@@ -1,6 +1,6 @@
 <?php
 session_start();
-include "../backend/db_connect.php";
+include "../../backend/db_connect.php";
 
 // Check if user is logged in
 if (!isset($_SESSION['user_id'])) {
@@ -38,7 +38,7 @@ $cart_items = $result->fetch_all(MYSQLI_ASSOC);
 $stmt->close();
 
 if (empty($cart_items)) {
-    echo "<p>Your cart is empty. <a href='index.php'>Go back to shopping</a></p>";
+    echo "<p>Your cart is empty. <a href='../product/MainPage.php'>Go back to shopping</a></p>";
     exit();
 }
 
@@ -93,6 +93,6 @@ $stmt->execute();
 $stmt->close();
 
 // Redirect to order confirmation page
-header("Location: /BackendWebDev/userpage/OrderConfirmationPage.php?order_id=" . $order_id);
+header("Location: /BackendWebDev/userpage/payment/OrderConfirmationPage.php?order_id=" . $order_id);
 exit();
 ?>

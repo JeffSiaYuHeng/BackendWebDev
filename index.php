@@ -3,7 +3,7 @@ session_start();
 
 // If user is already logged in, redirect to main
 if (isset($_SESSION["user_id"])) {
-    header("Location: /BackendWebDev/userpage/MainPage.php");
+    header("Location: /BackendWebDev/userpage/product/MainPage.php");
     exit();
 }
 
@@ -35,7 +35,7 @@ include "backend/index.php";
                 <img src="/BackendWebDev/image/banner/banner2_s.png" alt="Banner 2">
                 <img src="/BackendWebDev/image/banner/banner3_s.png" alt="Banner 3">
             </div>
-            <button onclick="window.location.href = 'userpage/LoginPage.php';">Let's Start</button>
+            <button onclick="window.location.href = 'userpage/authenticate/LoginPage.php';">Let's Start</button>
         </div>
     </section>
     <section class="product">

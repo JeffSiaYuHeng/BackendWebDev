@@ -28,7 +28,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             
 
             // ✅ Redirect to main after successful login
-            header("Location: /BackendWebDev/userpage/MainPage.php");
+            header("Location: /BackendWebDev/userpage/product/MainPage.php");
             exit();
         } else {
             echo "<script>alert('Invalid username or password'); window.location.href='/BackendWebDev/userpage/LoginPage.php';</script>";

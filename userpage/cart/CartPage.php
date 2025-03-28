@@ -1,6 +1,6 @@
 <?php
 session_start();
-include "../backend/db_connect.php";
+
 
 // Check if user is logged in
 if (!isset($_SESSION['user_id'])) {
@@ -8,58 +8,8 @@ if (!isset($_SESSION['user_id'])) {
     exit();
 }
 
-$user_id = $_SESSION['user_id'];
+include  "../../backend/user/cart/cart.php";
 
-// Retrieve the user's cart
-$sql = "SELECT * FROM cart WHERE user_id = ?";
-$stmt = $conn->prepare($sql);
-$stmt->bind_param("i", $user_id);
-$stmt->execute();
-$cart_result = $stmt->get_result();
-$cart = $cart_result->fetch_assoc();
-$stmt->close();
-
-if (!$cart) {
-    echo "<h2>Your cart is empty.</h2>";
-    exit();
-}
-
-$cart_id = $cart['id'];
-// Retrieve cart items
-$sql = "SELECT ci.*, p.name AS product_name 
-        FROM cart_items ci
-        INNER JOIN products p ON ci.product_id = p.id
-        WHERE ci.cart_id = ?";
-
-if ($stmt = $conn->prepare($sql)) {
-    $stmt->bind_param("i", $cart_id);
-    $stmt->execute();
-    $items_result = $stmt->get_result();
-    
-    $cart_items = $items_result->fetch_all(MYSQLI_ASSOC);
-
-    $stmt->close();
-} else {
-    $cart_items = [];
-}
-
-// Retrieve accessories for each cart item
-$cart_accessories = [];
-$sql = "SELECT ca.cart_item_id, a.name AS accessory_name, a.price AS accessory_price
-        FROM cart_accessories ca
-        JOIN accessories a ON ca.accessory_id = a.id
-        WHERE ca.cart_id = ?";
-$stmt = $conn->prepare($sql);
-$stmt->bind_param("i", $cart_id);
-$stmt->execute();
-$accessories_result = $stmt->get_result();
-$stmt->close();
-
-while ($row = $accessories_result->fetch_assoc()) {
-    $cart_accessories[$row['cart_item_id']][] = $row;
-}
-
-$conn->close();
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -99,7 +49,7 @@ $conn->close();
                 <li>No accessories added</li>
                 <?php endif; ?>
             </ul>
-            <form action="../backend/user/product/removeFromCart.php" method="POST">
+            <form action="../../backend/user/cart/removeFromCart.php" method="POST">
                 <input type="hidden" name="cart_item_id" value="<?= $item['id'] ?>">
                 <button type="submit">Remove</button>
             </form>
@@ -110,8 +60,8 @@ $conn->close();
 
     <footer>
         <h2>Total Price: RM <?= number_format($cart['total_price'], 2) ?></h2>
-        <button onclick="location.href='/BackendWebDev/userpage/CheckoutPage.php'">Proceed to Checkout</button>
-        <button onclick="location.href='/BackendWebDev/userpage/MainPage.php'">Home</button>
+        <button onclick="location.href='/BackendWebDev/userpage/payment/CheckoutPage.php'">Proceed to Checkout</button>
+        <button onclick="location.href='/BackendWebDev/userpage/product/MainPage.php'">Home</button>
     </footer>
 </body>
 

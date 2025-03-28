@@ -24,7 +24,7 @@ $(document).ready(function() {
             var response = JSON.parse(data);
             if (response.status === "success") {
                 alert(response.message);
-                window.location.href = "/BackendWebDev/userpage/resetPasswordPage.php";
+                window.location.href = "/BackendWebDev/userpage/authenticate/resetPasswordPage.php";
             } else {
                 alert(response.message);
             }

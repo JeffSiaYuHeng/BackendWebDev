@@ -37,6 +37,6 @@ $payment_id = $stmt->insert_id; // Get the inserted payment ID
 $stmt->close();
 
 // Redirect to success page
-header("Location: /BackendWebDev/userpage/PaymentSuccessPage.php?payment_id=" . $payment_id);
+header("Location: /BackendWebDev/userpage/payment/PaymentSuccessPage.php?payment_id=" . $payment_id);
 exit();
 ?>

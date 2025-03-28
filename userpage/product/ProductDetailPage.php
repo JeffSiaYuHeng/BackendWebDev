@@ -1,5 +1,5 @@
 <?php
-include "../backend/user/product/productDetail.php";
+include "../../backend/user/product/productDetail.php";
 
 // Dummy reviews (replace with database values later)
 $reviews = [

@@ -12,7 +12,7 @@ if (!isset($_SESSION["user_id"])) {
 // Ensure first_name is set; fallback to "Guest"
 $first_name = $_SESSION["first_name"] ?? "Guest";
 
-include "../backend/user/product/main.php"; // Include database connection
+include "../../backend/user/product/main.php"; // Include database connection
 
 
 
@@ -42,7 +42,7 @@ include "../backend/user/product/main.php"; // Include database connection
         <h1>Eternal Elegant Bridal</h1>
         <!-- Right container for Cart & Dropdown -->
         <div class="right-section">
-            <button class="cart-btn" id="open-btn" onclick="window.location.href='CartPage.php'">
+            <button class="cart-btn" id="open-btn" onclick="window.location.href='../cart/CartPage.php'">
                 <i class="fa fa-shopping-cart" aria-hidden="true"></i>
                 <span class="icon-button__badge"><?php ?></span>
             </button>

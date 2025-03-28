@@ -20,7 +20,7 @@ $(document).ready(function() {
                 
                 if (response.status === "success") {
                     // Always redirect to login page after password reset
-                    window.location.href = "/BackendWebDev/userpage/LoginPage.php"; 
+                    window.location.href = "/BackendWebDev/userpage/authenticate/LoginPage.php"; 
                 }
         });
     });

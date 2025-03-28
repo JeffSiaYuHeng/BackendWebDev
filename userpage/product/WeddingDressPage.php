@@ -1,7 +1,7 @@
 <?php
 
 //make into productPage.php
-include "../backend/user/product/weddingDress.php"; 
+include "../../backend/user/product/weddingDress.php"; 
 
 
 ?>

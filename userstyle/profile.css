@@ -36,11 +36,46 @@ header h1 {
 }
 
 /* Dropdown container */
-.dropdown {
+/* Right section containing Cart and Dropdown */
+.right-section {
+    display: flex;
+    align-items: center;
+    gap: 2rem; /* Space between Cart and Dropdown */
+    margin-right: auto;
     position: absolute;
-    right: 1rem; /* Positions dropdown at the right edge */
+    right: 1rem;
+}
+
+/* Cart Button */
+.cart-btn {
+    background-color: #8F7F65;
+    color: white;
+    padding: .5rem 1.1rem;
+    border: none;
+    cursor: pointer;
+    border-radius: 2rem;
+    margin-left: 10rem;
+    font-size: 2rem;
+    position: relative;
+}
+.icon-button__badge {
+    position: absolute;
+    font-size: 16px;
+    top: -10px;
+    right: -10px;
+    width: 25px;
+    height: 25px;
+    background: red;
+    color: #ffffff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+  }
+
+/* Dropdown container */
+.dropdown {
     display: inline-block;
-    margin-left: auto; /* Pushes the account div to the right */
 }
 
 /* Dropdown Button */
@@ -54,6 +89,8 @@ header h1 {
     border-radius: 2rem;
     font-family: 'Crimson Text';
     font-weight: 400;
+    display: flex;
+    align-items: center;
 }
 
 /* Dropdown Content (Hidden by Default) */
@@ -63,9 +100,8 @@ header h1 {
     background-color: #f1f1f1;
     box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
     z-index: 1;
-
-    transform: translateX(-50%); /* Shift back to center */
-    min-width: 15rem; /* Adjust width as needed */
+    transform: translateX(-50%);
+    min-width: 15rem;
     border-radius: 8px;
     overflow: hidden;
 }
@@ -93,6 +129,8 @@ header h1 {
 .dropdown:hover .dropdown-content {
     display: block;
 }
+
+  
   /* Change color of dropdown links on hover */
   .dropdown-content a:hover {background-color: #ddd;}
   
@@ -101,6 +139,7 @@ header h1 {
   
   /* Change the background color of the dropdown button when the dropdown content is shown */
   .dropdown:hover .dropbtn {background-color: #6d6f65;}
+
   nav{
     display: flex;
     justify-content: center;
@@ -203,5 +242,65 @@ nav a{
         width: 100%;
         border-right: none;
         border-bottom: 2px solid #ddd;
+    }
+}
+
+/*Table*/
+/* Table Styling */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    border-radius: 8px;
+    overflow: hidden;
+    background-color: #fff;
+    font-family: 'Roboto', sans-serif;
+}
+
+/* Table Borders */
+table, th, td {
+    border: 1px solid #ddd;
+}
+
+/* Table Header */
+th {
+    background-color: #8F7F65;
+    color: white;
+    padding: 12px;
+    text-align: left;
+    font-size: 16px;
+    font-weight: 400;
+}
+
+/* Table Rows */
+td {
+    padding: 10px;
+    font-size: 14px;
+}
+
+/* Alternate Row Color */
+tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+/* Hover Effect */
+tr:hover {
+    background-color: #eaeaea;
+}
+
+/* Table Container for Responsive Design */
+.table-container {
+    width: 100%;
+    overflow-x: auto;  /* Ensures no unnecessary horizontal scroll */
+    margin: 10px 0;
+}
+
+/* Responsive Table (for small screens) */
+@media (max-width: 768px) {
+    table {
+        font-size: 12px;
+    }
+
+    th, td {
+        padding: 8px;
     }
 }

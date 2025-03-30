@@ -16,7 +16,8 @@ if (isset($_GET["update"]) && $_GET["update"] === "success") {
 
 
 
-
+include "../../backend/user/cart/showCartNumber.php"; // Include database connection
+include "../../backend/user/payment/viewOrderRecord.php";
 include "../../backend/user/product/profile.php"; // Include database connection
 ?>
 <!DOCTYPE html>
@@ -38,20 +39,28 @@ include "../../backend/user/product/profile.php"; // Include database connection
 <body>
     <header>
         <h1>Eternal Elegant Bridal</h1>
-        <div class="dropdown">
-            <button class="dropbtn">
-                <span>Me <i class="fa fa-angle-down" aria-hidden="true"></i></span>
+        <!-- Right container for Cart & Dropdown -->
+        <div class="right-section">
+            <button class="cart-btn" id="open-btn" onclick="window.location.href='../cart/CartPage.php'">
+                <i class="fa fa-shopping-cart" aria-hidden="true"></i>
+                <?php if ($cart_count > 0): ?>
+                <span class="icon-button__badge"><?= $cart_count ?></span>
+                <?php endif; ?>
             </button>
-            <div class="dropdown-content">
-                <p>Hello <?php echo htmlspecialchars($first_name); ?>!</p>
-                <div class="line"></div>
-                <a href="#">Profile</a>
-                <a href="/BackendWebDev/backend/user/authenticate/logout.php">Logout</a>
+            <div class="dropdown">
+                <button class="dropbtn" id="account-btn">
+                    <span>Me <i class="fa fa-angle-down" aria-hidden="true"></i></span>
+                </button>
+                <div class="dropdown-content">
+                    <p>Hello <?php echo htmlspecialchars($first_name); ?>!</p>
+                    <div class="line"></div>
+                    <a href="ProfilePage.php">Profile</a>
+                    <a href="../backend/user/authenticate/logout.php">Logout</a>
+                </div>
             </div>
-        </div>
     </header>
     <nav>
-        <a class="blink" href="#">Home</a> |
+        <a class="blink" href="HomePage.php">Home</a> |
         <a class="blink" href="WeddingDressPage.php">Wedding Dress</a> |
         <a class="blink" href="">About</a> |
         <a class="blink" href="">Contact</a>
@@ -103,8 +112,42 @@ include "../../backend/user/product/profile.php"; // Include database connection
             </div>
 
             <div id="orders" class="section" style="display: none;">
-                <h2>Orders</h2>
-                <p>View your past orders and track current ones.</p>
+                <h2>Your Order History</h2>
+
+                <?php if ($orders_result->num_rows > 0): ?>
+                <div class="table-container">
+                    <table>
+                        <tr>
+                            <th>Order ID</th>
+                            <th>Total Price (RM)</th>
+                            <th>Order Status</th>
+                            <th>Delivery Method</th>
+                            <th>Order Date</th>
+                            <th>Payment Amount (RM)</th>
+                            <th>Payment Status</th>
+                            <th>Payment Date</th>
+                            <th>Accessories</th>
+                        </tr>
+                        <?php while ($order = $orders_result->fetch_assoc()): ?>
+                        <tr>
+                            <td>#<?php echo $order['order_id']; ?></td>
+                            <td><?php echo number_format($order['total_price'], 2); ?></td>
+                            <td><?php echo $order['status']; ?></td>
+                            <td><?php echo $order['delivery_method']; ?></td>
+                            <td><?php echo $order['created_at']; ?></td>
+                            <td><?php echo $order['payment_amount'] ? number_format($order['payment_amount'], 2) : 'N/A'; ?>
+                            </td>
+                            <td><?php echo $order['payment_status'] ? $order['payment_status'] : 'Not Paid'; ?></td>
+                            <td><?php echo $order['payment_date'] ? $order['payment_date'] : 'N/A'; ?></td>
+                            <td><?php echo $order['accessories'] ? $order['accessories'] : 'No Accessories'; ?></td>
+                        </tr>
+                        <?php endwhile; ?>
+                    </table>
+                </div>
+
+                <?php else: ?>
+                <p>No orders found.</p>
+                <?php endif; ?>
             </div>
 
             <div id="settings" class="section" style="display: none;">

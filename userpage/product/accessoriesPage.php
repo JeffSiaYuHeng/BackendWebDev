@@ -4,7 +4,7 @@ session_start();
 if (!isset($_SESSION["user_id"])) {
     echo "<script>
         alert('Your session has expired or you are not logged in. Please log in again.');
-        window.location.href = 'LoginPage.php';
+        window.location.href = '../authenticate/LoginPage.php';
     </script>";
     exit();
 }

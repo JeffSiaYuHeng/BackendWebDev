@@ -5,7 +5,7 @@ session_start();
 if (isset($_SESSION["user_id"])) {
     echo "<script>
         alert('You are already logged in.');
-        window.location.href = 'MainPage.php';
+        window.location.href = '../product/MainPage.php';
     </script>";
     exit();
 }

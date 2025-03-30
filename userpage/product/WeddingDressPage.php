@@ -1,6 +1,21 @@
 <?php
+session_start();
+// If user is NOT logged in, show an alert and redirect to login page
+if (!isset($_SESSION["user_id"])) {
+    echo "<script>
+        alert('Your session has expired or you are not logged in. Please log in again.');
+        window.location.href = '../authenticate/LoginPage.php';
+    </script>";
+    exit();
+}
+
+if (isset($_GET["update"]) && $_GET["update"] === "success") {
+    echo "<script>alert('Address updated successfully!');</script>";
+}
+
 
 //make into productPage.php
+include "../../backend/user/cart/showCartNumber.php";
 include "../../backend/user/product/weddingDress.php"; 
 
 
@@ -24,16 +39,25 @@ include "../../backend/user/product/weddingDress.php";
 <body>
     <header>
         <h1>Eternal Elegant Bridal</h1>
-        <div class="dropdown">
-            <button class="dropbtn">
-                <span>Me <i class="fa fa-angle-down" aria-hidden="true"></i></span>
+        <!-- Right container for Cart & Dropdown -->
+        <div class="right-section">
+            <button class="cart-btn" id="open-btn" onclick="window.location.href='../cart/CartPage.php'">
+                <i class="fa fa-shopping-cart" aria-hidden="true"></i>
+                <?php if ($cart_count > 0): ?>
+                <span class="icon-button__badge"><?= $cart_count ?></span>
+                <?php endif; ?>
             </button>
-            <div class="dropdown-content">
-                <p>Hello <?php echo htmlspecialchars($first_name); ?>!</p>
-                <div class="line"></div>
-                <a href="/BackendWebDev/backend/user/authenticate/logout.php">Logout</a>
+            <div class="dropdown">
+                <button class="dropbtn" id="account-btn">
+                    <span>Me <i class="fa fa-angle-down" aria-hidden="true"></i></span>
+                </button>
+                <div class="dropdown-content">
+                    <p>Hello <?php echo htmlspecialchars($first_name); ?>!</p>
+                    <div class="line"></div>
+                    <a href="ProfilePage.php">Profile</a>
+                    <a href="../backend/user/authenticate/logout.php">Logout</a>
+                </div>
             </div>
-        </div>
     </header>
     <nav>
         <a class="blink" href="MainPage.php">Home</a> |

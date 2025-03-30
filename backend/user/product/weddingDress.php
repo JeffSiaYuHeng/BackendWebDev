@@ -1,16 +1,7 @@
 <?php
 include __DIR__ . "/../../../backend/db_connect.php";
 
-session_start();
 
-// If user is NOT logged in, show an alert and redirect to login page
-if (!isset($_SESSION["user_id"])) {
-    echo "<script>
-        alert('Your session has expired or you are not logged in. Please log in again.');
-        window.location.href = '../../../BackendWebDev/login.php';
-    </script>";
-    exit();
-}
 
 // Ensure first_name is set; fallback to "Guest"
 $first_name = $_SESSION["first_name"] ?? "Guest";

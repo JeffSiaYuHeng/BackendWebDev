@@ -29,6 +29,6 @@ function fetch3product($conn) {
 
     // Close connection only if this is the last operation in the script
     // Remove this line if you're using the connection elsewhere later
-    $conn->close();
+    //$conn->close();
 }
 ?>

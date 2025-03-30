@@ -2,6 +2,7 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+
 }
 
 
@@ -24,6 +25,8 @@ html, body {
     display: flex;
     flex-direction: column;
     max-width: 100%;
+
+    overflow-x: hidden; /* Prevent horizontal scrolling */
 }
 header h1 {
     font-family: 'Crimson Text';
@@ -171,7 +174,7 @@ nav a{
 
 /* Slider Container */
 .slider {
-    width: 100vw;
+    width: 99vw;
     height: 30rem;
     overflow: hidden;
     position: relative; /* Ensures button stays inside */
@@ -307,7 +310,7 @@ nav a{
 }
 
 /* Responsive Product Grid */
-@media (max-width: 768px) {
+@media (max-width: 900px) {
     .product-container {
         grid-template-columns: repeat(2, 1fr); /* 2 columns */
         gap: 1.5rem; /* Reduce gap */
@@ -328,7 +331,7 @@ nav a{
     }
 }
 
-@media (max-width: 480px) {
+@media (max-width: 500px) {
     .product-container {
         grid-template-columns: 1fr; /* 1 column */
     }

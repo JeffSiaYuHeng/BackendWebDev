@@ -13,6 +13,7 @@ if (!isset($_SESSION["user_id"])) {
 $first_name = $_SESSION["first_name"] ?? "Guest";
 
 include "../../backend/user/product/main.php"; // Include database connection
+include "../../backend/user/cart/showCartNumber.php"; // Include database connection
 
 
 
@@ -44,7 +45,9 @@ include "../../backend/user/product/main.php"; // Include database connection
         <div class="right-section">
             <button class="cart-btn" id="open-btn" onclick="window.location.href='../cart/CartPage.php'">
                 <i class="fa fa-shopping-cart" aria-hidden="true"></i>
-                <span class="icon-button__badge"><?php ?></span>
+                <?php if ($cart_count > 0): ?>
+                <span class="icon-button__badge"><?= $cart_count ?></span>
+                <?php endif; ?>
             </button>
             <div class="dropdown">
                 <button class="dropbtn" id="account-btn">

@@ -51,5 +51,5 @@ while ($row = $accessories_result->fetch_assoc()) {
     $cart_accessories[$row['cart_item_id']][] = $row;
 }
 
-$conn->close();
+//$conn->close();
 ?>

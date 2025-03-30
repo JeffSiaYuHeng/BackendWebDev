@@ -10,7 +10,7 @@ function fetch3product($conn) {
         while ($row = $result->fetch_assoc()) {
             echo '
             <div class="product-card">
-                <a href="/BackendWebDev/userpage/LoginPage.php">
+                <a href="/BackendWebDev/userpage/authenticate/LoginPage.php">
                     <img src="' . htmlspecialchars($row['image']) . '"
                     alt="' . htmlspecialchars($row['name']) . '">
                 

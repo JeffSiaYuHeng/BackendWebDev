@@ -31,10 +31,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             header("Location: /BackendWebDev/userpage/product/MainPage.php");
             exit();
         } else {
-            echo "<script>alert('Invalid username or password'); window.location.href='/BackendWebDev/userpage/LoginPage.php';</script>";
+            echo "<script>alert('Invalid username or password'); window.location.href='/BackendWebDev/userpage/authenticate/LoginPage.php';</script>";
         }
     } else {
-        echo "<script>alert('Invalid username or password'); window.location.href='/BackendWebDev/userpage/LoginPage.php';</script>";
+        echo "<script>alert('Invalid username or password'); window.location.href='/BackendWebDev/userpage/authenticate/LoginPage.php';</script>";
     }
 
     $stmt->close();

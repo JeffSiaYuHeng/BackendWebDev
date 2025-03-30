@@ -4,10 +4,15 @@ session_start();
 if (!isset($_SESSION["user_id"])) {
     echo "<script>
         alert('Your session has expired or you are not logged in. Please log in again.');
-        window.location.href = 'LoginPage.php';
+        window.location.href = '../authenticate/LoginPage.php';
     </script>";
     exit();
 }
+
+if (isset($_GET["update"]) && $_GET["update"] === "success") {
+    echo "<script>alert('Address updated successfully!');</script>";
+}
+
 
 
 
@@ -21,13 +26,13 @@ include "../../backend/user/product/profile.php"; // Include database connection
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Profile Page</title>
-    <link rel="stylesheet" href="/BackendWebDev/userstyle/transitions.css">
-    <link rel="stylesheet" href="/userstyle/transitions.css">
+    <link rel="stylesheet" href="/BackendWebDev/userstyle/transition.css">
     <link rel="stylesheet" href="/BackendWebDev/userstyle/profile.css">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <script src="/BackendWebDev/userscript/transition.js"></script>
     <script src="/BackendWebDev/userscript/profile.js"></script>
+
 </head>
 
 <body>
@@ -71,6 +76,22 @@ include "../../backend/user/product/profile.php"; // Include database connection
                 <p><strong>Last Name:</strong> <?php echo htmlspecialchars($last_name); ?></p>
                 <p><strong>Email:</strong> <?php echo htmlspecialchars($email); ?></p>
                 <p><strong>Phone:</strong> <?php echo htmlspecialchars($phone); ?></p>
+                <!-- Address Section -->
+                <p>
+                    <strong>Address:</strong>
+                    <span id="address-text"><?php echo htmlspecialchars($address); ?></span>
+                    <button id="edit-address-btn" class="edit-btn" onclick="editAddress()">Change</button>
+                </p>
+
+                <!-- Address Edit Form (Hidden by Default) -->
+                <form id="address-form" action="../../backend/user/product/update_address.php" method="POST"
+                    style="display: none;">
+                    <input type="text" id="new-address" name="new_address"
+                        value="<?php echo htmlspecialchars($address); ?>" required>
+                    <button type="submit" class="save-btn">Save</button>
+                    <button type="button" id="cancel-btn" class="cancel-btn" onclick="cancelEdit()">Cancel</button>
+                </form>
+
             </div>
 
             <div id="security" class="section" style="display: none;">
@@ -92,6 +113,7 @@ include "../../backend/user/product/profile.php"; // Include database connection
             </div>
         </div>
     </div>
+    <script src="/BackendWebDev/userscript/profile.js"></script>
 </body>
 
 </html>

@@ -55,7 +55,7 @@ include "../../backend/user/product/weddingDress.php";
                     <p>Hello <?php echo htmlspecialchars($first_name); ?>!</p>
                     <div class="line"></div>
                     <a href="ProfilePage.php">Profile</a>
-                    <a href="../backend/user/authenticate/logout.php">Logout</a>
+                    <a href="../../backend/user/authenticate/logout.php">Logout</a>
                 </div>
             </div>
     </header>

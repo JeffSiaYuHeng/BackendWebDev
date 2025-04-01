@@ -19,6 +19,41 @@ $fabric_prices = [
 ];
 
 $base_price = $product['price'];
+
+
+
+// to Jeff: this is get the image path and by using the pathinfo function, we can get the directory of the image
+// and i adding php to remove the image name like dress.jpg and get the directory of the image
+// and then i will use the directory to get all the images in the directory and display it in the product detail page
+// Extract the directory from the product image path
+$product_image = $product['image'];  // Example: /BackendWebDev/image/dress/dress1/dress1.jpg
+$image_dir = dirname($product_image); // This extracts "/BackendWebDev/image/dress/dress1"
+
+// Get all images in the directory
+$image_extensions = ['jpg', 'jpeg', 'png', 'webp'];
+$additional_images = [];
+
+// Get absolute path
+$absolute_path = $_SERVER['DOCUMENT_ROOT'] . $image_dir;
+
+// Check if the directory exists and scan for images
+if (is_dir($absolute_path)) {
+    $files = scandir($absolute_path);
+    foreach ($files as $file) {
+        $file_extension = strtolower(pathinfo($file, PATHINFO_EXTENSION));
+        if (in_array($file_extension, $image_extensions)) {
+            $additional_images[] = $image_dir . '/' . $file;  // Store the relative path
+        }
+    }
+}
+
+// Ensure the main image is at the start
+if (!empty($additional_images)) {
+    $main_image = $product_image;
+    $additional_images = array_diff($additional_images, [$main_image]);
+} else {
+    $main_image = $product_image;
+}
 ?>
 
 <!DOCTYPE html>
@@ -34,14 +69,27 @@ $base_price = $product['price'];
 </head>
 
 <body>
+    <header>
+        <h1>Eternal Elegant Bridal</h1>
+    </header>
     <div class="product-container">
         <div class="image-container">
-            <img src="<?= htmlspecialchars($product['image']) ?>" alt="<?= htmlspecialchars($product['name']) ?>"
+            <!-- Main Product Image -->
+            <img src="<?= htmlspecialchars($main_image) ?>" alt="<?= htmlspecialchars($product['name']) ?>"
                 id="gownImage">
+
+            <!-- Additional Images for Product Views -->
+            <div class="additional-images">
+                <?php foreach ($additional_images as $img): ?>
+                <img src="<?= htmlspecialchars($img) ?>"
+                    alt="Additional view of <?= htmlspecialchars($product['name']) ?>" class="extra-image"
+                    onclick="changeImage(this.src)">
+                <?php endforeach; ?>
+            </div>
         </div>
 
         <div class="details-container">
-            <h1 id="bridalTitle"> <?= htmlspecialchars($product['name']) ?> </h1>
+            <h2 id="bridalTitle"> <?= htmlspecialchars($product['name']) ?> </h2>
             <h3 id="bridalType">Type: <?= htmlspecialchars($product['type']) ?> </h3>
             <p id="bridalDescription"> <?= htmlspecialchars($product['description']) ?> </p>
             <p id="bridalPrice">Price: RM<span id="dynamicPrice"> <?= number_format($base_price, 2) ?> </span></p>
@@ -103,6 +151,11 @@ $base_price = $product['price'];
         <?php endif; ?>
     </div>
 
+    <script>
+    function changeImage(newSrc) {
+        document.getElementById("gownImage").src = newSrc;
+    }
+    </script>
     <script src="/BackendWebDev/userscript/productDetailPage.js"></script>
 </body>
 

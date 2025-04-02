@@ -90,9 +90,41 @@ include "../../backend/user/cart/showCartNumber.php"; // Include database connec
         </div>
     </section>
 
-    <a href="LoginPAge.php">login test</a>
+
+    <a href="LoginPage.php">login test</a>
     <a href="ProductDetailPage.php">product page</a>
     <a href="../backend/user/authenticate/logout.php">Logout</a>
+    <script>
+    function trackVisit(productId) {
+        // Open a new tab first
+        let newTab = window.open("about:blank", "_blank");
+
+        fetch('/BackendWebDev/backend/user/product/updateAnalytics.php', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    product_id: productId
+                })
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    // Update the new tab's location
+                    newTab.location.href = "ProductDetailPage.php?id=" + productId;
+                } else {
+                    alert("Failed to update analytics.");
+                    newTab.close(); // Close the new tab if request fails
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                newTab.close(); // Close the new tab if there's an error
+            });
+    }
+    </script>
+
 </body>
 
 </html>

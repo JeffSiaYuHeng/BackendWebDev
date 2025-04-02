@@ -1,14 +1,19 @@
 <?php
 session_start();
 
-// If user is already logged in, redirect to main
+// If user is already logged in, redirect to the appropriate main page
 if (isset($_SESSION["user_id"])) {
+    $redirectPage = ($_SESSION["role"] === "admin") 
+        ? "/BackendWebDev/admin/adminpage/MainPage.php" 
+        : "/BackendWebDev/userpage/product/MainPage.php";
+
     echo "<script>
         alert('You are already logged in.');
-        window.location.href = '../product/MainPage.php';
+        window.location.href = '$redirectPage';
     </script>";
     exit();
 }
+
 
 //if user session role is = admin redirect to "window.location.href='/BackendWebDev/admin/adminpage/MainPage.php';console.log('caonima')"
 ?>

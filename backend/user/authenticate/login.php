@@ -2,6 +2,15 @@
 session_start();
 include __DIR__ . "/../../../backend/db_connect.php";
 
+// If user is already logged in, redirect to main
+if (isset($_SESSION["user_id"])) {
+    echo "<script>
+        alert('You are already logged in.');
+        window.location.href = '../product/MainPage.php';
+    </script>";
+    exit();
+}
+
 // Check if the form is submitted
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $username = trim($_POST["username"]);
@@ -29,25 +38,40 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
                 // Redirect based on role
                 if ($role === "admin") {
-                    // Redirect to the admin page if the user is an Admin
-                    echo "<script>alert('Welcome back Admin'); window.location.href='/BackendWebDev/admin/adminpage/MainPage.php';</script>";
-                    exit();
+                    echo "<script>
+                        alert('Welcome back, Admin');
+                        window.location.href='/BackendWebDev/admin/adminpage/MainPage.php';
+                    </script>";
                 } else {
-                    // Redirect to the user main page if the user is not an Admin
-                    echo "<script>alert('Welcome back Admin'); window.location.href='/BackendWebDev/userpage/MainPage.php';</script>";
-                    exit();
+                    echo "<script>
+                        alert('Login successful');
+                        window.location.href='/BackendWebDev/userpage/product/MainPage.php';
+                    </script>";
                 }
+                exit();
             } else {
-                echo "<script>alert('Invalid username or password'); window.location.href='/BackendWebDev/userpage/authenticate/LoginPage.php';</script>";
+                echo "<script>
+                    alert('Invalid username or password');
+                    window.location.href='/BackendWebDev/userpage/authenticate/LoginPage.php';
+                </script>";
+                exit();
             }
         } else {
-            echo "<script>alert('Invalid username or password'); window.location.href='/BackendWebDev/userpage/authenticate/LoginPage.php';</script>";
+            echo "<script>
+                alert('Invalid username or password');
+                window.location.href='/BackendWebDev/userpage/authenticate/LoginPage.php';
+            </script>";
+            exit();
         }
 
         $stmt->close();
     } else {
         // Handle error if query preparation fails
-        echo "<script>alert('Database error. Please try again later.'); window.location.href='/BackendWebDev/userpage/authenticate/LoginPage.php';</script>";
+        echo "<script>
+            alert('Database error. Please try again later.');
+            window.location.href='/BackendWebDev/userpage/authenticate/LoginPage.php';
+        </script>";
+        exit();
     }
 
     // Close connection

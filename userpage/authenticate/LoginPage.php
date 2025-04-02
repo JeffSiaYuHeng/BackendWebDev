@@ -9,6 +9,8 @@ if (isset($_SESSION["user_id"])) {
     </script>";
     exit();
 }
+
+//if user session role is = admin redirect to "window.location.href='/BackendWebDev/admin/adminpage/MainPage.php';console.log('caonima')"
 ?>
 
 <!DOCTYPE html>

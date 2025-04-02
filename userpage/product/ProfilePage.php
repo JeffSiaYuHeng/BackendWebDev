@@ -60,7 +60,7 @@ include "../../backend/user/product/profile.php"; // Include database connection
             </div>
     </header>
     <nav>
-        <a class="blink" href="HomePage.php">Home</a> |
+        <a class="blink" href="MainPage.php">Home</a> |
         <a class="blink" href="WeddingDressPage.php">Wedding Dress</a> |
         <a class="blink" href="">About</a> |
         <a class="blink" href="">Contact</a>

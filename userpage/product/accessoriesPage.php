@@ -80,7 +80,7 @@ include "../../backend/user/product/accessories.php"; // Include database connec
                 $price = $item['price'];
                 $image = $item['image'] ?? 'default.jpg'; // Use a default image if none exists
                 echo "<div class='accessory'>
-                        <img src='/path/to/images/$image' alt='$name'>
+                        <img src='$image' alt='$name'>
                         <p>$name - RM $price</p>
                         <button onclick=\"selectAccessory('$name', $price, '/path/to/images/$image')\">Select</button>
                       </div>";
@@ -121,7 +121,6 @@ include "../../backend/user/product/accessories.php"; // Include database connec
         item.id = name;
 
         item.innerHTML = `
-                <img src="${image}" alt="${name}">
                 <p>${name} - RM ${price.toFixed(2)}</p>
                 <button onclick="removeAccessory('${name}', ${price})">Remove</button>
             `;

@@ -71,12 +71,28 @@ include "../../backend/user/product/weddingDress.php";
                 <h3>Dress</h3>
                 <p><?php echo $item; ?> Items</p>
             </div>
+            <div class="searchbar">
+                <input type="text" id="searchQuery" name="searchQuery" placeholder="Search for a dress..."
+                    value="<?= isset($_GET['searchQuery']) ? htmlspecialchars($_GET['searchQuery']) : '' ?>">
+                <button onclick="applySearch()">Search</button>
+            </div>
+
             <div class="filter">
                 <label for="filter">Filter by:</label>
-                <select id="filter" name="filter">
-                    <option value="price_high_low" selected>Price: High to Low</option>
+                <select id="filter" name="filter" onchange="applyFilter()">
+                    <option value="A_Z" <?= (isset($_GET['filter']) && $_GET['filter'] == 'A_Z') ? 'selected' : '' ?>>
+                        Ascending Order: A to Z</option>
+                    <option value="Z_A" <?= (isset($_GET['filter']) && $_GET['filter'] == 'Z_A') ? 'selected' : '' ?>>
+                        Descending Order: Z to A</option>
+                    <option value="price_high_low"
+                        <?= (isset($_GET['filter']) && $_GET['filter'] == 'price_high_low') ? 'selected' : '' ?>>Price:
+                        High to Low</option>
+                    <option value="price_low_high"
+                        <?= (isset($_GET['filter']) && $_GET['filter'] == 'price_low_high') ? 'selected' : '' ?>>Price:
+                        Low to High</option>
                 </select>
             </div>
+
         </div>
     </section>
 
@@ -85,6 +101,31 @@ include "../../backend/user/product/weddingDress.php";
             <?php fetchProducts($conn); ?>
         </div>
     </section>
+
+    <script>
+    window.onload = function() {
+        const urlParams = new URLSearchParams(window.location.search);
+        if (!urlParams.has("filter")) {
+            window.location.href = "WeddingDressPage.php?filter=A_Z";
+        }
+    };
+
+    function applyFilter() {
+        let selectedFilter = document.getElementById("filter").value;
+        let searchQuery = document.getElementById("searchQuery").value;
+        window.location.href = "WeddingDressPage.php?filter=" + selectedFilter + "&searchQuery=" + encodeURIComponent(
+            searchQuery);
+    }
+
+    function applySearch() {
+        let searchQuery = document.getElementById("searchQuery").value;
+        let selectedFilter = document.getElementById("filter").value;
+        window.location.href = "WeddingDressPage.php?searchQuery=" + encodeURIComponent(searchQuery) + "&filter=" +
+            selectedFilter;
+    }
+    </script>
+
+
 
 </body>
 

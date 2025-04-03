@@ -105,8 +105,11 @@ include "../../backend/user/product/weddingDress.php";
     <script>
     window.onload = function() {
         const urlParams = new URLSearchParams(window.location.search);
+
         if (!urlParams.has("filter")) {
-            window.location.href = "WeddingDressPage.php?filter=A_Z";
+            let searchQuery = urlParams.has("searchQuery") ? "&searchQuery=" + encodeURIComponent(urlParams.get(
+                "searchQuery")) : "";
+            window.location.href = "WeddingDressPage.php?filter=A_Z" + searchQuery;
         }
     };
 
@@ -122,6 +125,33 @@ include "../../backend/user/product/weddingDress.php";
         let selectedFilter = document.getElementById("filter").value;
         window.location.href = "WeddingDressPage.php?searchQuery=" + encodeURIComponent(searchQuery) + "&filter=" +
             selectedFilter;
+    }
+
+    function trackVisit(productId) {
+        let newTab = window.open("about:blank", "_blank");
+
+        fetch('/BackendWebDev/backend/user/product/updateAnalytics.php', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    product_id: productId
+                })
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    newTab.location.href = "ProductDetailPage.php?id=" + productId;
+                } else {
+                    alert("Failed to update analytics.");
+                    newTab.close();
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                newTab.close();
+            });
     }
     </script>
 

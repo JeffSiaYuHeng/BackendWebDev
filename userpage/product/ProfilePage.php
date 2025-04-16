@@ -95,7 +95,7 @@ include "../../backend/user/product/profile.php"; // Include database connection
                 <!-- Address Edit Form (Hidden by Default) -->
                 <form id="address-form" action="../../backend/user/product/update_address.php" method="POST"
                     style="display: none;">
-                    <input type="text" id="new-address" name="new_address"
+                    <input type="text" id="new-address" name="new_address" class="address-input"
                         value="<?php echo htmlspecialchars($address); ?>" required>
                     <button type="submit" class="save-btn">Save</button>
                     <button type="button" id="cancel-btn" class="cancel-btn" onclick="cancelEdit()">Cancel</button>

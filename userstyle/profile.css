@@ -304,3 +304,48 @@ tr:hover {
         padding: 8px;
     }
 }
+
+/* Make address input wider and styled properly */
+.address-input {
+    width: 100%;
+    max-width: 500px;
+    padding: 10px;
+    font-size: 16px;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+    margin-top: 8px;
+}
+
+/*Btn styling*/
+
+.reset-password-btn {
+    display: inline-block;
+    padding: 8px 16px;
+    background-color: #8F7F65; /* Soft purple */
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    font-weight: 500;
+    transition: background-color 0.3s ease;
+    margin-left: 10px;
+}
+
+.reset-password-btn:hover {
+    background-color: #665b4a;
+}
+
+.edit-btn{
+    display: inline-block;
+    padding: 8px 16px;
+    background-color: #8F7F65; /* Soft purple */
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    font-weight: 500;
+    transition: background-color 0.3s ease;
+    
+}
+.edit-btn:hover {
+    background-color: #665b4a;
+}

@@ -2,9 +2,15 @@
 session_start();
 include __DIR__ . "/../../../backend/db_connect.php";
 
-
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $email = trim($_POST["email"]);
+
+    // Define mapping of safe key values to full question text
+    $safeKeyMap = [
+        'pet_name' => "What is your first pet's name?",
+        'mother_birth' => "What is your mother's birthdate?",
+        'favorite_teacher' => "Who was your favorite teacher?"
+    ];
 
     // Check if email exists
     $stmt = $conn->prepare("SELECT safe_key_question FROM users WHERE email = ?");
@@ -17,10 +23,19 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $stmt->fetch();
         $_SESSION["reset_email"] = $email; // Store email in session
 
-        // Send safe key question back as JSON
-        echo json_encode(["status" => "success", "question" => $safe_key_question]);
+        // Convert stored key into readable question
+        $questionText = isset($safeKeyMap[$safe_key_question]) ? $safeKeyMap[$safe_key_question] : "Security question";
+
+        // Send full question text back
+        echo json_encode([
+            "status" => "success",
+            "question" => $questionText
+        ]);
     } else {
-        echo json_encode(["status" => "error", "message" => "Email not found. Try again."]);
+        echo json_encode([
+            "status" => "error",
+            "message" => "Email not found. Try again."
+        ]);
     }
 
     $stmt->close();

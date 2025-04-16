@@ -20,6 +20,10 @@ if (!isset($_SESSION["user_id"]) && !isset($_SESSION["reset_email"])) {
     <title>Reset Password</title>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="/BackendWebDev/userscript/resetPassword.js"></script>
+    <link rel="stylesheet" href="/BackendWebDev/userstyle/resetpassword.css">
+    <link rel="stylesheet" href="/BackendWebDev/userstyle/transition.css">
+    <script src="/BackendWebDev/userscript/transition.js"></script>
+
 </head>
 
 <body>

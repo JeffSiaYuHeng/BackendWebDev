@@ -127,6 +127,7 @@ include "../../backend/user/product/profile.php"; // Include database connection
                             <th>Payment Status</th>
                             <th>Payment Date</th>
                             <th>Accessories</th>
+                            <th>Review</th>
                         </tr>
                         <?php while ($order = $orders_result->fetch_assoc()): ?>
                         <tr>
@@ -140,6 +141,17 @@ include "../../backend/user/product/profile.php"; // Include database connection
                             <td><?php echo $order['payment_status'] ? $order['payment_status'] : 'Not Paid'; ?></td>
                             <td><?php echo $order['payment_date'] ? $order['payment_date'] : 'N/A'; ?></td>
                             <td><?php echo $order['accessories'] ? $order['accessories'] : 'No Accessories'; ?></td>
+                            <td>
+                                <?php if ($order['payment_status'] === 'Paid' && $order['status'] === 'Delivered'): ?>
+                                <a class="review-btn" href="ReviewPage.php?order_id=<?= $order['order_id']; ?>">Leave
+                                    Review</a>
+                                <?php elseif ($order['status'] === 'Pending'): ?>
+                                Waiting to Delivered</button>
+                                <?php else: ?>
+                                Waiting to done
+                                <?php endif; ?>
+                            </td>
+
                         </tr>
                         <?php endwhile; ?>
                     </table>
@@ -156,6 +168,8 @@ include "../../backend/user/product/profile.php"; // Include database connection
             </div>
         </div>
     </div>
+
+
     <script src="/BackendWebDev/userscript/profile.js"></script>
 </body>
 

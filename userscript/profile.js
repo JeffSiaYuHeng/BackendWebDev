@@ -107,3 +107,4 @@ document.addEventListener("DOMContentLoaded", function () {
     // Show "Personal Details" section by default
     showSection('personal');
 });
+

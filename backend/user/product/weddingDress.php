@@ -53,7 +53,8 @@ function fetchProducts($conn) {
         }
     }
 
-    $sql_products = "SELECT id, name, price, image FROM products WHERE 1=1 $searchQuery $sortQuery";
+    $sql_products = "SELECT id, name, price, image, type FROM products WHERE 1=1 $searchQuery $sortQuery";
+
     $stmt = $conn->prepare($sql_products);
     if (!empty($params)) {
         $stmt->bind_param($types, ...$params);
@@ -64,7 +65,8 @@ function fetchProducts($conn) {
     if ($result_products->num_rows > 0) {
         while ($product = $result_products->fetch_assoc()) {
             echo '<div class="product-card">
-                    <a href="javascript:void(0);" onclick="trackVisit(' . $product["id"] . ')" target="_blank">
+                    <a href="javascript:void(0);" onclick="trackVisit(' . $product["id"] . ', \'' . $product["type"] . '\')" target="_blank">
+
                         <img src="' . htmlspecialchars($product["image"]) . '" alt="' . htmlspecialchars($product["name"]) . '">
                         <div class="product-content">
                             <p class="product-name">' . htmlspecialchars($product["name"]) . '</p>

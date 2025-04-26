@@ -127,7 +127,7 @@ include "../../backend/user/product/weddingDress.php";
             selectedFilter;
     }
 
-    function trackVisit(productId) {
+    function trackVisit(productId, type) {
         let newTab = window.open("about:blank", "_blank");
 
         fetch('/BackendWebDev/backend/user/product/updateAnalytics.php', {
@@ -142,7 +142,11 @@ include "../../backend/user/product/weddingDress.php";
             .then(response => response.json())
             .then(data => {
                 if (data.success) {
-                    newTab.location.href = "ProductDetailPage.php?id=" + productId;
+                    if (type === "custom") {
+                        newTab.location.href = "CustomDetailPage.php?id=" + productId;
+                    } else {
+                        newTab.location.href = "ProductDetailPage.php?id=" + productId;
+                    }
                 } else {
                     alert("Failed to update analytics.");
                     newTab.close();

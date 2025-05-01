@@ -39,10 +39,11 @@ header nav ul li a {
     font-weight: bold;
 }
 
-header nav ul li a:hover {
+header nav ul li a:hover,
+header nav ul li a.active {
     text-decoration: underline;
+    color: #5C6BC0;
 }
-
 /* User Management Section */
 .user-management {
     max-width: 1200px;
@@ -82,6 +83,36 @@ table tr:nth-child(even) {
 
 table tr:hover {
     background-color: #f1f1f1;
+}
+/*button style*/
+.btn {
+    padding: 6px 12px;
+    border: none;
+    text-decoration: none;
+    border-radius: 6px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    color: white;
+    margin-right: 8px; /* more gap between buttons */
+    display: inline-block;
+}
+
+
+.edit-btn {
+    background-color: #4CAF50;
+}
+
+.edit-btn:hover {
+    background-color: #45a049;
+}
+
+.delete-btn {
+    background-color: #f44336;
+}
+
+.delete-btn:hover {
+    background-color: #da190b;
 }
 
 /* Footer Styles */

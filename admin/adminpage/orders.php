@@ -30,12 +30,14 @@ $orders_result = $stmt->get_result();
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>All Orders - Admin</title>
     <link rel="stylesheet" href="../adminstyle/orders.css"> <!-- Ensure you have a CSS file for styling -->
 </head>
+
 <body>
 
     <!-- Header -->
@@ -86,7 +88,8 @@ $orders_result = $stmt->get_result();
                     <td><?php echo $order['status']; ?></td>
                     <td><?php echo $order['delivery_method']; ?></td>
                     <td><?php echo $order['created_at']; ?></td>
-                    <td><?php echo $order['payment_amount'] ? number_format($order['payment_amount'], 2) : 'N/A'; ?></td>
+                    <td><?php echo $order['payment_amount'] ? number_format($order['payment_amount'], 2) : 'N/A'; ?>
+                    </td>
                     <td><?php echo $order['payment_status'] ? $order['payment_status'] : 'Not Paid'; ?></td>
                     <td><?php echo $order['payment_date'] ? $order['payment_date'] : 'N/A'; ?></td>
                     <td><?php echo $order['accessories'] ? $order['accessories'] : 'No Accessories'; ?></td>
@@ -105,6 +108,7 @@ $orders_result = $stmt->get_result();
         <p>&copy; 2025 Admin Dashboard. All Rights Reserved.</p>
     </footer>
 </body>
+
 </html>
 
 <?php

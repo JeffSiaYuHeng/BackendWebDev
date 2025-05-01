@@ -62,7 +62,7 @@ $popularProduct = $popularProductData['name'] ?? 'N/A';
         </div>
         <nav>
             <ul>
-                <li><a href="/BackendWebDev/admin/adminpage/MainPage.php">Home</a></li>
+                <li><a href="/BackendWebDev/admin/adminpage/MainPage.php" class="active">Home</a></li>
                 <li><a href="manageUsers.php">Manage Users</a></li>
                 <li><a href="orders.php">Orders</a></li>
                 <li><a href="products.php">Products</a></li>

@@ -20,7 +20,7 @@ $result = mysqli_query($conn, $sql);
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin - View Products</title>
-    <link rel="stylesheet" href="../adminstyle/products.css"> 
+    <link rel="stylesheet" href="../adminstyle/products.css">
 </head>
 
 <body>
@@ -35,8 +35,8 @@ $result = mysqli_query($conn, $sql);
                 <li><a href="/BackendWebDev/admin/adminpage/MainPage.php">Home</a></li>
                 <li><a href="manageUsers.php">Manage Users</a></li>
                 <li><a href="orders.php">Orders</a></li>
-                <li><a href="products.php">Products</a></li>
-                <li><a href="accessories.php" class="active">Accessories</a></li>
+                <li><a href="products.php" class="active">Products</a></li>
+                <li><a href="accessories.php">Accessories</a></li>
                 <li><a href="payments.php">Payments</a></li>
                 <li><a href="analytics.php">Analytics</a></li>
                 <li><a href="settings.php">Settings</a></li>
@@ -67,9 +67,9 @@ $result = mysqli_query($conn, $sql);
                     <td>#<?php echo $product['id']; ?></td>
                     <td>
                         <?php if ($product['image']): ?>
-                            <img src="<?php echo $product['image']; ?>" alt="Product Image" class="product-img">
+                        <img src="<?php echo $product['image']; ?>" alt="Product Image" class="product-img">
                         <?php else: ?>
-                            <span>No Image</span>
+                        <span>No Image</span>
                         <?php endif; ?>
                     </td>
                     <td><?php echo htmlspecialchars($product['name']); ?></td>
@@ -92,6 +92,7 @@ $result = mysqli_query($conn, $sql);
     </footer>
 
 </body>
+
 </html>
 
 <?php

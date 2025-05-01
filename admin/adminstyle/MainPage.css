@@ -41,10 +41,11 @@ header nav ul li a {
     font-weight: bold;
 }
 
-header nav ul li a:hover {
+header nav ul li a:hover,
+header nav ul li a.active {
     text-decoration: underline;
+    color: #5C6BC0;
 }
-
 /* Welcome Section */
 .welcome-section {
     text-align: center;

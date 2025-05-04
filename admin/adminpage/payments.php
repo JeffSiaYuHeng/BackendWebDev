@@ -45,7 +45,6 @@ $payments_result = $stmt->get_result();
                 <li><a href="accessories.php">Accessories</a></li>
                 <li><a href="payments.php" class="active">Payments</a></li>
                 <li><a href="analytics.php">Analytics</a></li>
-                <li><a href="settings.php">Settings</a></li>
                 <li><a href="../../backend/admin/authenticate/logout.php">Logout</a></li>
             </ul>
         </nav>

@@ -35,7 +35,6 @@ $result = mysqli_query($conn, $sql);
                 <li><a href="accessories.php" class="active">Accessories</a></li>
                 <li><a href="payments.php">Payments</a></li>
                 <li><a href="analytics.php">Analytics</a></li>
-                <li><a href="settings.php">Settings</a></li>
                 <li><a href="../../backend/admin/authenticate/logout.php">Logout</a></li>
             </ul>
         </nav>

@@ -34,7 +34,6 @@ $userResult = mysqli_query($conn, $userQuery);
                 <li><a href="products.php">Products</a></li>
                 <li><a href="payments.php">Payments</a></li>
                 <li><a href="analytics.php">Analytics</a></li>
-                <li><a href="settings.php">Settings</a></li>
                 <li><a href="../../backend/admin/authenticate/logout.php">Logout</a></li>
             </ul>
         </nav>

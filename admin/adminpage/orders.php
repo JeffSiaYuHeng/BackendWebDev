@@ -49,12 +49,11 @@ $orders_result = $stmt->get_result();
             <ul>
                 <li><a href="/BackendWebDev/admin/adminpage/MainPage.php">Home</a></li>
                 <li><a href="manageUsers.php">Manage Users</a></li>
-                <li><a href="orders.php">Orders</a></li>
+                <li><a href="orders.php" class="active">Orders</a></li>
                 <li><a href="products.php">Products</a></li>
-                <li><a href="accessories.php" class="active">Accessories</a></li>
+                <li><a href="accessories.php">Accessories</a></li>
                 <li><a href="payments.php">Payments</a></li>
                 <li><a href="analytics.php">Analytics</a></li>
-                <li><a href="settings.php">Settings</a></li>
                 <li><a href="../../backend/admin/authenticate/logout.php">Logout</a></li>
             </ul>
         </nav>

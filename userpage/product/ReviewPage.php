@@ -27,6 +27,8 @@ if (!isset($_SESSION["user_id"])) {
 
         <form action="../../backend/user/product/submitReview.php" method="POST" class="review-form">
             <input type="hidden" name="order_id" value="<?php echo $_GET['order_id']; ?>">
+            <input type="hidden" name="product_id" value="<?php echo $_GET['product_id'] ?? ''; ?>">
+
 
             <label for="rating">Rating:</label>
             <div class="stars" id="stars">
@@ -39,10 +41,12 @@ if (!isset($_SESSION["user_id"])) {
             </div>
 
             <label for="review">Review:</label>
-            <textarea name="review" id="review" placeholder="Tell us what you think..." rows="5" required></textarea>
+            <textarea name="review_text" id="review" placeholder="Tell us what you think..." rows="5"
+                required></textarea>
 
             <button type="submit" class="submit-btn">Submit Review</button>
         </form>
+
     </div>
 
     <script>

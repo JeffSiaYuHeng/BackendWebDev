@@ -118,13 +118,15 @@ if (!empty($additional_images)) {
                     <option value="Antique White">Antique White</option>
                 </select>
 
+                <br>
                 <label for="fabricPicker">Select Fabric:</label>
-                <select name="fabric" id="fabricPicker">
-                    <option value="None">None</option>
+                <select name="fabric" id="fabricPicker" required>
+                    <option value="" disabled selected>Select a fabric</option>
                     <option value="fabric1">Lace</option>
                     <option value="fabric2">Satin</option>
                     <option value="fabric3">Tulle</option>
                 </select>
+
 
                 <input type="hidden" name="product_name" value="<?= htmlspecialchars($product['name']) ?>">
                 <input type="hidden" name="product_type" value="<?= htmlspecialchars($product['type']) ?>">

@@ -9,7 +9,7 @@ if (!isset($_SESSION['user_id'])) {
 }
 
 $user_id = $_SESSION['user_id'];
-$total_amount = 0;
+$total_amount = 0; // Reset total amount here
 
 // Get Cart ID
 $sql = "SELECT id FROM cart WHERE user_id = ?";
@@ -91,6 +91,9 @@ $stmt = $conn->prepare($sql);
 $stmt->bind_param("i", $cart_id);
 $stmt->execute();
 $stmt->close();
+
+// Reset total price here
+$total_amount = 0; // This line resets the total price after the checkout
 
 // Redirect to order confirmation page
 header("Location: /BackendWebDev/userpage/payment/OrderConfirmationPage.php?order_id=" . $order_id);

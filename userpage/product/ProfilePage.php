@@ -121,7 +121,6 @@ include "../../backend/user/product/profile.php"; // Include database connection
                             <th>Order ID</th>
                             <th>Product Name</th>
                             <th>Quantity</th>
-                            <th>Color</th>
                             <th>Size</th>
                             <th>Status</th>
                             <th>Delivery Method</th>
@@ -137,7 +136,6 @@ include "../../backend/user/product/profile.php"; // Include database connection
                             <td>#<?= $order['order_id']; ?></td>
                             <td><?= htmlspecialchars($order['product_name']); ?></td>
                             <td><?= $order['quantity']; ?></td>
-                            <td><?= htmlspecialchars($order['color']); ?></td>
                             <td><?= htmlspecialchars($order['size']); ?></td>
                             <td><?= $order['status']; ?></td>
                             <td><?= $order['delivery_method']; ?></td>

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- 主机： 127.0.0.1
--- 生成日期： 2025-05-06 11:25:34
+-- 生成日期： 2025-05-06 13:18:18
 -- 服务器版本： 10.4.32-MariaDB
 -- PHP 版本： 8.2.12
 
@@ -40,15 +40,15 @@ CREATE TABLE `accessories` (
 --
 
 INSERT INTO `accessories` (`id`, `name`, `category`, `price`, `image`) VALUES
-(1, 'Classic Lace Veil', 'Veil', 149.99, 'BackendWebDev/image/accessories/Pearl-Embellished-Sandals.jpg'),
-(2, 'Embroidered Cathedral Veil', 'Veil', 199.50, 'BackendWebDev/image/accessories/embroidered_cathedral_veil.jpg'),
-(3, 'Beaded Edge Veil', 'Veil', 239.99, 'BackendWebDev/image/accessories/beaded_edge_veil.jpg'),
-(4, 'Crystal Princess Tiara', 'Tiara', 189.99, 'BackendWebDev/image/accessories/crystal_princess_tiara.jpg'),
-(5, 'Gold Floral Tiara', 'Tiara', 225.75, 'BackendWebDev/image/accessories/gold_floral_tiara.jpg'),
-(6, 'Silver Rhinestone Tiara', 'Tiara', 249.50, 'BackendWebDev/image/accessories/silver_rhinestone_tiara.jpg'),
-(7, 'White Satin Heels', 'Shoes', 179.99, 'BackendWebDev/image/accessories/white_satin_heels.jpg'),
-(8, 'Lace Wedding Flats', 'Shoes', 129.50, 'BackendWebDev/image/accessories/lace_wedding_flats.jpg'),
-(9, 'Pearl Embellished Sandals', 'Shoes', 210.25, 'BackendWebDev/image/accessories/pearl_embellished_sandals.jpg');
+(1, 'Classic Lace Veil', 'Veil', 149.99, '/BackendWebDev/image/accessories/Classic-Lace-Veil.jpg'),
+(2, 'Embroidered Cathedral Veil', 'Veil', 199.50, '/BackendWebDev/image/accessories/Embroidered-Cathedral-Veil.jpg'),
+(3, 'Beaded Edge Veil', 'Veil', 239.99, '/BackendWebDev/image/accessories/Beaded-Edge-Veil.jpg'),
+(4, 'Crystal Princess Tiara', 'Tiara', 189.99, '/BackendWebDev/image/accessories/Crystal-Princess-Tiara.jpg'),
+(5, 'Gold Floral Tiara', 'Tiara', 225.75, '/BackendWebDev/image/accessories/Gold-Floral-Tiara.jpg'),
+(6, 'Silver Rhinestone Tiara', 'Tiara', 249.50, '/BackendWebDev/image/accessories/Silver-Rhinestone-Tiara.jpg'),
+(7, 'White Satin Heels', 'Shoes', 179.99, '/BackendWebDev/image/accessories/White-Satin-Heels.jpg'),
+(8, 'Lace Wedding Flats', 'Shoes', 129.50, '/BackendWebDev/image/accessories/Lace-Wedding-Flats.jpg'),
+(9, 'Pearl Embellished Sandals', 'Shoes', 210.25, '/BackendWebDev/image/accessories/Pearl-Embellished-Sandals.jpg');
 
 -- --------------------------------------------------------
 
@@ -70,19 +70,19 @@ CREATE TABLE `analytics` (
 --
 
 INSERT INTO `analytics` (`id`, `product_id`, `search_count`, `visit_count`, `order_count`, `created_at`) VALUES
-(1, 1, 0, 18, 0, '2025-04-02 13:04:18'),
-(2, 2, 0, 13, 0, '2025-04-02 13:05:09'),
-(3, 3, 0, 5, 0, '2025-04-02 13:11:44'),
-(4, 5, 0, 1, 0, '2025-04-03 06:03:42'),
-(5, 1, 1, 11, 0, '2025-04-03 06:53:24'),
-(6, 5, 1, 0, 0, '2025-04-03 06:53:24'),
-(7, 3, 1, 4, 0, '2025-04-03 06:53:24'),
-(8, 4, 1, 1, 0, '2025-04-03 06:53:24'),
-(9, 1, 1, 11, 0, '2025-04-03 06:53:42'),
-(10, 5, 1, 0, 0, '2025-04-03 06:53:42'),
-(11, 3, 1, 4, 0, '2025-04-03 06:53:42'),
-(12, 4, 1, 1, 0, '2025-04-03 06:53:42'),
-(13, 7, 0, 1, 0, '2025-05-06 04:25:20');
+(1, 1, 0, 19, 0, '2025-04-02 13:04:18'),
+(2, 2, 0, 16, 0, '2025-04-02 13:05:09'),
+(3, 3, 0, 6, 0, '2025-04-02 13:11:44'),
+(4, 5, 0, 2, 0, '2025-04-03 06:03:42'),
+(5, 1, 1, 12, 0, '2025-04-03 06:53:24'),
+(6, 5, 1, 1, 0, '2025-04-03 06:53:24'),
+(7, 3, 1, 5, 0, '2025-04-03 06:53:24'),
+(8, 4, 1, 2, 0, '2025-04-03 06:53:24'),
+(9, 1, 1, 12, 0, '2025-04-03 06:53:42'),
+(10, 5, 1, 1, 0, '2025-04-03 06:53:42'),
+(11, 3, 1, 5, 0, '2025-04-03 06:53:42'),
+(12, 4, 1, 2, 0, '2025-04-03 06:53:42'),
+(13, 7, 0, 5, 0, '2025-05-06 04:25:20');
 
 -- --------------------------------------------------------
 
@@ -102,7 +102,7 @@ CREATE TABLE `cart` (
 --
 
 INSERT INTO `cart` (`id`, `user_id`, `total_price`, `created_at`) VALUES
-(9, 9, 0.00, '2025-05-06 05:08:37');
+(9, 9, 4329.50, '2025-05-06 05:08:37');
 
 -- --------------------------------------------------------
 
@@ -135,6 +135,21 @@ CREATE TABLE `cart_items` (
 -- --------------------------------------------------------
 
 --
+-- 表的结构 `custom_dress_configurations`
+--
+
+CREATE TABLE `custom_dress_configurations` (
+  `id` int(11) NOT NULL,
+  `color` varchar(50) NOT NULL,
+  `design` varchar(50) NOT NULL,
+  `length` varchar(50) NOT NULL,
+  `sleeve` varchar(50) NOT NULL,
+  `image` varchar(255) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
 -- 表的结构 `orders`
 --
 
@@ -153,7 +168,8 @@ CREATE TABLE `orders` (
 
 INSERT INTO `orders` (`id`, `user_id`, `total_price`, `delivery_method`, `status`, `created_at`) VALUES
 (12, 9, 4399.50, 'Delivery', 'Pending', '2025-05-06 05:08:39'),
-(13, 9, 3249.00, 'Delivery', 'Pending', '2025-05-06 05:12:33');
+(13, 9, 3249.00, 'Delivery', 'Pending', '2025-05-06 05:12:33'),
+(14, 9, 4329.50, 'Delivery', 'Pending', '2025-05-06 10:14:25');
 
 -- --------------------------------------------------------
 
@@ -167,15 +183,6 @@ CREATE TABLE `order_accessories` (
   `order_item_id` int(11) NOT NULL,
   `accessory_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- 转存表中的数据 `order_accessories`
---
-
-INSERT INTO `order_accessories` (`id`, `order_id`, `order_item_id`, `accessory_id`) VALUES
-(24, 12, 16, 2),
-(25, 13, 17, 2),
-(26, 13, 17, 6);
 
 -- --------------------------------------------------------
 
@@ -199,7 +206,8 @@ CREATE TABLE `order_items` (
 
 INSERT INTO `order_items` (`id`, `order_id`, `product_id`, `name`, `size`, `price`, `quantity`) VALUES
 (16, 12, 2, '', 'M', 4399.50, 1),
-(17, 13, 3, '', 'XL', 3249.00, 1);
+(17, 13, 3, '', 'XL', 3249.00, 1),
+(18, 14, 2, '', 'M', 4329.50, 1);
 
 -- --------------------------------------------------------
 
@@ -223,7 +231,8 @@ CREATE TABLE `payments` (
 
 INSERT INTO `payments` (`id`, `order_id`, `user_id`, `amount`, `payment_method`, `status`, `created_at`) VALUES
 (11, 12, 9, 4399.50, '', 'Pending', '2025-05-06 05:08:42'),
-(12, 13, 9, 3249.00, '', 'Pending', '2025-05-06 05:12:35');
+(12, 13, 9, 3249.00, '', 'Pending', '2025-05-06 05:12:35'),
+(13, 14, 9, 4329.50, '', 'Pending', '2025-05-06 10:14:28');
 
 -- --------------------------------------------------------
 
@@ -250,7 +259,7 @@ INSERT INTO `products` (`id`, `name`, `type`, `price`, `image`, `description`) V
 (3, 'White Bow Puffy Dress', 'wedding dress', 2800.00, '/BackendWebDev/image/dress/dress3/dress3.jpg', 'A cute and stylish dress.'),
 (4, 'White Satin Strapless Puff Sleeve Wedding Dress', 'wedding dress', 4000.00, '/BackendWebDev/image/dress/dress4/dress4.jpg', 'A stunning off-shoulder satin wedding gown with a delicate bow detail.'),
 (5, 'Vintage White Satin Strapless Wedding Dress', 'wedding dress', 4500.00, '/BackendWebDev/image/dress/dress5/dress5.jpg', 'A luxurious strapless wedding ball gown with a structured bodice and a voluminous skirt.'),
-(7, 'Build Your Own Dress', 'custom', 4800.00, NULL, 'Customize your own wedding dress from fabric to fit!');
+(7, 'Build Your Own Dress', 'custom', 4800.00, '/BackendWebDev/image/dress/BuildYourOwnDress.png', 'Customize your own wedding dress from fabric to fit!');
 
 -- --------------------------------------------------------
 
@@ -348,6 +357,12 @@ ALTER TABLE `cart_items`
   ADD KEY `product_id` (`product_id`);
 
 --
+-- 表的索引 `custom_dress_configurations`
+--
+ALTER TABLE `custom_dress_configurations`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- 表的索引 `orders`
 --
 ALTER TABLE `orders`
@@ -409,7 +424,7 @@ ALTER TABLE `users`
 -- 使用表AUTO_INCREMENT `accessories`
 --
 ALTER TABLE `accessories`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
 -- 使用表AUTO_INCREMENT `analytics`
@@ -427,37 +442,43 @@ ALTER TABLE `cart`
 -- 使用表AUTO_INCREMENT `cart_accessories`
 --
 ALTER TABLE `cart_accessories`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
 
 --
 -- 使用表AUTO_INCREMENT `cart_items`
 --
 ALTER TABLE `cart_items`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
+
+--
+-- 使用表AUTO_INCREMENT `custom_dress_configurations`
+--
+ALTER TABLE `custom_dress_configurations`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- 使用表AUTO_INCREMENT `orders`
 --
 ALTER TABLE `orders`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- 使用表AUTO_INCREMENT `order_accessories`
 --
 ALTER TABLE `order_accessories`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
 
 --
 -- 使用表AUTO_INCREMENT `order_items`
 --
 ALTER TABLE `order_items`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
 -- 使用表AUTO_INCREMENT `payments`
 --
 ALTER TABLE `payments`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- 使用表AUTO_INCREMENT `products`

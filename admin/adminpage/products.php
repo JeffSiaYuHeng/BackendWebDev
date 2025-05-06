@@ -34,7 +34,7 @@ $result = mysqli_query($conn, $sql);
             <ul>
                 <li><a href="/BackendWebDev/admin/adminpage/MainPage.php">Home</a></li>
                 <li><a href="manageUsers.php">Manage Users</a></li>
-                <li><a href="orders.php">Orders</a></li>
+                <li><a href="manageDelivery.php" >Manage Delivery</a></li>
                 <li><a href="products.php" class="active">Products</a></li>
                 <li><a href="accessories.php">Accessories</a></li>
                 <li><a href="payments.php">Payments</a></li>

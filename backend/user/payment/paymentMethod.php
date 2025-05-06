@@ -28,13 +28,16 @@ $stmt->bind_param("si", $delivery_method, $order_id);
 $stmt->execute();
 $stmt->close();
 
-// Insert into payments table
-$sql = "INSERT INTO payments (order_id, user_id, amount, status, created_at) VALUES (?, ?, ?, 'Pending', NOW())";
+
+// Insert into payments table with payment_method
+$sql = "INSERT INTO payments (order_id, user_id, amount, payment_method, status, created_at) 
+        VALUES (?, ?, ?, ?, 'Pending', NOW())";
 $stmt = $conn->prepare($sql);
-$stmt->bind_param("iid", $order_id, $user_id, $total_price);
+$stmt->bind_param("iids", $order_id, $user_id, $total_price, $payment_method);
 $stmt->execute();
-$payment_id = $stmt->insert_id; // Get the inserted payment ID
+$payment_id = $stmt->insert_id;
 $stmt->close();
+
 
 // Redirect to success page
 header("Location: /BackendWebDev/userpage/payment/PaymentSuccessPage.php?payment_id=" . $payment_id);

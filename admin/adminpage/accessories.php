@@ -16,7 +16,7 @@ $result = mysqli_query($conn, $sql);
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin - View Accessories</title>
-    <link rel="stylesheet" href="../adminstyle/accessories.css"> 
+    <link rel="stylesheet" href="../adminstyle/accessories.css">
 </head>
 
 <body>
@@ -30,7 +30,7 @@ $result = mysqli_query($conn, $sql);
             <ul>
                 <li><a href="/BackendWebDev/admin/adminpage/MainPage.php">Home</a></li>
                 <li><a href="manageUsers.php">Manage Users</a></li>
-                <li><a href="orders.php">Orders</a></li>
+                <li><a href="manageDelivery.php">Manage Delivery</a></li>
                 <li><a href="products.php">Products</a></li>
                 <li><a href="accessories.php" class="active">Accessories</a></li>
                 <li><a href="payments.php">Payments</a></li>
@@ -61,9 +61,9 @@ $result = mysqli_query($conn, $sql);
                     <td>#<?php echo $accessory['id']; ?></td>
                     <td>
                         <?php if ($accessory['image']): ?>
-                            <img src="<?php echo $accessory['image']; ?>" alt="Accessory Image" class="accessory-img">
+                        <img src="<?php echo $accessory['image']; ?>" alt="Accessory Image" class="accessory-img">
                         <?php else: ?>
-                            <span>No Image</span>
+                        <span>No Image</span>
                         <?php endif; ?>
                     </td>
                     <td><?php echo htmlspecialchars($accessory['name']); ?></td>
@@ -85,6 +85,7 @@ $result = mysqli_query($conn, $sql);
     </footer>
 
 </body>
+
 </html>
 
 <?php

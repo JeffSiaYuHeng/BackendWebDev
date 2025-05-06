@@ -67,7 +67,7 @@ while ($row = $orderResult->fetch_assoc()) {
             <ul>
                 <li><a href="MainPage.php">Home</a></li>
                 <li><a href="manageUsers.php">Manage Users</a></li>
-                <li><a href="orders.php">Orders</a></li>
+                <li><a href="manageDelivery.php" >Manage Delivery</a></li>
                 <li><a href="products.php">Products</a></li>
                 <li><a href="accessories.php">Accessories</a></li>
                 <li><a href="payments.php">Payments</a></li>

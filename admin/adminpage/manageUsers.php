@@ -30,7 +30,7 @@ $userResult = mysqli_query($conn, $userQuery);
             <ul>
                 <li><a href="/BackendWebDev/admin/adminpage/MainPage.php">Home</a></li>
                 <li><a href="manageUsers.php" class="active">Manage Users</a></li>
-                <li><a href="orders.php">Orders</a></li>
+                <li><a href="manageDelivery.php" >Manage Delivery</a></li>
                 <li><a href="products.php">Products</a></li>
                 <li><a href="payments.php">Payments</a></li>
                 <li><a href="analytics.php">Analytics</a></li>

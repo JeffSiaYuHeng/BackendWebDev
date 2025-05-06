@@ -48,25 +48,7 @@ nav ul li a.active {
     background-color: #007bff;
     color: #fff;
 }
-/* Welcome Section */
-.welcome-section {
-    text-align: center;
-    margin: 30px 0;
-    padding: 20px;
-    background-color: white;
-    border-radius: 8px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-}
 
-.welcome-section h2 {
-    font-size: 2em;
-    color: #333;
-}
-
-.welcome-section p {
-    font-size: 1.2em;
-    color: #555;
-}
 
 /* Order Management Section */
 .order-management {
@@ -148,4 +130,52 @@ footer {
     header nav ul li {
         margin: 10px 0;
     }
+}
+
+/*button style*/
+.btn {
+    padding: 6px 12px;
+    border: none;
+    text-decoration: none;
+    border-radius: 6px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    color: white;
+    margin-right: 8px; /* more gap between buttons */
+    display: inline-block;
+}
+
+
+.update-btn {
+    background-color: #4CAF50;
+}
+
+.update-btn:hover {
+    background-color: #45a049;
+}
+
+/*filter*/
+.filter-form {
+    margin-bottom: 20px;
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+.filter-form select,
+.filter-form button {
+    padding: 6px 12px;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+}
+/* Footer Styles */
+footer {
+    background-color: #333;
+    color: white;
+    text-align: center;
+    padding: 10px 0;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
 }

@@ -131,26 +131,27 @@ if (!$product) {
     const selects = document.querySelectorAll("select");
 
     function updateImage() {
-      const color = document.getElementById("color").value;
-      const design = document.getElementById("design").value;
-      const length = document.getElementById("length").value;
-      const sleeve = document.getElementById("sleeve").value;
+  const color = document.getElementById("color").value;
+  const design = document.getElementById("design").value;
+  const length = document.getElementById("length").value;
+  const sleeve = document.getElementById("sleeve").value;
 
-      const filename = `${color}_${design}_${length}_${sleeve}.png`;
-      const imagePath = `images/${filename}`;
+  const filename = `${color}_${design}_${length}_${sleeve}.png`;
+  const imagePath = `/BackendWebDev/image/WeddingDressImage/${filename}`;
 
-      // Fade-out
-      image.classList.remove("visible");
-      
-      setTimeout(() => {
-        image.src = imagePath;
+  // Fade-out
+  image.classList.remove("visible");
 
-        // After image loads, fade-in
-        image.onload = () => {
-          image.classList.add("visible");
-        };
-      }, 200);
-    }
+  setTimeout(() => {
+    image.src = imagePath;
+
+    // After image loads, fade-in
+    image.onload = () => {
+      image.classList.add("visible");
+    };
+  }, 200);
+}
+
 
     selects.forEach(select => {
       select.addEventListener("change", updateImage);

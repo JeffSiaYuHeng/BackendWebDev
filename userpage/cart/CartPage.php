@@ -34,8 +34,6 @@ include  "../../backend/user/cart/cart.php";
         <div class="cart-item">
             <h2><?= htmlspecialchars($item['product_name']) ?></h2>
             <p><strong>Size:</strong> <?= htmlspecialchars($item['size']) ?></p>
-            <p><strong>Color:</strong> <?= htmlspecialchars($item['color']) ?></p>
-            <p><strong>Fabric:</strong> <?= htmlspecialchars($item['fabric']) ?></p>
             <p><strong>Price:</strong> RM <?= number_format($item['price'], 2) ?></p>
             <p><strong>Quantity:</strong> <?= $item['quantity'] ?></p>
             <h3>Accessories:</h3>

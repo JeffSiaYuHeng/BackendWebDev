@@ -26,7 +26,7 @@ if (!$cart_id) {
 }
 
 // Fetch cart items with product details
-$sql = "SELECT ci.id AS cart_item_id, ci.product_id, ci.size, ci.color, ci.fabric, ci.quantity, ci.price, p.name AS product_name 
+$sql = "SELECT ci.id AS cart_item_id, ci.product_id, ci.size, ci.quantity, ci.price, p.name AS product_name 
         FROM cart_items ci
         JOIN products p ON ci.product_id = p.id
         WHERE ci.cart_id = ?";
@@ -57,10 +57,10 @@ $stmt->close();
 
 // Move cart items to order items
 foreach ($cart_items as $item) {
-    $sql = "INSERT INTO order_items (order_id, product_id, quantity, size, color, fabric, price) 
-            VALUES (?, ?, ?, ?, ?, ?, ?)";
+    $sql = "INSERT INTO order_items (order_id, product_id, quantity, size, price) 
+            VALUES (?, ?, ?, ?, ?)";
     $stmt = $conn->prepare($sql);
-    $stmt->bind_param("iiisssd", $order_id, $item['product_id'], $item['quantity'], $item['size'], $item['color'], $item['fabric'], $item['price']);
+    $stmt->bind_param("iiisd", $order_id, $item['product_id'], $item['quantity'], $item['size'], $item['price']);
     $stmt->execute();
     $order_item_id = $stmt->insert_id;
     $stmt->close();

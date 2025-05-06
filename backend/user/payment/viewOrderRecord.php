@@ -1,11 +1,11 @@
 <?php
 include __DIR__ . "/../../../backend/db_connect.php";
+
 // Fetch all orders, grouping accessories and payments, including delivery method
 $sql = "SELECT o.id AS order_id,
                oi.product_id,
                oi.name AS product_name,
                oi.quantity,
-               oi.color,
                oi.size,
                o.status,
                o.delivery_method,
@@ -21,9 +21,6 @@ $sql = "SELECT o.id AS order_id,
         WHERE o.user_id = ?
         GROUP BY o.id, oi.id
         ORDER BY o.created_at DESC";
-
-
-
 
 $stmt = $conn->prepare($sql);
 $stmt->bind_param("i", $user_id);

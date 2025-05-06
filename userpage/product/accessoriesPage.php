@@ -36,8 +36,6 @@ include "../../backend/user/product/accessories.php"; // Include database connec
         <p><strong>Gown:</strong> <?= htmlspecialchars($product_name) ?></p>
         <p><strong>Type:</strong> <?= htmlspecialchars($product_type) ?></p>
         <p><strong>Size:</strong> <?= htmlspecialchars($size) ?></p>
-        <p><strong>Color:</strong> <?= htmlspecialchars($color) ?></p>
-        <p><strong>Fabric:</strong> <?= htmlspecialchars($fabric_display) ?></p>
         <p><strong>Base Price:</strong> RM<span id="basePrice"><?= number_format($product_price, 2) ?></span></p>
         <p><strong>Total Price:</strong> RM<span id="totalPrice"><?= number_format($product_price, 2) ?></span></p>
     </section>
@@ -95,8 +93,6 @@ include "../../backend/user/product/accessories.php"; // Include database connec
         <input type="hidden" name="product_type" value="<?= htmlspecialchars($product_type) ?>">
         <input type="hidden" name="product_price" id="finalPrice" value="<?= number_format($product_price, 2) ?>">
         <input type="hidden" name="size" value="<?= htmlspecialchars($size) ?>">
-        <input type="hidden" name="color" value="<?= htmlspecialchars($color) ?>">
-        <input type="hidden" name="fabric" value="<?= htmlspecialchars($fabric_display) ?>">
         <input type="hidden" name="accessories" id="selectedAccessories" value="">
         <button type="submit">Add to Cart</button>
     </form>
@@ -120,7 +116,7 @@ include "../../backend/user/product/accessories.php"; // Include database connec
         item.classList.add("selected-item");
         item.id = name;
 
-        item.innerHTML = `
+        item.innerHTML = ` 
                 <p>${name} - RM ${price.toFixed(2)}</p>
                 <button onclick="removeAccessory('${name}', ${price})">Remove</button>
             `;

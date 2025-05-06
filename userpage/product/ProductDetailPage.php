@@ -4,8 +4,6 @@ include "../../backend/user/product/productDetail.php";
 // Fetch actual reviews from the database
 $reviews = [];
 
-
-
 $review_query = "SELECT r.rating, r.review_text, u.username
                  FROM reviews r
                  LEFT JOIN users u ON r.user_id = u.id
@@ -27,44 +25,27 @@ if ($stmt = $conn->prepare($review_query)) {
     $stmt->close();
 }
 
-// Fabric prices
-$fabric_prices = [
-    "None" => 0,
-    "fabric1" => 50,  // Lace adds RM50
-    "fabric2" => 70,  // Satin adds RM70
-    "fabric3" => 40,  // Tulle adds RM40
-];
-
 $base_price = $product['price'];
 
+// Extract image directory
+$product_image = $product['image'];
+$image_dir = dirname($product_image);
 
-
-// to Jeff: this is get the image path and by using the pathinfo function, we can get the directory of the image
-// and i adding php to remove the image name like dress.jpg and get the directory of the image
-// and then i will use the directory to get all the images in the directory and display it in the product detail page
-// Extract the directory from the product image path
-$product_image = $product['image'];  // Example: /BackendWebDev/image/dress/dress1/dress1.jpg
-$image_dir = dirname($product_image); // This extracts "/BackendWebDev/image/dress/dress1"
-
-// Get all images in the directory
 $image_extensions = ['jpg', 'jpeg', 'png', 'webp'];
 $additional_images = [];
 
-// Get absolute path
 $absolute_path = $_SERVER['DOCUMENT_ROOT'] . $image_dir;
 
-// Check if the directory exists and scan for images
 if (is_dir($absolute_path)) {
     $files = scandir($absolute_path);
     foreach ($files as $file) {
         $file_extension = strtolower(pathinfo($file, PATHINFO_EXTENSION));
         if (in_array($file_extension, $image_extensions)) {
-            $additional_images[] = $image_dir . '/' . $file;  // Store the relative path
+            $additional_images[] = $image_dir . '/' . $file;
         }
     }
 }
 
-// Ensure the main image is at the start
 if (!empty($additional_images)) {
     $main_image = $product_image;
     $additional_images = array_diff($additional_images, [$main_image]);
@@ -91,16 +72,10 @@ if (!empty($additional_images)) {
     </header>
     <div class="product-container">
         <div class="image-container">
-            <!-- Main Product Image -->
-            <img src="<?= htmlspecialchars($main_image) ?>" alt="<?= htmlspecialchars($product['name']) ?>"
-                id="gownImage">
-
-            <!-- Additional Images for Product Views -->
+            <img src="<?= htmlspecialchars($main_image) ?>" alt="<?= htmlspecialchars($product['name']) ?>" id="gownImage">
             <div class="additional-images">
                 <?php foreach ($additional_images as $img): ?>
-                <img src="<?= htmlspecialchars($img) ?>"
-                    alt="Additional view of <?= htmlspecialchars($product['name']) ?>" class="extra-image"
-                    onclick="changeImage(this.src)">
+                <img src="<?= htmlspecialchars($img) ?>" alt="Additional view of <?= htmlspecialchars($product['name']) ?>" class="extra-image" onclick="changeImage(this.src)">
                 <?php endforeach; ?>
             </div>
         </div>
@@ -120,30 +95,6 @@ if (!empty($additional_images)) {
                     <option value="L">Large</option>
                     <option value="XL">X-Large</option>
                 </select>
-
-                <div class="preview-container">
-                    <div class="preview-box" id="previewBox">
-                        <div class="fabric-overlay" id="fabricPreview"></div>
-                    </div>
-                </div>
-
-                <label for="colorPicker">Select Color:</label>
-                <select name="color" id="colorPicker">
-                    <option value="White">White</option>
-                    <option value="Ivory">Ivory</option>
-                    <option value="Champagne">Champagne</option>
-                    <option value="Antique White">Antique White</option>
-                </select>
-
-                <br>
-                <label for="fabricPicker">Select Fabric:</label>
-                <select name="fabric" id="fabricPicker" required>
-                    <option value="" disabled selected>Select a fabric</option>
-                    <option value="fabric1">Lace</option>
-                    <option value="fabric2">Satin</option>
-                    <option value="fabric3">Tulle</option>
-                </select>
-
 
                 <input type="hidden" name="product_name" value="<?= htmlspecialchars($product['name']) ?>">
                 <input type="hidden" name="product_type" value="<?= htmlspecialchars($product['type']) ?>">
@@ -168,7 +119,6 @@ if (!empty($additional_images)) {
         <?php else: ?>
         <p>No reviews yet. Be the first to review!</p>
         <?php endif; ?>
-
     </div>
 
     <script>

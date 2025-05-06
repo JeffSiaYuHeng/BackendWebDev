@@ -11,8 +11,6 @@ $user_id = $_SESSION['user_id'];
 $product_name = $_POST['product_name'] ?? '';
 $product_type = $_POST['product_type'] ?? '';
 $size = $_POST['size'] ?? '';
-$color = $_POST['color'] ?? '';
-$fabric = $_POST['fabric'] ?? '';
 $total_price = (float) $_POST['product_price'] ?? 0.00;
 $accessories = json_decode($_POST['accessories'], true) ?? [];
 
@@ -49,9 +47,9 @@ if ($cart_result->num_rows > 0) {
 }
 
 // Insert the main product into cart_items
-$item_insert = "INSERT INTO cart_items (cart_id, product_id, size, color, fabric, price) VALUES (?, ?, ?, ?, ?, ?)";
+$item_insert = "INSERT INTO cart_items (cart_id, product_id, size, price) VALUES (?, ?, ?, ?)";
 $stmt = $conn->prepare($item_insert);
-$stmt->bind_param("iisssd", $cart_id, $product_id, $size, $color, $fabric, $total_price);
+$stmt->bind_param("iisd", $cart_id, $product_id, $size, $total_price);
 $stmt->execute();
 $cart_item_id = $stmt->insert_id;
 $stmt->close();

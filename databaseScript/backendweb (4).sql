@@ -128,18 +128,9 @@ CREATE TABLE `cart_items` (
   `cart_id` int(11) NOT NULL,
   `product_id` int(11) NOT NULL,
   `size` varchar(50) DEFAULT NULL,
-  `color` varchar(50) DEFAULT NULL,
-  `fabric` varchar(100) DEFAULT NULL,
   `price` decimal(10,2) NOT NULL,
   `quantity` int(11) DEFAULT 1
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `cart_items`
---
-
-INSERT INTO `cart_items` (`id`, `cart_id`, `product_id`, `size`, `color`, `fabric`, `price`, `quantity`) VALUES
-(13, 4, 1, 'S', 'White', 'None', 3.00, 1);
 
 -- --------------------------------------------------------
 
@@ -211,26 +202,9 @@ CREATE TABLE `order_items` (
   `product_id` int(11) DEFAULT NULL,
   `name` varchar(255) NOT NULL,
   `size` varchar(50) NOT NULL,
-  `color` varchar(50) NOT NULL,
-  `fabric` varchar(100) NOT NULL,
   `price` decimal(10,2) NOT NULL,
   `quantity` int(11) DEFAULT 1
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `order_items`
---
-
-INSERT INTO `order_items` (`id`, `order_id`, `product_id`, `name`, `size`, `color`, `fabric`, `price`, `quantity`) VALUES
-(1, 1, 2, '', 'S', 'Champagne', 'Lace', 4475.75, 1),
-(2, 2, 5, '', 'L', 'Ivory', 'Lace', 4.00, 1),
-(3, 2, 5, '', 'L', 'Ivory', 'Lace', 4.00, 1),
-(4, 3, 1, '', 'S', 'White', 'Lace', 3999.99, 1),
-(5, 4, 5, '', 'S', 'White', 'Lace', 4729.99, 1),
-(6, 5, 5, '', 'S', 'White', 'None', 4699.50, 1),
-(7, 5, 2, '', 'S', 'White', 'None', 4399.50, 1),
-(8, 6, 5, '', 'S', 'Ivory', 'Lace', 5804.72, 1),
-(9, 7, 1, '', 'S', 'Ivory', 'None', 3.00, 1);
 
 -- --------------------------------------------------------
 

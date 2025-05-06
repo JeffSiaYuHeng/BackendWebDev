@@ -119,29 +119,6 @@ h1, h3 {
     overflow: hidden;
 }
 
-/* Ensure fabric overlay doesn't block color */
-.fabric-overlay {
-    width: 100%;
-    height: 100%;
-    position: absolute;
-    top: 0;
-    left: 0;
-    opacity: 0.3;
-    pointer-events: none; /* Allows clicks to pass through */
-}
-
-/* Fabric Textures */
-.fabric1 {
-    background-image: repeating-linear-gradient(45deg, rgba(0,0,0,0.2), transparent 10px);
-}
-
-.fabric2 {
-    background-image: repeating-linear-gradient(90deg, rgba(0,0,0,0.2), transparent 5px);
-}
-
-.fabric3 {
-    background-image: repeating-linear-gradient(135deg, rgba(0,0,0,0.2), transparent 15px);
-}
 
 
 /* Responsive Design */

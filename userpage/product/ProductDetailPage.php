@@ -1,4 +1,13 @@
 <?php
+// If user is NOT logged in, show an alert and redirect to login page
+if (!isset($_SESSION["user_id"])) {
+    echo "<script>
+        alert('Your session has expired or you are not logged in. Please log in again.');
+        window.location.href = '../authenticate/LoginPage.php';
+    </script>";
+    exit();
+}
+
 include "../../backend/user/product/productDetail.php";
 
 // Fetch actual reviews from the database

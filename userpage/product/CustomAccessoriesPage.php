@@ -9,17 +9,6 @@ if (!isset($_SESSION["user_id"])) {
     exit();
 }
 
-// Ensure product details are set via POST
-$product_name = $_POST['product_name'] ?? 'Unknown Gown';
-$product_type = $_POST['product_type'] ?? 'Standard';
-$product_price = $_POST['product_price'] ?? 0.00;
-$color = $_POST['color'] ?? 'Not selected';
-$design = $_POST['design'] ?? 'Not selected';
-$length = $_POST['length'] ?? 'Not selected';
-$sleeve = $_POST['sleeve'] ?? 'Not selected';
-$size = $_POST['size'] ?? 'Not selected';
-
-
 // Ensure first_name is set; fallback to "Guest"
 $first_name = $_SESSION["first_name"] ?? "Guest";
 
@@ -44,24 +33,12 @@ include "../../backend/user/product/accessories.php"; // Include database connec
 
     <section class="bridal-details">
         <h2>Your Bridal Selection</h2>
-        
         <p><strong>Gown:</strong> <?= htmlspecialchars($product_name) ?></p>
         <p><strong>Type:</strong> <?= htmlspecialchars($product_type) ?></p>
         <p><strong>Size:</strong> <?= htmlspecialchars($size) ?></p>
-
-        <?php if (strtolower($product_type) === "custom"): ?>
-            <p><strong>Color:</strong> <?= htmlspecialchars($color) ?></p>
-            <p><strong>Design:</strong> <?= htmlspecialchars($design) ?></p>
-            <p><strong>Length:</strong> <?= htmlspecialchars($length) ?></p>
-            <p><strong>Sleeve:</strong> <?= htmlspecialchars($sleeve) ?></p>
-        <?php else: ?>
-            <p><strong>Custom Gown:</strong> No</p>
-        <?php endif; ?>
-
-        <p><strong>Base Price:</strong> RM<span id="basePrice"><?= number_format((float)$product_price, 2) ?></span></p>
-        <p><strong>Total Price:</strong> RM<span id="totalPrice"><?= number_format((float)$product_price, 2) ?></span></p>
+        <p><strong>Base Price:</strong> RM<span id="basePrice"><?= number_format($product_price, 2) ?></span></p>
+        <p><strong>Total Price:</strong> RM<span id="totalPrice"><?= number_format($product_price, 2) ?></span></p>
     </section>
-
 
     <section>
         <h2>Selected Accessories</h2>
@@ -92,29 +69,21 @@ include "../../backend/user/product/accessories.php"; // Include database connec
             }
         }
 
-       // Loop through each category and display accessories
+        // Loop through each category and display accessories
         foreach ($categories as $category => $items) {
             echo "<h2>$category</h2><div class='accessory-grid'>";
             foreach ($items as $item) {
-                $name = htmlspecialchars($item['name']);
+                $name = $item['name'];
                 $price = $item['price'];
                 $image = $item['image'] ?? 'default.jpg'; // Use a default image if none exists
-
                 echo "<div class='accessory'>
                         <img src='$image' alt='$name'>
                         <p>$name - RM $price</p>
-                        <button 
-                            class='select-btn' 
-                            data-accessory='$name' 
-                            data-price='$price' 
-                            onclick=\"selectAccessory('$name', $price, '$image', this)\">
-                            Select
-                        </button>
-                    </div>";
+                        <button onclick=\"selectAccessory('$name', $price, '/path/to/images/$image')\">Select</button>
+                      </div>";
             }
             echo "</div>";
         }
-
         ?>
         </div>
     </section>
@@ -133,53 +102,36 @@ include "../../backend/user/product/accessories.php"; // Include database connec
     const basePrice = parseFloat(<?= $product_price ?>);
     let totalPrice = basePrice;
     let selectedAccessories = [];
-    const accessoryButtons = {}; // Store references to buttons
 
-    function selectAccessory(name, price, image, button) {
+    // Accessory Prices from PHP
+    const accessoryPrices = <?= $accessories_json ?>;
+
+    function selectAccessory(name, price, image) {
         if (selectedAccessories.includes(name)) return;
 
         selectedAccessories.push(name);
         totalPrice += price;
-
-        // Disable the clicked button and mark it visually
-        button.disabled = true;
-        button.textContent = "Selected";
-        button.classList.add("disabled-btn");
-
-        accessoryButtons[name] = button;
 
         const selectedContainer = document.getElementById("selected-accessories");
         const item = document.createElement("div");
         item.classList.add("selected-item");
         item.id = name;
 
-        item.innerHTML = `
-        <p>${name} - RM ${price.toFixed(2)}</p>
-        <button onclick="removeAccessory('${name}', ${price}')">Remove</button>
-    `;
+        item.innerHTML = ` 
+                <p>${name} - RM ${price.toFixed(2)}</p>
+                <button onclick="removeAccessory('${name}', ${price})">Remove</button>
+            `;
 
         selectedContainer.appendChild(item);
         updateTotalPrice();
     }
 
-
     function removeAccessory(name, price) {
         selectedAccessories = selectedAccessories.filter(item => item !== name);
         totalPrice -= price;
-
-        // Re-enable the button and reset its style
-        const button = accessoryButtons[name];
-        if (button) {
-            button.disabled = false;
-            button.textContent = "Select";
-            button.classList.remove("disabled-btn");
-            delete accessoryButtons[name];
-        }
-
-        document.getElementById(name)?.remove();
+        document.getElementById(name).remove();
         updateTotalPrice();
     }
-
 
     function updateTotalPrice() {
         document.getElementById("totalPrice").textContent = totalPrice.toFixed(2);

@@ -139,7 +139,7 @@ include "../../backend/user/product/profile.php"; // Include database connection
                             <td><?= htmlspecialchars($order['size']); ?></td>
                             <td><?= $order['status']; ?></td>
                             <td><?= $order['delivery_method']; ?></td>
-                            <td><?= $order['payment_amount'] ? number_format($order['payment_amount'], 2) : 'N/A'; ?>
+                            <td><?= isset($order['price']) ? number_format($order['price'], 2) : 'N/A'; ?></td>
                             </td>
                             <td><?= $order['accessories'] ? $order['accessories'] : 'No Accessories'; ?></td>
                             <td><?= $order['created_at']; ?></td>

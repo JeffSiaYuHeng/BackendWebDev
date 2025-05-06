@@ -171,6 +171,7 @@ $image_path = $product['image'];
             <p>No reviews yet. Be the first to review!</p>
         <?php endif; ?>
     </div>
+    <div class="box"></div>
 
     <script>
         const image = document.getElementById("dressImage");

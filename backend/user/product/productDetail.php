@@ -6,7 +6,6 @@ if (!isset($_GET['id']) || empty($_GET['id'])) {
     echo "Product not found.";
     exit();
 }
-
 $product_id = intval($_GET['id']); // Sanitize ID input
 
 // Fetch product details from database
@@ -22,5 +21,4 @@ if ($result->num_rows == 0) {
 }
 
 $product = $result->fetch_assoc();
-$conn->close();
 ?>

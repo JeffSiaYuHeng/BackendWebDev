@@ -1,14 +1,31 @@
 <?php
 include "../../backend/user/product/productDetail.php";
 
-// Dummy reviews (replace with database values later)
-$reviews = [
-    ["username" => "Alice", "rating" => 5, "content" => "Absolutely loved this dress! The quality is amazing."],
-    ["username" => "JohnDoe", "rating" => 4, "content" => "Beautiful fabric and design, but the size runs a bit small."],
-    ["username" => "Sophia", "rating" => 3, "content" => "It's decent, but I expected better stitching."],
-    ["username" => "EmilyR", "rating" => 5, "content" => "Perfect for my wedding! Highly recommend."],
-    ["username" => "Michael", "rating" => 2, "content" => "Not what I expected. The fabric feels cheap."],
-];
+// Fetch actual reviews from the database
+$reviews = [];
+
+
+
+$review_query = "SELECT r.rating, r.review_text, u.username
+                 FROM reviews r
+                 LEFT JOIN users u ON r.user_id = u.id
+                 WHERE r.product_id = ?
+                 ORDER BY r.created_at DESC";
+
+if ($stmt = $conn->prepare($review_query)) {
+    $stmt->bind_param("i", $product_id);
+    $stmt->execute();
+    $result = $stmt->get_result();
+
+    while ($row = $result->fetch_assoc()) {
+        $reviews[] = [
+            "username" => $row["username"] ?? "Anonymous",
+            "rating" => (int) $row["rating"],
+            "content" => $row["review_text"]
+        ];
+    }
+    $stmt->close();
+}
 
 // Fabric prices
 $fabric_prices = [
@@ -151,6 +168,7 @@ if (!empty($additional_images)) {
         <?php else: ?>
         <p>No reviews yet. Be the first to review!</p>
         <?php endif; ?>
+
     </div>
 
     <script>

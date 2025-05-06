@@ -415,3 +415,19 @@ nav a{
 .details-container button:hover {
     background-color: #6e5e44;
 }
+
+
+.average-rating {
+    margin-top: 30px;
+    margin-bottom: 10px;
+    padding: 10px;
+    background-color: #fefefe;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.average-rating .stars {
+    color: gold;
+    font-size: 20px;
+    margin-top: 5px;
+}

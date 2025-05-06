@@ -57,6 +57,20 @@ if (!empty($additional_images)) {
 } else {
     $main_image = $product_image;
 }
+
+// Get average rating for the product
+$avg_rating = 0;
+$count_rating = 0;
+
+$avg_query = "SELECT AVG(rating) AS avg_rating, COUNT(*) AS total_reviews FROM reviews WHERE product_id = ?";
+if ($stmt = $conn->prepare($avg_query)) {
+    $stmt->bind_param("i", $product_id);
+    $stmt->execute();
+    $stmt->bind_result($avg_rating, $count_rating);
+    $stmt->fetch();
+    $stmt->close();
+}
+
 ?>
 
 <!DOCTYPE html>
@@ -73,7 +87,7 @@ if (!empty($additional_images)) {
 </head>
 
 <body>
-<header>
+    <header>
         <h1>Eternal Elegant Bridal</h1>
         <!-- Right container for Cart & Dropdown -->
         <div class="right-section">
@@ -103,16 +117,35 @@ if (!empty($additional_images)) {
     </nav>
     <div class="product-container">
         <div class="image-container">
-            <img src="<?= htmlspecialchars($main_image) ?>" alt="<?= htmlspecialchars($product['name']) ?>" id="gownImage">
+            <img src="<?= htmlspecialchars($main_image) ?>" alt="<?= htmlspecialchars($product['name']) ?>"
+                id="gownImage">
             <div class="additional-images">
                 <?php foreach ($additional_images as $img): ?>
-                <img src="<?= htmlspecialchars($img) ?>" alt="Additional view of <?= htmlspecialchars($product['name']) ?>" class="extra-image" onclick="changeImage(this.src)">
+                <img src="<?= htmlspecialchars($img) ?>"
+                    alt="Additional view of <?= htmlspecialchars($product['name']) ?>" class="extra-image"
+                    onclick="changeImage(this.src)">
                 <?php endforeach; ?>
             </div>
         </div>
 
         <div class="details-container">
             <h2 id="bridalTitle"> <?= htmlspecialchars($product['name']) ?> </h2>
+            <div class="average-rating">
+                <h2>Average Rating</h2>
+                <?php if ($count_rating > 0): ?>
+                <p>
+                    <?= number_format($avg_rating, 1) ?> / 5.0
+                    (<?= $count_rating ?> review<?= $count_rating > 1 ? 's' : '' ?>)
+                </p>
+                <p class="stars">
+                    <?= str_repeat("★", floor($avg_rating)) ?>
+                    <?= ($avg_rating - floor($avg_rating) >= 0.5) ? "½" : "" ?>
+                    <?= str_repeat("☆", 5 - ceil($avg_rating)) ?>
+                </p>
+                <?php else: ?>
+                <p>No ratings yet</p>
+                <?php endif; ?>
+            </div>
             <h3 id="bridalType">Type: <?= htmlspecialchars($product['type']) ?> </h3>
             <p id="bridalDescription"> <?= htmlspecialchars($product['description']) ?> </p>
             <p id="bridalPrice">Price: RM<span id="dynamicPrice"> <?= number_format($base_price, 2) ?> </span></p>
@@ -128,6 +161,7 @@ if (!empty($additional_images)) {
                 </select>
 
                 <input type="hidden" name="product_name" value="<?= htmlspecialchars($product['name']) ?>">
+
                 <input type="hidden" name="product_type" value="<?= htmlspecialchars($product['type']) ?>">
                 <input type="hidden" id="finalPrice" name="product_price"
                     value="<?= number_format((float) $base_price, 2, '.', '') ?>">
@@ -136,6 +170,7 @@ if (!empty($additional_images)) {
             </form>
         </div>
     </div>
+
 
     <div class="review-section">
         <h2>Customer Reviews</h2>

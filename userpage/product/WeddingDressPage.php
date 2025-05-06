@@ -63,8 +63,8 @@ include "../../backend/user/product/weddingDress.php";
     <nav>
         <a class="blink" href="MainPage.php">Home</a> |
         <a class="blink" href="#">Wedding Dress</a> |
-        <a class="blink" href="">About</a> |
-        <a class="blink" href="">Contact</a>
+        <a class="blink" href="AboutPage.php">About</a> |
+        <a class="blink" href="ContactPage.php">Contact</a>
     </nav>
     <section>
         <div class="same-row">

@@ -1,0 +1,224 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+
+}
+
+
+header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between; /* Spread elements */
+    padding: 1rem;
+    position: relative;
+}
+
+h1{
+    font-family: 'Crimson Text';
+    font-weight: 400;
+    letter-spacing: 5px;
+    font-size: 50px;
+}
+html, body {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    max-width: 100%;
+
+    overflow-x: hidden; /* Prevent horizontal scrolling */
+}
+header h1 {
+    font-family: 'Crimson Text';
+    font-weight: 400;
+    color: #5B5449;
+    letter-spacing: 5px;
+    font-size: 39px;
+    text-align: center;
+    flex-grow: 1 !important;
+}
+
+/* Right section containing Cart and Dropdown */
+.right-section {
+    display: flex;
+    align-items: center;
+    gap: 2rem; /* Space between Cart and Dropdown */
+    margin-right: auto;
+    position: absolute;
+    right: 1rem;
+}
+
+/* Cart Button */
+.cart-btn {
+    background-color: #8F7F65;
+    color: white;
+    padding: .5rem 1.1rem;
+    border: none;
+    cursor: pointer;
+    border-radius: 2rem;
+    margin-left: 10rem;
+    font-size: 2rem;
+    position: relative;
+}
+.icon-button__badge {
+    position: absolute;
+    font-size: 16px;
+    top: -10px;
+    right: -10px;
+    width: 25px;
+    height: 25px;
+    background: red;
+    color: #ffffff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+  }
+
+/* Dropdown container */
+.dropdown {
+    display: inline-block;
+}
+
+/* Dropdown Button */
+.dropbtn {
+    background-color: #8F7F65;
+    color: white;
+    padding: 1rem 2rem;
+    font-size: 16px;
+    border: none;
+    cursor: pointer;
+    border-radius: 2rem;
+    font-family: 'Crimson Text';
+    font-weight: 400;
+    display: flex;
+    align-items: center;
+}
+
+/* Dropdown Content (Hidden by Default) */
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f1f1f1;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+    transform: translateX(-50%);
+    min-width: 15rem;
+    border-radius: 8px;
+    overflow: hidden;
+}
+.line{
+    border-bottom: 1px solid #b2b2b2;
+    margin: 0 auto;
+    width: 95%;
+}
+
+/* Links inside the dropdown */
+.dropdown-content a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+    font-family: 'Crimson Text';
+    font-weight: 400;
+}
+.dropdown-content p{
+    padding: 12px 16px;
+    font-family: 'Crimson Text';
+    font-weight: 400;
+}
+/* Show the dropdown content when hovering over dropdown */
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+  
+  /* Change color of dropdown links on hover */
+  .dropdown-content a:hover {background-color: #ddd;}
+  
+  /* Show the dropdown menu on hover */
+  .dropdown:hover .dropdown-content {display: block;}
+  
+  /* Change the background color of the dropdown button when the dropdown content is shown */
+  .dropdown:hover .dropbtn {background-color: #6d6f65;}
+
+
+
+/*Nav bar*/
+nav{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 1rem;
+}
+nav a{
+    font-family: 'Crimson Text';
+    font-weight: 400;
+    font-size: 20px;
+    margin: 0 1rem;
+    text-decoration: none;
+    color : #000;
+}
+@keyframes blink {
+
+    0% { opacity: 1; }
+    50% { opacity: 0; }
+    100% { opacity: 1; }
+    
+}
+.blink:hover{
+    animation: blink 1s infinite ease-in-out alternate;
+}
+
+/* Content Section */
+.about-us {
+    background-color: #fefaf5;
+    padding: 3rem 2rem;
+    font-family: 'Crimson Text', serif;
+    color: #5B5449;
+    text-align: center;
+    
+}
+
+.about-us h2 {
+    font-size: 36px;
+    margin-bottom: 1.5rem;
+    letter-spacing: 2px;
+    color: #8F7F65;
+}
+
+.about-content {
+    max-width: 900px;
+    margin: 0 auto;
+    line-height: 1.8;
+    font-size: 18px;
+    text-align: justify;
+}
+
+.about-content p {
+    margin-bottom: 1.5rem;
+}
+
+.about-content .quote {
+    font-style: italic;
+    color: #7c6b55;
+    font-size: 20px;
+    text-align: center;
+    margin-top: 2rem;
+}
+
+
+
+/* Footer Section */
+footer {
+    background-color: #5B5449;
+    color: white;
+    text-align: center;
+    padding: 1rem 0;
+    font-family: 'Crimson Text', serif;
+    font-size: 1rem;
+    letter-spacing: 1px;
+    margin-top: auto; /* Push footer to bottom if content is short */
+    width: 100%;
+    box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+}

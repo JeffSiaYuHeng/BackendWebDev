@@ -1,11 +1,11 @@
 <?php
 include __DIR__ . "/../../../backend/db_connect.php";
+
 // Fetch all orders, grouping accessories and payments, including delivery method
 $sql = "SELECT o.id AS order_id,
                oi.product_id,
-               oi.name AS product_name,
+               pr.name AS product_name,  -- Use a different alias for the products table
                oi.quantity,
-               oi.color,
                oi.size,
                o.status,
                o.delivery_method,
@@ -18,12 +18,10 @@ $sql = "SELECT o.id AS order_id,
         LEFT JOIN order_accessories oa ON o.id = oa.order_id
         LEFT JOIN accessories a ON oa.accessory_id = a.id
         LEFT JOIN order_items oi ON o.id = oi.order_id
+        LEFT JOIN products pr ON oi.product_id = pr.id  -- Changed alias to 'pr' for the products table
         WHERE o.user_id = ?
         GROUP BY o.id, oi.id
         ORDER BY o.created_at DESC";
-
-
-
 
 $stmt = $conn->prepare($sql);
 $stmt->bind_param("i", $user_id);

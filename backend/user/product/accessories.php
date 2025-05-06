@@ -7,17 +7,9 @@ $product_name = $_POST['product_name'] ?? 'Unknown Bridal Gown';
 $product_type = $_POST['product_type'] ?? 'Unknown Type';
 $product_price = $_POST['product_price'] ?? '0.00';
 $size = $_POST['size'] ?? 'Not Selected';
-$color = $_POST['color'] ?? 'Default Color';
-$fabric = $_POST['fabric'] ?? 'Default Fabric';
-
-// Fabric mapping
-$fabric_options = ["fabric1" => "Lace", "fabric2" => "Satin", "fabric3" => "Tulle"];
-$fabric_display = $fabric_options[$fabric] ?? $fabric;
 
 // Convert product price to float
 $product_price = (float) str_replace(',', '', $product_price);
-
-
 
 // Initialize the accessories array
 $accessories = [];

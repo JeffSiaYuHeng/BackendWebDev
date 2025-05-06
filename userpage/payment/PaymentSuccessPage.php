@@ -11,6 +11,7 @@ include "../../backend/user/payment/paymentSuccess.php"; // Include database con
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Payment Success</title>
+    <link rel="stylesheet" href="/BackendWebDev/userstyle/paymentSuccess.css">
 </head>
 
 <body>

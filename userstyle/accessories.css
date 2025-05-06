@@ -155,6 +155,13 @@ form button {
     font-weight: bold;
 }
 
+button.disabled-btn {
+    background-color: #ccc;
+    color: #666;
+    cursor: not-allowed;
+}
+
+
 
 /* Responsive Design */
 @media (max-width: 768px) {

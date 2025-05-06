@@ -28,102 +28,137 @@ if (!$product) {
     exit();
 }
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-    <meta charset="UTF-8">
-    <title>Customize Your Wedding Dress</title>
-    <link rel="stylesheet" href="/BackendWebDev/userstyle/customizePage.css">
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-</head>
+  <meta charset="UTF-8" />
+  <title>Dress Designer Viewer</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      display: flex;
+      height: 100vh;
+      background: #f5f5f5;
+    }
 
+    .viewer {
+      flex: 2;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: #ffffff;
+      position: relative;
+    }
+
+    .viewer img {
+      max-height: 80%;
+      max-width: 100%;
+      opacity: 0;
+      transition: opacity 0.5s ease-in-out;
+      position: absolute;
+    }
+
+    .viewer img.visible {
+      opacity: 1;
+      position: relative;
+    }
+
+    .controls {
+      flex: 1;
+      padding: 2rem;
+      background: #222;
+      color: white;
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+
+    .controls label {
+      font-weight: bold;
+    }
+
+    .controls select {
+      padding: 0.5rem;
+      font-size: 1rem;
+      margin-top: 0.25rem;
+    }
+  </style>
+</head>
 <body>
 
-    <header>
-        <h1>Customize Your Wedding Dress</h1>
-    </header>
+  <div class="viewer">
+    <img id="dressImage" src="" alt="Dress Design" />
+  </div>
 
-    <section class="customize-section">
-        <div class="product-preview">
-            <img src="<?= htmlspecialchars($product['image']) ?>" alt="<?= htmlspecialchars($product['name']) ?>">
-            <h2><?= htmlspecialchars($product['name']) ?></h2>
-            <p><?= htmlspecialchars($product['description']) ?></p>
-        </div>
+  <div class="controls">
+    <div>
+      <label for="color">颜色：</label>
+      <select id="color">
+        <option value="black">黑色</option>
+        <option value="white">白色</option>
+      </select>
+    </div>
 
-        <div class="customize-options">
-            <form action="../../backend/user/cart/addCustomToCart.php" method="post">
-                <input type="hidden" name="product_id" value="<?= $productId ?>">
+    <div>
+      <label for="design">设计：</label>
+      <select id="design">
+        <option value="design1">Design 1</option>
+        <option value="design2">Design 2</option>
+        <option value="design3">Design 3</option>
+      </select>
+    </div>
 
-                <div class="option-group">
-                    <label for="size">Select Size:</label>
-                    <select name="size" id="size" required>
-                        <option value="">Choose size</option>
-                        <option value="S">Small (S)</option>
-                        <option value="M">Medium (M)</option>
-                        <option value="L">Large (L)</option>
-                        <option value="XL">Extra Large (XL)</option>
-                    </select>
-                </div>
+    <div>
+      <label for="length">裙摆长度：</label>
+      <select id="length">
+        <option value="long">长</option>
+        <option value="midi">中长</option>
+      </select>
+    </div>
 
-                <div class="option-group">
-                    <label for="color">Select Color:</label>
-                    <select name="color" id="color" required>
-                        <option value="">Choose color</option>
-                        <option value="White">White</option>
-                        <option value="Ivory">Ivory</option>
-                        <option value="Blush Pink">Blush Pink</option>
-                        <option value="Champagne">Champagne</option>
-                    </select>
-                </div>
+    <div>
+      <label for="sleeve">袖子：</label>
+      <select id="sleeve">
+        <option value="sleeves">有袖子</option>
+        <option value="sleeveless">无袖子</option>
+      </select>
+    </div>
+  </div>
 
-                <div class="option-group">
-                    <label>Add Accessories:</label>
-                    <div class="accessories-list">
-                        <label><input type="checkbox" name="accessories[]" value="Veil" data-price="100"> Veil
-                            (+RM100)</label>
-                        <label><input type="checkbox" name="accessories[]" value="Gloves" data-price="50"> Gloves
-                            (+RM50)</label>
-                        <label><input type="checkbox" name="accessories[]" value="Necklace" data-price="150"> Necklace
-                            (+RM150)</label>
-                        <label><input type="checkbox" name="accessories[]" value="Tiara" data-price="200"> Tiara
-                            (+RM200)</label>
-                    </div>
-                </div>
+  <script>
+    const image = document.getElementById("dressImage");
+    const selects = document.querySelectorAll("select");
 
-                <div class="price-summary">
-                    <h3>Estimated Price: <span id="totalPrice">RM <?= number_format($product['price'], 2) ?></span></h3>
-                </div>
+    function updateImage() {
+      const color = document.getElementById("color").value;
+      const design = document.getElementById("design").value;
+      const length = document.getElementById("length").value;
+      const sleeve = document.getElementById("sleeve").value;
 
-                <button type="submit" class="add-to-cart-btn">Add Customized Dress to Cart</button>
-            </form>
-        </div>
-    </section>
+      const filename = `${color}_${design}_${length}_${sleeve}.png`;
+      const imagePath = `images/${filename}`;
 
+      // Fade-out
+      image.classList.remove("visible");
+      
+      setTimeout(() => {
+        image.src = imagePath;
 
+        // After image loads, fade-in
+        image.onload = () => {
+          image.classList.add("visible");
+        };
+      }, 200);
+    }
 
-    <footer>
-        <p>&copy; 2021 Eternal Elegant Bridal. All rights reserved.</p>
-    </footer>
-    <script>
-    $(document).ready(function() {
-        let basePrice = <?= $product['price'] ?>;
-
-        function updatePrice() {
-            let totalPrice = basePrice;
-            $("input[name='accessories[]']:checked").each(function() {
-                totalPrice += parseFloat($(this).attr("data-price"));
-            });
-            $("#totalPrice").text("RM " + totalPrice.toFixed(2));
-        }
-
-        $("input[name='accessories[]']").change(function() {
-            updatePrice();
-        });
+    selects.forEach(select => {
+      select.addEventListener("change", updateImage);
     });
-    </script>
+
+    // Initialize default image
+    window.onload = updateImage;
+  </script>
 
 </body>
-
 </html>

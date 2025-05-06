@@ -42,11 +42,10 @@ include "../../backend/user/product/accessories.php"; // Include database connec
 
     <section>
         <h2>Selected Accessories</h2>
-        <div id="selected-accessories"></div>
-    </section>
+        <div id="selected-accessories">
 
-    <section class="accessories-container">
-        <?php 
+            <section class="accessories-container">
+                <?php 
         // Categories for displaying accessories
         $categories = [
             "Veils" => [],
@@ -86,6 +85,8 @@ include "../../backend/user/product/accessories.php"; // Include database connec
             echo "</div>";
         }
         ?>
+        </div>
+    </section>
     </section>
 
     <form action="/BackendWebDev/backend/user/cart/addToCart.php" method="POST">

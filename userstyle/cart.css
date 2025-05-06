@@ -1,87 +1,102 @@
-/* General Styles */
-body {
-    font-family: Arial, sans-serif;
+/* Reset and Base Styles */
+* {
     margin: 0;
     padding: 0;
-    background-color: #f8f8f8;
-    color: #333;
+    box-sizing: border-box;
 }
 
-header {
-    background-color: #5B5449;
-    color: white;
-    text-align: center;
-    padding: 1rem;
-    font-size: 24px;
-}
-
-.cart-items {
-    max-width: 800px;
-    margin: 20px auto;
+body {
+    font-family: 'Segoe UI', sans-serif;
+    background-color: #fffaf7;
+    color: #444;
     padding: 20px;
-    background: white;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    line-height: 1.6;
+}
+
+/* Header */
+header {
+    background-color: #f3e9dd;
+    padding: 20px;
+    text-align: center;
+    border-radius: 12px;
+    margin-bottom: 30px;
+}
+
+header h1 {
+    font-size: 36px;
+    color: #8F7F65;
+}
+
+/* Cart Items Section */
+.cart-items {
+    max-width: 900px;
+    margin: 0 auto;
 }
 
 .cart-item {
-    border-bottom: 1px solid #ddd;
-    padding: 15px;
-}
-
-.cart-item:last-child {
-    border-bottom: none;
+    background-color: #fffdfc;
+    border: 1px solid #e2d8ce;
+    border-radius: 10px;
+    padding: 20px;
+    margin-bottom: 20px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.05);
 }
 
 .cart-item h2 {
-    font-size: 20px;
-    color: #444;
+    color: #6e5b49;
+    margin-bottom: 10px;
 }
 
 .cart-item p {
-    margin: 5px 0;
-    font-size: 16px;
+    margin-bottom: 8px;
 }
 
 .cart-item ul {
-    list-style: none;
-    padding: 0;
+    margin-left: 20px;
+    margin-bottom: 10px;
 }
 
-.cart-item ul li {
-    font-size: 14px;
-    color: #666;
-    padding-left: 10px;
-    margin: 5px 0;
+.cart-item li {
+    margin-bottom: 5px;
 }
 
+/* Buttons */
 button {
-    background-color: #ff6b6b;
-    color: white;
+    background-color: #8F7F65;
+    color: #fff;
     border: none;
-    padding: 10px 15px;
-    font-size: 16px;
-    border-radius: 5px;
+    padding: 10px 16px;
+    border-radius: 8px;
     cursor: pointer;
-    transition: background 0.3s;
+    transition: background-color 0.3s ease;
+    font-size: 16px;
 }
 
 button:hover {
-    background-color: #e63946;
+    background-color: #6d6151;
 }
 
+form {
+    margin-top: 10px;
+}
+
+/* Footer */
 footer {
     text-align: center;
-    margin-top: 20px;
-    padding: 15px;
-    background-color: white;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    max-width: 800px;
-    margin: auto;
+    margin-top: 40px;
 }
 
 footer h2 {
-    font-size: 22px;
-    margin-bottom: 10px;
+    font-size: 24px;
+    color: #4a4a4a;
+    margin-bottom: 15px;
+}
+
+footer form {
+    display: inline-block;
+    margin: 10px;
+}
+
+footer button {
+    margin: 10px 5px;
 }

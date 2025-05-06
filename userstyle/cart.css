@@ -9,7 +9,6 @@ body {
     font-family: 'Segoe UI', sans-serif;
     background-color: #fffaf7;
     color: #444;
-    padding: 20px;
     line-height: 1.6;
 }
 
@@ -20,6 +19,7 @@ header {
     text-align: center;
     border-radius: 12px;
     margin-bottom: 30px;
+    width: 100%;
 }
 
 header h1 {

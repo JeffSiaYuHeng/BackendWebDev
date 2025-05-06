@@ -119,7 +119,6 @@ include "../../backend/user/product/accessories.php"; // Include database connec
         </div>
     </section>
     </section>
-
     <form action="/BackendWebDev/backend/user/cart/addToCart.php" method="POST">
         <input type="hidden" name="product_name" value="<?= htmlspecialchars($product_name) ?>">
         <input type="hidden" name="product_type" value="<?= htmlspecialchars($product_type) ?>">
@@ -159,7 +158,7 @@ include "../../backend/user/product/accessories.php"; // Include database connec
 
         item.innerHTML = `
         <p>${name} - RM ${price.toFixed(2)}</p>
-        <button onclick="removeAccessory('${name}', ${price}')">Remove</button>
+        <button onclick="removeAccessory('${name}', '${price}')">Remove</button>
     `;
 
         selectedContainer.appendChild(item);

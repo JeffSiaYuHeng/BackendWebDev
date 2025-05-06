@@ -1,6 +1,10 @@
 <?php
 session_start();
 
+include "../../backend/user/cart/showCartNumber.php"; // Include database connection
+// Ensure first_name is set; fallback to "Guest"
+$first_name = $_SESSION["first_name"] ?? "Guest";
+
 // 登录验证
 if (!isset($_SESSION["user_id"])) {
     echo "<script>
@@ -58,193 +62,146 @@ $image_path = $product['image'];
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-  <meta charset="UTF-8" />
-  <title><?= htmlspecialchars($product['name']) ?> - Designer</title>
-  <style>
-    body {
-      margin: 0;
-      font-family: Arial, sans-serif;
-      display: flex;
-      flex-direction: column;
-      background: #f5f5f5;
-    }
-
-    header {
-      background-color: #222;
-      color: white;
-      padding: 1rem;
-      text-align: center;
-    }
-
-    .main-content {
-      display: flex;
-      height: 80vh;
-    }
-
-    .viewer {
-      flex: 2;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      background: #ffffff;
-      position: relative;
-    }
-
-    .viewer img {
-      max-height: 80%;
-      max-width: 100%;
-      opacity: 0;
-      transition: opacity 0.5s ease-in-out;
-      position: absolute;
-    }
-
-    .viewer img.visible {
-      opacity: 1;
-      position: relative;
-    }
-
-    .controls {
-      flex: 1;
-      padding: 2rem;
-      background: #222;
-      color: white;
-      display: flex;
-      flex-direction: column;
-      gap: 1.2rem;
-    }
-
-    .controls label {
-      font-weight: bold;
-    }
-
-    .controls select {
-      padding: 0.5rem;
-      font-size: 1rem;
-    }
-
-    form button {
-      margin-top: 2rem;
-      padding: 0.75rem;
-      font-size: 1rem;
-      background-color: #00c2cb;
-      border: none;
-      color: white;
-      cursor: pointer;
-    }
-
-    .review-section {
-      padding: 2rem;
-      background-color: #fff;
-    }
-
-    .review {
-      border-bottom: 1px solid #ccc;
-      margin-bottom: 1rem;
-      padding-bottom: 1rem;
-    }
-  </style>
+    <meta charset="UTF-8" />
+    <title><?= htmlspecialchars($product['name']) ?> - Designer</title>
+    <link rel="stylesheet" href="/BackendWebDev/userstyle/customdetail.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
+
 <body>
 
-<header>
-  <h1>Eternal Elegant Bridal - Customize Your Dress</h1>
-</header>
-
-<div class="main-content">
-  <div class="viewer">
-    <img id="dressImage" src="" alt="Dress Design" />
-  </div>
-
-  <form class="controls" action="accessoriesPage.php" method="POST">
-    <!-- Hidden fields for product info -->
-    <input type="hidden" name="product_name" value="<?= htmlspecialchars($product['name']) ?>">
-    <input type="hidden" name="product_type" value="custom">
-    <input type="hidden" name="product_price" value="<?= htmlspecialchars(number_format((float) $base_price, 2, '.', '')) ?>">
-
-    <!-- User-selected fields -->
-    <label for="color">Color: </label>
-    <select id="color" name="color" required>
-      <option value="black">Black</option>
-      <option value="white">White</option>
-    </select>
-
-    <label for="design">Design: </label>
-    <select id="design" name="design" required>
-      <option value="design1">Design 1</option>
-      <option value="design2">Design 2</option>
-      <option value="design3">Design 3</option>
-    </select>
-
-    <label for="length">Skirt Length: </label>
-    <select id="length" name="length" required>
-      <option value="long">Long</option>
-      <option value="midi">Midi</option>
-    </select>
-
-    <label for="sleeve">Sleeve: </label>
-    <select id="sleeve" name="sleeve" required>
-      <option value="sleeves">With Sleeves</option>
-      <option value="sleeveless">Sleeveless</option>
-    </select>
-
-    <label for="size">Size: </label>
-    <select id="size" name="size" required>
-      <option value="S">Small (S)</option>
-      <option value="M">Medium (M)</option>
-      <option value="L">Large (L)</option>
-      <option value="XL">Extra Large (XL)</option>
-    </select>
-
-    <button type="submit">Continue</button>
-  </form>
-</div>
+    <header>
+        <h1>Eternal Elegant Bridal - Customize Your Dress</h1><!-- Right container for Cart & Dropdown -->
+        <div class="right-section">
+            <button class="cart-btn" id="open-btn" onclick="window.location.href='../cart/CartPage.php'">
+                <i class="fa fa-shopping-cart" aria-hidden="true"></i>
+                <?php if ($cart_count > 0): ?>
+                    <span class="icon-button__badge"><?= $cart_count ?></span>
+                <?php endif; ?>
+            </button>
+            <div class="dropdown">
+                <button class="dropbtn" id="account-btn">
+                    <span>Me <i class="fa fa-angle-down" aria-hidden="true"></i></span>
+                </button>
+                <div class="dropdown-content">
+                    <p>Hello <?php echo htmlspecialchars($first_name); ?>!</p>
+                    <div class="line"></div>
+                    <a href="ProfilePage.php">Profile</a>
+                    <a href="../../backend/user/authenticate/logout.php">Logout</a>
+                </div>
+            </div>
+    </header>
+    <nav>
+        <a class="blink" href="MainPage.php">Home</a> |
+        <a class="blink" href="WeddingDressPage.php">Wedding Dress</a> |
+        <a class="blink" href="AboutPage.php">About</a> |
+        <a class="blink" href="ContactPage.php">Contact</a>
+    </nav>
 
 
-<div class="review-section">
-  <h2>Customer Reviews</h2>
-  <?php if (!empty($reviews)): ?>
-      <?php foreach ($reviews as $review): ?>
-          <div class="review">
-              <p class="username"><strong><?= htmlspecialchars($review["username"]) ?></strong></p>
-              <p class="stars"><?= str_repeat("★", $review["rating"]) . str_repeat("☆", 5 - $review["rating"]) ?></p>
-              <p class="review-content"><?= htmlspecialchars($review["content"]) ?></p>
-          </div>
-      <?php endforeach; ?>
-  <?php else: ?>
-      <p>No reviews yet. Be the first to review!</p>
-  <?php endif; ?>
-</div>
 
-<script>
-const image = document.getElementById("dressImage");
-const selects = document.querySelectorAll("select");
 
-function updateImage() {
-  const color = document.getElementById("color").value;
-  const design = document.getElementById("design").value;
-  const length = document.getElementById("length").value;
-  const sleeve = document.getElementById("sleeve").value;
+    <div class="product-container">
+        <div class="image-container">
+            <img id="dressImage" src="" alt="Dress Design" />
+        </div>
+        <div class="details-container">
+        <h2 id="bridalTitle"> <?= htmlspecialchars($product['name']) ?> </h2>
 
-  const filename = `${color}_${design}_${length}_${sleeve}.png`;
-  const imagePath = `/BackendWebDev/image/WeddingDressImage/${filename}`;
+            <form class="controls" action="accessoriesPage.php" method="POST">
+                <!-- Hidden fields for product info -->
+                <input type="hidden" name="product_name" value="<?= htmlspecialchars($product['name']) ?>">
+                <input type="hidden" name="product_type" value="custom">
+                <input type="hidden" name="product_price" value="<?= htmlspecialchars(number_format((float) $base_price, 2, '.', '')) ?>">
 
-  image.classList.remove("visible");
+                <!-- User-selected fields -->
+                <label for="color">Color: </label>
+                <select id="color" name="color" required>
+                    <option value="black">Black</option>
+                    <option value="white">White</option>
+                </select>
 
-  setTimeout(() => {
-    image.src = imagePath;
-    image.onload = () => {
-      image.classList.add("visible");
-    };
-  }, 200);
-}
+                <label for="design">Design: </label>
+                <select id="design" name="design" required>
+                    <option value="design1">Design 1</option>
+                    <option value="design2">Design 2</option>
+                    <option value="design3">Design 3</option>
+                </select>
 
-selects.forEach(select => {
-  select.addEventListener("change", updateImage);
-});
+                <label for="length">Skirt Length: </label>
+                <select id="length" name="length" required>
+                    <option value="long">Long</option>
+                    <option value="midi">Midi</option>
+                </select>
 
-window.onload = updateImage;
-</script>
+                <label for="sleeve">Sleeve: </label>
+                <select id="sleeve" name="sleeve" required>
+                    <option value="sleeves">With Sleeves</option>
+                    <option value="sleeveless">Sleeveless</option>
+                </select>
+
+                <label for="size">Size: </label>
+                <select id="size" name="size" required>
+                    <option value="S">Small (S)</option>
+                    <option value="M">Medium (M)</option>
+                    <option value="L">Large (L)</option>
+                    <option value="XL">Extra Large (XL)</option>
+                </select>
+
+                <button type="submit">Continue</button>
+            </form>
+        </div>
+
+    </div>
+
+
+    <div class="review-section">
+        <h2>Customer Reviews</h2>
+        <?php if (!empty($reviews)): ?>
+            <?php foreach ($reviews as $review): ?>
+                <div class="review">
+                    <p class="username"><strong><?= htmlspecialchars($review["username"]) ?></strong></p>
+                    <p class="stars"><?= str_repeat("★", $review["rating"]) . str_repeat("☆", 5 - $review["rating"]) ?></p>
+                    <p class="review-content"><?= htmlspecialchars($review["content"]) ?></p>
+                </div>
+            <?php endforeach; ?>
+        <?php else: ?>
+            <p>No reviews yet. Be the first to review!</p>
+        <?php endif; ?>
+    </div>
+
+    <script>
+        const image = document.getElementById("dressImage");
+        const selects = document.querySelectorAll("select");
+
+        function updateImage() {
+            const color = document.getElementById("color").value;
+            const design = document.getElementById("design").value;
+            const length = document.getElementById("length").value;
+            const sleeve = document.getElementById("sleeve").value;
+
+            const filename = `${color}_${design}_${length}_${sleeve}.png`;
+            const imagePath = `/BackendWebDev/image/WeddingDressImage/${filename}`;
+
+            image.classList.remove("visible");
+
+            setTimeout(() => {
+                image.src = imagePath;
+                image.onload = () => {
+                    image.classList.add("visible");
+                };
+            }, 200);
+        }
+
+        selects.forEach(select => {
+            select.addEventListener("change", updateImage);
+        });
+
+        window.onload = updateImage;
+    </script>
 
 </body>
+
 </html>

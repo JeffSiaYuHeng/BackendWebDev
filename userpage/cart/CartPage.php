@@ -29,6 +29,7 @@ foreach ($cart_items as $item) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Your Cart | Eternal Elegant Bridal</title>
+    <link rel="stylesheet" href="/BackendWebDev/userstyle/cart.css">
 </head>
 
 <body>

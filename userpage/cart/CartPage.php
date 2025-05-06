@@ -77,6 +77,7 @@ foreach ($cart_items as $item) {
 
     <footer>
         <h2>Total Price: RM <?= number_format($total_price, 2) ?></h2>
+        <form action="/BackendWebDev/userpage/payment/CheckoutPage.php" method="POST">
             <input type="hidden" name="total_price" value="<?= $total_price ?>">
             <button type="submit">Proceed to Checkout</button>
         </form>

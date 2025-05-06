@@ -1,110 +1,103 @@
 <?php
 session_start();
-include "../../backend/db_connect.php";
+include __DIR__ . "/../../../backend/db_connect.php";
 
-// Ensure user is logged in
+// Check if user is logged in
 if (!isset($_SESSION['user_id'])) {
-    header("Location: login.php");
-    exit();
+    die("User not logged in.");
 }
 
 $user_id = $_SESSION['user_id'];
-$total_amount = 0;
+$product_name = $_POST['product_name'] ?? '';
+$product_type = $_POST['product_type'] ?? '';
+$color = $_POST['color'] ?? null;
+$design = $_POST['design'] ?? null;
+$length = $_POST['length'] ?? null;
+$sleeve = $_POST['sleeve'] ?? null;
+$size = $_POST['size'] ?? '';
+$total_price = isset($_POST['product_price']) ? (float) $_POST['product_price'] : 0.00;
+$accessories = isset($_POST['accessories']) ? json_decode($_POST['accessories'], true) : [];
 
-// Step 1: Get cart ID
-$sql = "SELECT id FROM cart WHERE user_id = ?";
-$stmt = $conn->prepare($sql);
+// Fetch product ID
+$product_query = "SELECT id FROM products WHERE name = ? AND type = ? LIMIT 1";
+$stmt = $conn->prepare($product_query);
+$stmt->bind_param("ss", $product_name, $product_type);
+$stmt->execute();
+$product_result = $stmt->get_result();
+$product_id = ($product_result->num_rows > 0) ? $product_result->fetch_assoc()['id'] : null;
+$stmt->close();
+
+if (!$product_id) {
+    die("Product not found.");
+}
+
+// Check or create cart
+$cart_query = "SELECT id FROM cart WHERE user_id = ? LIMIT 1";
+$stmt = $conn->prepare($cart_query);
 $stmt->bind_param("i", $user_id);
 $stmt->execute();
-$stmt->bind_result($cart_id);
-$stmt->fetch();
-$stmt->close();
+$cart_result = $stmt->get_result();
 
-if (!$cart_id) {
-    echo "<p>Error: Cart not found!</p>";
-    exit();
-}
-
-// Step 2: Get cart items with custom_config_id if any
-$sql = "
-    SELECT ci.id AS cart_item_id, ci.product_id, ci.size, ci.quantity, ci.price, ci.custom_config_id, 
-           p.name AS product_name 
-    FROM cart_items ci
-    JOIN products p ON ci.product_id = p.id
-    WHERE ci.cart_id = ?
-";
-$stmt = $conn->prepare($sql);
-$stmt->bind_param("i", $cart_id);
-$stmt->execute();
-$result = $stmt->get_result();
-$cart_items = $result->fetch_all(MYSQLI_ASSOC);
-$stmt->close();
-
-if (empty($cart_items)) {
-    echo "<p>Your cart is empty. <a href='../product/MainPage.php'>Go back to shopping</a></p>";
-    exit();
-}
-
-// Step 3: Calculate total amount
-foreach ($cart_items as $item) {
-    $total_amount += $item['price'] * $item['quantity'];
-}
-
-// Step 4: Create order
-$sql = "INSERT INTO orders (user_id, total_price, status) VALUES (?, ?, 'Pending')";
-$stmt = $conn->prepare($sql);
-$stmt->bind_param("id", $user_id, $total_amount);
-$stmt->execute();
-$order_id = $stmt->insert_id;
-$stmt->close();
-
-// Step 5: Move cart items to order items (including custom_config_id)
-foreach ($cart_items as $item) {
-    $sql = "
-        INSERT INTO order_items (order_id, product_id, quantity, size, price, custom_config_id) 
-        VALUES (?, ?, ?, ?, ?, ?)
-    ";
-    $stmt = $conn->prepare($sql);
-    $stmt->bind_param(
-        "iiisdi", 
-        $order_id, 
-        $item['product_id'], 
-        $item['quantity'], 
-        $item['size'], 
-        $item['price'], 
-        $item['custom_config_id']
-    );
+if ($cart_result->num_rows > 0) {
+    $cart_id = $cart_result->fetch_assoc()['id'];
+} else {
+    $cart_insert = "INSERT INTO cart (user_id, total_price) VALUES (?, 0.00)";
+    $stmt = $conn->prepare($cart_insert);
+    $stmt->bind_param("i", $user_id);
     $stmt->execute();
-    $order_item_id = $stmt->insert_id;
-    $stmt->close();
-
-    // Step 6: Move accessories related to this cart item
-    $sql = "
-        INSERT INTO order_accessories (order_id, order_item_id, accessory_id)
-        SELECT ?, ?, ca.accessory_id
-        FROM cart_accessories ca
-        WHERE ca.cart_item_id = ?
-    ";
-    $stmt = $conn->prepare($sql);
-    $stmt->bind_param("iii", $order_id, $order_item_id, $item['cart_item_id']);
-    $stmt->execute();
+    $cart_id = $stmt->insert_id;
     $stmt->close();
 }
 
-// Step 7: Clear cart items and accessories
-$sql = "DELETE FROM cart_items WHERE cart_id = ?";
-$stmt = $conn->prepare($sql);
-$stmt->bind_param("i", $cart_id);
+// Optional: insert custom dress configuration
+$custom_config_id = null;
+if (strtolower($product_type) === 'custom') {
+    $insert_config = "INSERT INTO custom_dress_configurations (color, design, length, sleeve) VALUES (?, ?, ?, ?)";
+    $stmt = $conn->prepare($insert_config);
+    $stmt->bind_param("ssss", $color, $design, $length, $sleeve);
+    $stmt->execute();
+    $custom_config_id = $stmt->insert_id;
+    $stmt->close();
+}
+
+// Insert cart item
+$item_insert = "INSERT INTO cart_items (cart_id, product_id, size, price, custom_config_id) VALUES (?, ?, ?, ?, ?)";
+$stmt = $conn->prepare($item_insert);
+$stmt->bind_param("iisdi", $cart_id, $product_id, $size, $total_price, $custom_config_id);
+$stmt->execute();
+$cart_item_id = $stmt->insert_id;
+$stmt->close();
+
+// Insert accessories
+if (!empty($accessories)) {
+    foreach ($accessories as $accessory_name) {
+        $accessory_query = "SELECT id FROM accessories WHERE name = ? LIMIT 1";
+        $stmt = $conn->prepare($accessory_query);
+        $stmt->bind_param("s", $accessory_name);
+        $stmt->execute();
+        $accessory_result = $stmt->get_result();
+        if ($accessory_result->num_rows > 0) {
+            $accessory_id = $accessory_result->fetch_assoc()['id'];
+            $stmt->close();
+
+            $accessory_insert = "INSERT INTO cart_accessories (cart_id, cart_item_id, accessory_id) VALUES (?, ?, ?)";
+            $stmt = $conn->prepare($accessory_insert);
+            $stmt->bind_param("iii", $cart_id, $cart_item_id, $accessory_id);
+            $stmt->execute();
+            $stmt->close();
+        }
+    }
+}
+
+// Update total price
+$update_cart = "UPDATE cart SET total_price = (SELECT SUM(price) FROM cart_items WHERE cart_id = ?) WHERE id = ?";
+$stmt = $conn->prepare($update_cart);
+$stmt->bind_param("ii", $cart_id, $cart_id);
 $stmt->execute();
 $stmt->close();
 
-$sql = "DELETE FROM cart_accessories WHERE cart_id = ?";
-$stmt = $conn->prepare($sql);
-$stmt->bind_param("i", $cart_id);
-$stmt->execute();
-$stmt->close();
+$conn->close();
 
-// Step 8: Redirect to confirmation
-header("Location: /BackendWebDev/userpage/payment/OrderConfirmationPage.php?order_id=" . $order_id);
+// Redirect
+header("Location: /BackendWebDev/userpage/cart/CartPage.php");
 exit();
-?>

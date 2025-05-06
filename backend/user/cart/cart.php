@@ -1,8 +1,13 @@
 <?php
 include __DIR__ . "/../../../backend/db_connect.php";
+
+if (!isset($_SESSION['user_id'])) {
+    die("User not logged in.");
+}
+
 $user_id = $_SESSION['user_id'];
 
-// Retrieve the user's cart
+// Step 1: Get user's cart
 $sql = "SELECT * FROM cart WHERE user_id = ?";
 $stmt = $conn->prepare($sql);
 $stmt->bind_param("i", $user_id);
@@ -12,35 +17,42 @@ $cart = $cart_result->fetch_assoc();
 $stmt->close();
 
 if (!$cart) {
-    echo "<h2>Your cart is empty.</h2>";
-    exit();
+    $cart_items = [];
+    $cart_accessories = [];
+    return;
 }
 
 $cart_id = $cart['id'];
-// Retrieve cart items
-$sql = "SELECT ci.*, p.name AS product_name 
-        FROM cart_items ci
-        INNER JOIN products p ON ci.product_id = p.id
-        WHERE ci.cart_id = ?";
 
-if ($stmt = $conn->prepare($sql)) {
-    $stmt->bind_param("i", $cart_id);
-    $stmt->execute();
-    $items_result = $stmt->get_result();
-    
-    $cart_items = $items_result->fetch_all(MYSQLI_ASSOC);
+// Step 2: Get cart items with product name, type, and custom config if any
+$sql = "
+    SELECT 
+        ci.*, 
+        p.name AS product_name, 
+        p.type AS product_type,
+        cdc.color, cdc.design, cdc.length, cdc.sleeve
+    FROM cart_items ci
+    JOIN products p ON ci.product_id = p.id
+    LEFT JOIN custom_dress_configurations cdc ON ci.custom_config_id = cdc.id
+    WHERE ci.cart_id = ?
+";
 
-    $stmt->close();
-} else {
-    $cart_items = [];
-}
+$stmt = $conn->prepare($sql);
+$stmt->bind_param("i", $cart_id);
+$stmt->execute();
+$items_result = $stmt->get_result();
+$cart_items = $items_result->fetch_all(MYSQLI_ASSOC);
+$stmt->close();
 
-// Retrieve accessories for each cart item
+// Step 3: Get accessories linked to cart items
 $cart_accessories = [];
-$sql = "SELECT ca.cart_item_id, a.name AS accessory_name, a.price AS accessory_price
-        FROM cart_accessories ca
-        JOIN accessories a ON ca.accessory_id = a.id
-        WHERE ca.cart_id = ?";
+$sql = "
+    SELECT ca.cart_item_id, a.name AS accessory_name, a.price AS accessory_price
+    FROM cart_accessories ca
+    JOIN accessories a ON ca.accessory_id = a.id
+    WHERE ca.cart_id = ?
+";
+
 $stmt = $conn->prepare($sql);
 $stmt->bind_param("i", $cart_id);
 $stmt->execute();
@@ -50,6 +62,4 @@ $stmt->close();
 while ($row = $accessories_result->fetch_assoc()) {
     $cart_accessories[$row['cart_item_id']][] = $row;
 }
-
-//$conn->close();
 ?>

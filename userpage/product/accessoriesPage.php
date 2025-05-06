@@ -124,6 +124,10 @@ include "../../backend/user/product/accessories.php"; // Include database connec
         <input type="hidden" name="product_name" value="<?= htmlspecialchars($product_name) ?>">
         <input type="hidden" name="product_type" value="<?= htmlspecialchars($product_type) ?>">
         <input type="hidden" name="product_price" id="finalPrice" value="<?= number_format($product_price, 2) ?>">
+        <input type="hidden" name="color" value="<?= htmlspecialchars($color) ?>">
+        <input type="hidden" name="design" value="<?= htmlspecialchars($design) ?>">
+        <input type="hidden" name="length" value="<?= htmlspecialchars($length) ?>">
+        <input type="hidden" name="sleeve" value="<?= htmlspecialchars($sleeve) ?>">
         <input type="hidden" name="size" value="<?= htmlspecialchars($size) ?>">
         <input type="hidden" name="accessories" id="selectedAccessories" value="">
         <button type="submit">Add to Cart</button>

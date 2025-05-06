@@ -12,7 +12,6 @@ $total_price = 0; // Initialize total price
 
 // Calculate the total price for items in the cart
 foreach ($cart_items as $item) {
-    $total_price += $item['price'] * $item['quantity'];
 
     // Add price for accessories if any
     if (isset($cart_accessories[$item['id']])) {
@@ -47,6 +46,16 @@ foreach ($cart_items as $item) {
                     <p><strong>Size:</strong> <?= htmlspecialchars($item['size']) ?></p>
                     <p><strong>Price:</strong> RM <?= number_format($item['price'], 2) ?></p>
                     <p><strong>Quantity:</strong> <?= $item['quantity'] ?></p>
+
+                    <?php if ($item['color'] || $item['design'] || $item['length'] || $item['sleeve']): ?>
+                        <h3>Custom Configuration:</h3>
+                        <ul>
+                            <li><strong>Color:</strong> <?= htmlspecialchars($item['color']) ?></li>
+                            <li><strong>Design:</strong> <?= htmlspecialchars($item['design']) ?></li>
+                            <li><strong>Length:</strong> <?= htmlspecialchars($item['length']) ?></li>
+                            <li><strong>Sleeve:</strong> <?= htmlspecialchars($item['sleeve']) ?></li>
+                        </ul>
+                    <?php endif; ?>
                     <h3>Accessories:</h3>
                     <ul>
                         <?php if (isset($cart_accessories[$item['id']])): ?>
@@ -68,7 +77,6 @@ foreach ($cart_items as $item) {
 
     <footer>
         <h2>Total Price: RM <?= number_format($total_price, 2) ?></h2>
-        <form action="/BackendWebDev/userpage/payment/CheckoutPage.php" method="POST">
             <input type="hidden" name="total_price" value="<?= $total_price ?>">
             <button type="submit">Proceed to Checkout</button>
         </form>

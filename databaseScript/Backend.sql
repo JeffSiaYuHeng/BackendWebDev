@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- 主机： 127.0.0.1
--- 生成日期： 2025-05-06 13:18:18
+-- 生成日期： 2025-05-06 14:55:02
 -- 服务器版本： 10.4.32-MariaDB
 -- PHP 版本： 8.2.12
 
@@ -70,19 +70,19 @@ CREATE TABLE `analytics` (
 --
 
 INSERT INTO `analytics` (`id`, `product_id`, `search_count`, `visit_count`, `order_count`, `created_at`) VALUES
-(1, 1, 0, 19, 0, '2025-04-02 13:04:18'),
-(2, 2, 0, 16, 0, '2025-04-02 13:05:09'),
-(3, 3, 0, 6, 0, '2025-04-02 13:11:44'),
+(1, 1, 0, 21, 0, '2025-04-02 13:04:18'),
+(2, 2, 0, 18, 0, '2025-04-02 13:05:09'),
+(3, 3, 0, 9, 0, '2025-04-02 13:11:44'),
 (4, 5, 0, 2, 0, '2025-04-03 06:03:42'),
-(5, 1, 1, 12, 0, '2025-04-03 06:53:24'),
+(5, 1, 1, 14, 0, '2025-04-03 06:53:24'),
 (6, 5, 1, 1, 0, '2025-04-03 06:53:24'),
-(7, 3, 1, 5, 0, '2025-04-03 06:53:24'),
+(7, 3, 1, 8, 0, '2025-04-03 06:53:24'),
 (8, 4, 1, 2, 0, '2025-04-03 06:53:24'),
-(9, 1, 1, 12, 0, '2025-04-03 06:53:42'),
+(9, 1, 1, 14, 0, '2025-04-03 06:53:42'),
 (10, 5, 1, 1, 0, '2025-04-03 06:53:42'),
-(11, 3, 1, 5, 0, '2025-04-03 06:53:42'),
+(11, 3, 1, 8, 0, '2025-04-03 06:53:42'),
 (12, 4, 1, 2, 0, '2025-04-03 06:53:42'),
-(13, 7, 0, 5, 0, '2025-05-06 04:25:20');
+(13, 7, 0, 10, 0, '2025-05-06 04:25:20');
 
 -- --------------------------------------------------------
 
@@ -102,7 +102,7 @@ CREATE TABLE `cart` (
 --
 
 INSERT INTO `cart` (`id`, `user_id`, `total_price`, `created_at`) VALUES
-(9, 9, 4329.50, '2025-05-06 05:08:37');
+(9, 9, 5109.49, '2025-05-06 05:08:37');
 
 -- --------------------------------------------------------
 
@@ -129,7 +129,8 @@ CREATE TABLE `cart_items` (
   `product_id` int(11) NOT NULL,
   `size` varchar(50) DEFAULT NULL,
   `price` decimal(10,2) NOT NULL,
-  `quantity` int(11) DEFAULT 1
+  `custom_config_id` int(11) DEFAULT NULL,
+  `quantity` int(11) NOT NULL DEFAULT 1
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -146,6 +147,15 @@ CREATE TABLE `custom_dress_configurations` (
   `sleeve` varchar(50) NOT NULL,
   `image` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- 转存表中的数据 `custom_dress_configurations`
+--
+
+INSERT INTO `custom_dress_configurations` (`id`, `color`, `design`, `length`, `sleeve`, `image`) VALUES
+(1, 'black', 'design3', 'midi', 'sleeveless', NULL),
+(2, 'black', 'design1', 'long', 'sleeves', NULL),
+(3, 'black', 'design1', 'long', 'sleeves', NULL);
 
 -- --------------------------------------------------------
 
@@ -169,7 +179,13 @@ CREATE TABLE `orders` (
 INSERT INTO `orders` (`id`, `user_id`, `total_price`, `delivery_method`, `status`, `created_at`) VALUES
 (12, 9, 4399.50, 'Delivery', 'Pending', '2025-05-06 05:08:39'),
 (13, 9, 3249.00, 'Delivery', 'Pending', '2025-05-06 05:12:33'),
-(14, 9, 4329.50, 'Delivery', 'Pending', '2025-05-06 10:14:25');
+(14, 9, 4329.50, 'Delivery', 'Pending', '2025-05-06 10:14:25'),
+(15, 9, 5109.49, 'Delivery', 'Pending', '2025-05-06 11:23:05'),
+(16, 9, 4399.50, 'Delivery', 'Pending', '2025-05-06 11:23:46'),
+(17, 9, 4399.50, 'Delivery', 'Pending', '2025-05-06 11:32:23'),
+(18, 9, 5179.00, 'Delivery', 'Pending', '2025-05-06 11:32:46'),
+(19, 9, 5049.50, 'Delivery', 'Pending', '2025-05-06 11:49:24'),
+(20, 9, 5109.49, 'Delivery', 'Pending', '2025-05-06 11:57:26');
 
 -- --------------------------------------------------------
 
@@ -184,6 +200,21 @@ CREATE TABLE `order_accessories` (
   `accessory_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- 转存表中的数据 `order_accessories`
+--
+
+INSERT INTO `order_accessories` (`id`, `order_id`, `order_item_id`, `accessory_id`) VALUES
+(29, 15, 19, 8),
+(30, 15, 19, 7),
+(32, 16, 20, 2),
+(33, 17, 21, 2),
+(34, 18, 22, 6),
+(35, 18, 22, 8),
+(37, 19, 23, 6),
+(38, 20, 24, 8),
+(39, 20, 24, 7);
+
 -- --------------------------------------------------------
 
 --
@@ -197,17 +228,24 @@ CREATE TABLE `order_items` (
   `name` varchar(255) NOT NULL,
   `size` varchar(50) NOT NULL,
   `price` decimal(10,2) NOT NULL,
-  `quantity` int(11) DEFAULT 1
+  `custom_config_id` int(11) DEFAULT NULL,
+  `quantity` int(11) NOT NULL DEFAULT 1
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- 转存表中的数据 `order_items`
 --
 
-INSERT INTO `order_items` (`id`, `order_id`, `product_id`, `name`, `size`, `price`, `quantity`) VALUES
-(16, 12, 2, '', 'M', 4399.50, 1),
-(17, 13, 3, '', 'XL', 3249.00, 1),
-(18, 14, 2, '', 'M', 4329.50, 1);
+INSERT INTO `order_items` (`id`, `order_id`, `product_id`, `name`, `size`, `price`, `custom_config_id`, `quantity`) VALUES
+(16, 12, 2, '', 'M', 4399.50, NULL, 1),
+(17, 13, 3, '', 'XL', 3249.00, NULL, 1),
+(18, 14, 2, '', 'M', 4329.50, NULL, 1),
+(19, 15, 7, '', 'M', 5109.49, NULL, 1),
+(20, 16, 2, '', 'M', 4399.50, NULL, 1),
+(21, 17, 2, '', 'M', 4399.50, NULL, 1),
+(22, 18, 7, '', 'S', 5179.00, NULL, 1),
+(23, 19, 7, '', 'S', 5049.50, 2, 1),
+(24, 20, 7, '', 'S', 5109.49, 3, 1);
 
 -- --------------------------------------------------------
 
@@ -232,7 +270,12 @@ CREATE TABLE `payments` (
 INSERT INTO `payments` (`id`, `order_id`, `user_id`, `amount`, `payment_method`, `status`, `created_at`) VALUES
 (11, 12, 9, 4399.50, '', 'Pending', '2025-05-06 05:08:42'),
 (12, 13, 9, 3249.00, '', 'Pending', '2025-05-06 05:12:35'),
-(13, 14, 9, 4329.50, '', 'Pending', '2025-05-06 10:14:28');
+(13, 14, 9, 4329.50, '', 'Pending', '2025-05-06 10:14:28'),
+(14, 15, 9, 5109.49, '', 'Pending', '2025-05-06 11:23:08'),
+(15, 17, 9, 4399.50, '', 'Pending', '2025-05-06 11:32:26'),
+(16, 18, 9, 5179.00, '', 'Pending', '2025-05-06 11:32:49'),
+(17, 19, 9, 5049.50, '', 'Pending', '2025-05-06 11:49:28'),
+(18, 20, 9, 5109.49, '', 'Pending', '2025-05-06 11:57:30');
 
 -- --------------------------------------------------------
 
@@ -442,43 +485,43 @@ ALTER TABLE `cart`
 -- 使用表AUTO_INCREMENT `cart_accessories`
 --
 ALTER TABLE `cart_accessories`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=42;
 
 --
 -- 使用表AUTO_INCREMENT `cart_items`
 --
 ALTER TABLE `cart_items`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
 
 --
 -- 使用表AUTO_INCREMENT `custom_dress_configurations`
 --
 ALTER TABLE `custom_dress_configurations`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- 使用表AUTO_INCREMENT `orders`
 --
 ALTER TABLE `orders`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
 -- 使用表AUTO_INCREMENT `order_accessories`
 --
 ALTER TABLE `order_accessories`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=41;
 
 --
 -- 使用表AUTO_INCREMENT `order_items`
 --
 ALTER TABLE `order_items`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
 
 --
 -- 使用表AUTO_INCREMENT `payments`
 --
 ALTER TABLE `payments`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
 -- 使用表AUTO_INCREMENT `products`

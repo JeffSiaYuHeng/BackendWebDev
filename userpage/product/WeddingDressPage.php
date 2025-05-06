@@ -33,6 +33,7 @@ include "../../backend/user/product/weddingDress.php";
     <link rel="stylesheet" href="/BackendWebDev/userstyle/weddingDress.css">
     <link rel="stylesheet" href="/BackendWebDev/userstyle/transition.css">
     <script src="/BackendWebDev/userscript/transition.js"></script>
+    <link rel="stylesheet" href="/BackendWebDev/userstyle/fancySearchBar.css">
 
 </head>
 
@@ -71,11 +72,13 @@ include "../../backend/user/product/weddingDress.php";
                 <h3>Dress</h3>
                 <p><?php echo $item; ?> Items</p>
             </div>
-            <div class="searchbar">
-                <input type="text" id="searchQuery" name="searchQuery" placeholder="Search for a dress..."
-                    value="<?= isset($_GET['searchQuery']) ? htmlspecialchars($_GET['searchQuery']) : '' ?>">
-                <button onclick="applySearch()">Search</button>
-            </div>
+
+            <form onsubmit="event.preventDefault();" role="search" class="search-bar">
+                <label for="search">Search for stuff</label>
+                <input id="searchQuery" name="searchQuery" type="search" placeholder="Search for a dress..." autofocus
+                    required value="<?= isset($_GET['searchQuery']) ? htmlspecialchars($_GET['searchQuery']) : '' ?>" />
+                <button onclick="applySearch()" type="submit">Go</button>
+            </form>
 
             <div class="filter">
                 <label for="filter">Filter by:</label>
@@ -101,7 +104,9 @@ include "../../backend/user/product/weddingDress.php";
             <?php fetchProducts($conn); ?>
         </div>
     </section>
-
+    <footer>
+        <p>&copy; 2021 Eternal Elegant Bridal. All rights reserved.</p>
+    </footer>
     <script>
     window.onload = function() {
         const urlParams = new URLSearchParams(window.location.search);

@@ -34,7 +34,7 @@ if (isset($_SESSION["user_id"])) {
         <h1>Register</h1>
         <p style="color:#808080">Create your account to get started</p>
 
-        <form action="/BackendWebDev/backend/user/authenticate/register.php" method="POST">
+        <form action="/BackendWebDev/backend/user/authenticate/register.php" method="POST" style="margin-bottom: 5rem;">
 
             <div class="form-group">
                 <div class="input-box">
@@ -108,6 +108,9 @@ if (isset($_SESSION["user_id"])) {
             <button type="button" onclick="window.location.href='LoginPage.php'">Sign In</button>
         </form>
     </section>
+    <footer>
+        <p>&copy; 2021 Eternal Elegant Bridal. All rights reserved.</p>
+    </footer>
 </body>
 
 

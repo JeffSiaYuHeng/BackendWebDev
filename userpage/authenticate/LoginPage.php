@@ -51,6 +51,9 @@ if (isset($_SESSION["user_id"])) {
             <button type="button" onclick="window.location.href='RegisterPage.php'">Register</button>
         </form>
     </section>
+    <footer>
+        <p>&copy; 2021 Eternal Elegant Bridal. All rights reserved.</p>
+    </footer>
 </body>
 
 </html>

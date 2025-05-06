@@ -101,6 +101,11 @@ if (!$product) {
         </div>
     </section>
 
+
+
+    <footer>
+        <p>&copy; 2021 Eternal Elegant Bridal. All rights reserved.</p>
+    </footer>
     <script>
     $(document).ready(function() {
         let basePrice = <?= $product['price'] ?>;

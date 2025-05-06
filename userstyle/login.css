@@ -98,3 +98,17 @@ button[type="button"]{
     font-weight: 500;
     cursor: pointer;
 }
+
+/* Footer Section */
+footer {
+    background-color: #5B5449;
+    color: white;
+    text-align: center;
+    padding: 1rem 0;
+    font-family: 'Crimson Text', serif;
+    font-size: 1rem;
+    letter-spacing: 1px;
+    margin-top: auto; /* Push footer to bottom if content is short */
+    width: 100%;
+    box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+}

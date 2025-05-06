@@ -12,25 +12,23 @@ if (!isset($_SESSION["user_id"])) {
 // Ensure first_name is set; fallback to "Guest"
 $first_name = $_SESSION["first_name"] ?? "Guest";
 
-include "../../backend/user/product/main.php"; // Include database connection
-include "../../backend/user/cart/showCartNumber.php"; // Include database connection
-
-
-
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/BackendWebDev/userstyle/transition.css">
+    <link rel="stylesheet" href="/BackendWebDev/userstyle/transitions.css">
+    <link rel="stylesheet" href="/userstyle/transitions.css">
     <link rel="stylesheet" href="/BackendWebDev/userstyle/main.css">
+    <link rel="stylesheet" href="/userstyle/main.css">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <title>main</title>
     <script src="/BackendWebDev/userscript/transition.js"></script>
+
+    <script src="/userscript/slider.js"></script>
     <script src="/BackendWebDev/userscript/slider.js"></script>
 </head>
 
@@ -63,66 +61,11 @@ include "../../backend/user/cart/showCartNumber.php"; // Include database connec
         <a class="blink" href="">About</a> |
         <a class="blink" href="">Contact</a>
     </nav>
-    <section class="banner">
-        <div class="slider">
-            <div class="slides">
-                <img src="/BackendWebDev/image/banner/banner1_s.png" alt="Banner 1">
 
-                <img src="/BackendWebDev/image/banner/banner2_s.png" alt="Banner 2">
 
-                <img src="/BackendWebDev/image/banner/banner3_s.png" alt="Banner 3">
-            </div>
-            <button onclick="window.location.href='WeddingDressPage.php'">Start Customizing Your Gown</button>
-        </div>
-    </section>
 
-    <section class="product">
-        <h2>Our Products</h2>
-        <div class="product-container">
-            <?php
-            fetch3product($conn);
-            ?>
-
-        </div>
-    </section>
 
     <footer>
         <p>&copy; 2021 Eternal Elegant Bridal. All rights reserved.</p>
     </footer>
-
-
-
-    <script>
-    function trackVisit(productId) {
-        // Open a new tab first
-        let newTab = window.open("about:blank", "_blank");
-
-        fetch('/BackendWebDev/backend/user/product/updateAnalytics.php', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({
-                    product_id: productId
-                })
-            })
-            .then(response => response.json())
-            .then(data => {
-                if (data.success) {
-                    // Update the new tab's location
-                    newTab.location.href = "ProductDetailPage.php?id=" + productId;
-                } else {
-                    alert("Failed to update analytics.");
-                    newTab.close(); // Close the new tab if request fails
-                }
-            })
-            .catch(error => {
-                console.error('Error:', error);
-                newTab.close(); // Close the new tab if there's an error
-            });
-    }
-    </script>
-
 </body>
-
-</html>

@@ -69,21 +69,29 @@ include "../../backend/user/product/accessories.php"; // Include database connec
             }
         }
 
-        // Loop through each category and display accessories
+       // Loop through each category and display accessories
         foreach ($categories as $category => $items) {
             echo "<h2>$category</h2><div class='accessory-grid'>";
             foreach ($items as $item) {
-                $name = $item['name'];
+                $name = htmlspecialchars($item['name']);
                 $price = $item['price'];
                 $image = $item['image'] ?? 'default.jpg'; // Use a default image if none exists
+
                 echo "<div class='accessory'>
                         <img src='$image' alt='$name'>
                         <p>$name - RM $price</p>
-                        <button onclick=\"selectAccessory('$name', $price, '/path/to/images/$image')\">Select</button>
-                      </div>";
+                        <button 
+                            class='select-btn' 
+                            data-accessory='$name' 
+                            data-price='$price' 
+                            onclick=\"selectAccessory('$name', $price, '$image', this)\">
+                            Select
+                        </button>
+                    </div>";
             }
             echo "</div>";
         }
+
         ?>
         </div>
     </section>
@@ -102,36 +110,53 @@ include "../../backend/user/product/accessories.php"; // Include database connec
     const basePrice = parseFloat(<?= $product_price ?>);
     let totalPrice = basePrice;
     let selectedAccessories = [];
+    const accessoryButtons = {}; // Store references to buttons
 
-    // Accessory Prices from PHP
-    const accessoryPrices = <?= $accessories_json ?>;
-
-    function selectAccessory(name, price, image) {
+    function selectAccessory(name, price, image, button) {
         if (selectedAccessories.includes(name)) return;
 
         selectedAccessories.push(name);
         totalPrice += price;
+
+        // Disable the clicked button and mark it visually
+        button.disabled = true;
+        button.textContent = "Selected";
+        button.classList.add("disabled-btn");
+
+        accessoryButtons[name] = button;
 
         const selectedContainer = document.getElementById("selected-accessories");
         const item = document.createElement("div");
         item.classList.add("selected-item");
         item.id = name;
 
-        item.innerHTML = ` 
-                <p>${name} - RM ${price.toFixed(2)}</p>
-                <button onclick="removeAccessory('${name}', ${price})">Remove</button>
-            `;
+        item.innerHTML = `
+        <p>${name} - RM ${price.toFixed(2)}</p>
+        <button onclick="removeAccessory('${name}', ${price}')">Remove</button>
+    `;
 
         selectedContainer.appendChild(item);
         updateTotalPrice();
     }
 
+
     function removeAccessory(name, price) {
         selectedAccessories = selectedAccessories.filter(item => item !== name);
         totalPrice -= price;
-        document.getElementById(name).remove();
+
+        // Re-enable the button and reset its style
+        const button = accessoryButtons[name];
+        if (button) {
+            button.disabled = false;
+            button.textContent = "Select";
+            button.classList.remove("disabled-btn");
+            delete accessoryButtons[name];
+        }
+
+        document.getElementById(name)?.remove();
         updateTotalPrice();
     }
+
 
     function updateTotalPrice() {
         document.getElementById("totalPrice").textContent = totalPrice.toFixed(2);

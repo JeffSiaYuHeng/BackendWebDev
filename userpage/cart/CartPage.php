@@ -8,18 +8,15 @@ if (!isset($_SESSION['user_id'])) {
     exit();
 }
 
-$total_price = 0; // Initialize total price
 
-// Calculate the total price for items in the cart
+$total_price = 0;
+
 foreach ($cart_items as $item) {
+    // Add base product price * quantity
+    $total_price += $item['price'] * $item['quantity'];
 
-    // Add price for accessories if any
-    if (isset($cart_accessories[$item['id']])) {
-        foreach ($cart_accessories[$item['id']] as $accessory) {
-            $total_price += $accessory['accessory_price'];
-        }
-    }
 }
+
 ?>
 <!DOCTYPE html>
 <html lang="en">

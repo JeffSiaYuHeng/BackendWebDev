@@ -1,6 +1,10 @@
 <?php
+session_start();
 
 include "../../backend/user/product/productDetail.php";
+include "../../backend/user/cart/showCartNumber.php"; // Include database connection
+// Ensure first_name is set; fallback to "Guest"
+$first_name = $_SESSION["first_name"] ?? "Guest";
 
 // Fetch actual reviews from the database
 $reviews = [];
@@ -64,13 +68,39 @@ if (!empty($additional_images)) {
     <title><?= htmlspecialchars($product['name']) ?></title>
     <script src="/BackendWebDev/userscript/transition.js"></script>
     <link rel="stylesheet" href="/BackendWebDev/userstyle/transition.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="/BackendWebDev/userstyle/productDetailPage.css">
 </head>
 
 <body>
-    <header>
+<header>
         <h1>Eternal Elegant Bridal</h1>
+        <!-- Right container for Cart & Dropdown -->
+        <div class="right-section">
+            <button class="cart-btn" id="open-btn" onclick="window.location.href='../cart/CartPage.php'">
+                <i class="fa fa-shopping-cart" aria-hidden="true"></i>
+                <?php if ($cart_count > 0): ?>
+                <span class="icon-button__badge"><?= $cart_count ?></span>
+                <?php endif; ?>
+            </button>
+            <div class="dropdown">
+                <button class="dropbtn" id="account-btn">
+                    <span>Me <i class="fa fa-angle-down" aria-hidden="true"></i></span>
+                </button>
+                <div class="dropdown-content">
+                    <p>Hello <?php echo htmlspecialchars($first_name); ?>!</p>
+                    <div class="line"></div>
+                    <a href="ProfilePage.php">Profile</a>
+                    <a href="../../backend/user/authenticate/logout.php">Logout</a>
+                </div>
+            </div>
     </header>
+    <nav>
+        <a class="blink" href="MainPage.php">Home</a> |
+        <a class="blink" href="WeddingDressPage.php">Wedding Dress</a> |
+        <a class="blink" href="AboutPage.php">About</a> |
+        <a class="blink" href="ContactPage.php">Contact</a>
+    </nav>
     <div class="product-container">
         <div class="image-container">
             <img src="<?= htmlspecialchars($main_image) ?>" alt="<?= htmlspecialchars($product['name']) ?>" id="gownImage">

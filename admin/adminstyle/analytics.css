@@ -53,7 +53,6 @@ nav ul li a.active {
 /* Main Section */
 main {
     padding: 30px;
-    max-width: 1200px;
     margin: auto;
 }
 
@@ -67,18 +66,43 @@ main h2 {
 /* Chart Container */
 .chart-container {
     display: flex;
-    flex-direction: column;
+    width: 100%;
+    flex-wrap: wrap;
     align-items: center;
-    gap: 40px;
+    gap: 100px;
     padding: 20px;
 }
 
-.chart-container canvas {
-    max-width: 600px;
+.pie-block {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: auto;
+}
+
+.pie-box{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    max-width: 300px;
+    max-height: 300px;
     width: 100%;
     height: auto;
     margin: 0 auto;
 }
+
+.canvas-box{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    max-width: 600px;
+    max-height: 600px;
+    width: 100%;
+    height: auto;
+    margin: 0 auto;
+}
+
 
 .chart-container h3 {
     font-size: 20px;

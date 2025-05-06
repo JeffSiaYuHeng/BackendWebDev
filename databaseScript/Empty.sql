@@ -61,7 +61,6 @@ CREATE TABLE `analytics` (
   `product_id` int(11) DEFAULT NULL,
   `search_count` int(11) DEFAULT 0,
   `visit_count` int(11) DEFAULT 0,
-  `order_count` int(11) DEFAULT 0,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 

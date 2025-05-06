@@ -19,10 +19,19 @@ while ($row = $paymentStatusResult->fetch_assoc()) {
     $statusCounts[] = $row['count'];
 }
 
-// Top 5 most searched products
-$searchQuery = "SELECT p.name, a.search_count FROM analytics a JOIN products p ON a.product_id = p.id ORDER BY a.search_count DESC LIMIT 5";
+// Top 5 most searched products (if each search is a separate row)
+$searchQuery = "
+    SELECT p.name, COUNT(a.product_id) AS search_count 
+    FROM analytics a 
+    JOIN products p ON a.product_id = p.id 
+    GROUP BY a.product_id 
+    ORDER BY search_count DESC 
+    LIMIT 5
+";
+
 $searchResult = $conn->query($searchQuery);
 $searchLabels = $searchCounts = [];
+
 while ($row = $searchResult->fetch_assoc()) {
     $searchLabels[] = $row['name'];
     $searchCounts[] = $row['search_count'];
@@ -38,13 +47,23 @@ while ($row = $visitResult->fetch_assoc()) {
 }
 
 // Top 5 most ordered products
-$orderQuery = "SELECT p.name, a.order_count FROM analytics a JOIN products p ON a.product_id = p.id ORDER BY a.order_count DESC LIMIT 5";
+$orderQuery = "
+    SELECT p.name, COUNT(oi.product_id) AS order_count 
+    FROM order_items oi
+    JOIN products p ON oi.product_id = p.id 
+    GROUP BY oi.product_id 
+    ORDER BY order_count DESC 
+    LIMIT 5
+";
+
 $orderResult = $conn->query($orderQuery);
 $orderLabels = $orderCounts = [];
+
 while ($row = $orderResult->fetch_assoc()) {
     $orderLabels[] = $row['name'];
     $orderCounts[] = $row['order_count'];
 }
+
 ?>
 
 <!DOCTYPE html>
@@ -67,7 +86,7 @@ while ($row = $orderResult->fetch_assoc()) {
             <ul>
                 <li><a href="MainPage.php">Home</a></li>
                 <li><a href="manageUsers.php">Manage Users</a></li>
-                <li><a href="manageDelivery.php" >Manage Delivery</a></li>
+                <li><a href="manageDelivery.php">Manage Delivery</a></li>
                 <li><a href="products.php">Products</a></li>
                 <li><a href="accessories.php">Accessories</a></li>
                 <li><a href="payments.php">Payments</a></li>
@@ -81,109 +100,122 @@ while ($row = $orderResult->fetch_assoc()) {
         <h2>Payment & Product Analytics</h2>
 
         <div class="chart-container">
-            <h3>Payment Method Distribution</h3>
-            <canvas id="methodChart"></canvas>
+            <div class="pie-block">
+                <div class="pie-box">
+                    <h3>Payment Method Distribution</h3>
+                    <canvas id="methodChart"></canvas>
+                </div>
+                <div class="pie-box">
+                    <h3>Payment Status Distribution</h3>
+                    <canvas id="statusChart"></canvas>
+                </div>
+            </div>
+            <div class="canvas-box">
+                <h3>Top 5 Most Searched Products</h3>
+                <canvas id="searchChart"></canvas>
+            </div>
 
-            <h3>Payment Status Distribution</h3>
-            <canvas id="statusChart"></canvas>
+            <div class="canvas-box">
 
-            <h3>Top 5 Most Searched Products</h3>
-            <canvas id="searchChart"></canvas>
+                <h3>Top 5 Most Visited Products</h3>
+                <canvas id="visitChart"></canvas>
+            </div>
 
-            <h3>Top 5 Most Visited Products</h3>
-            <canvas id="visitChart"></canvas>
+            <div class="canvas-box">
 
-            <h3>Top 5 Most Ordered Products</h3>
-            <canvas id="orderChart"></canvas>
+                <h3>Top 5 Most Ordered Products</h3>
+                <canvas id="orderChart"></canvas>
+            </div>
+
         </div>
     </main>
 
     <script>
-    const methodCtx = document.getElementById('methodChart');
-    new Chart(methodCtx, {
-        type: 'pie',
-        data: {
-            labels: <?= json_encode($methodLabels) ?>,
-            datasets: [{
-                label: 'Payment Methods',
-                data: <?= json_encode($methodCounts) ?>,
-                backgroundColor: ['#007bff', '#28a745', '#ffc107', '#dc3545', '#6c757d']
-            }]
-        }
-    });
+        const methodCtx = document.getElementById('methodChart');
+        new Chart(methodCtx, {
+            type: 'pie',
+            data: {
+                labels: <?= json_encode($methodLabels) ?>,
+                datasets: [{
+                    label: 'Payment Methods',
+                    data: <?= json_encode($methodCounts) ?>,
+                    backgroundColor: ['#007bff', '#28a745', '#ffc107', '#dc3545', '#6c757d']
+                }]
+            }
+        });
 
-    const statusCtx = document.getElementById('statusChart');
-    new Chart(statusCtx, {
-        type: 'doughnut',
-        data: {
-            labels: <?= json_encode($statusLabels) ?>,
-            datasets: [{
-                label: 'Payment Status',
-                data: <?= json_encode($statusCounts) ?>,
-                backgroundColor: ['#17a2b8', '#28a745', '#dc3545', '#ffc107']
-            }]
-        }
-    });
+        const statusCtx = document.getElementById('statusChart');
+        new Chart(statusCtx, {
+            type: 'doughnut',
+            data: {
+                labels: <?= json_encode($statusLabels) ?>,
+                datasets: [{
+                    label: 'Payment Status',
+                    data: <?= json_encode($statusCounts) ?>,
+                    backgroundColor: ['#17a2b8', '#28a745', '#dc3545', '#ffc107']
+                }]
+            }
+        });
 
-    const searchCtx = document.getElementById('searchChart');
-    new Chart(searchCtx, {
-        type: 'bar',
-        data: {
-            labels: <?= json_encode($searchLabels) ?>,
-            datasets: [{
-                label: 'Search Count',
-                data: <?= json_encode($searchCounts) ?>,
-                backgroundColor: '#007bff'
-            }]
-        },
-        options: {
-            scales: {
-                y: {
-                    beginAtZero: true
+        const searchCtx = document.getElementById('searchChart');
+        new Chart(searchCtx, {
+            type: 'bar',
+            data: {
+                labels: <?= json_encode($searchLabels) ?>,
+                datasets: [{
+                    label: 'Search Count',
+                    data: <?= json_encode($searchCounts) ?>,
+                    backgroundColor: '#007bff'
+                }]
+            },
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
                 }
             }
-        }
-    });
+        });
 
-    const visitCtx = document.getElementById('visitChart');
-    new Chart(visitCtx, {
-        type: 'bar',
-        data: {
-            labels: <?= json_encode($visitLabels) ?>,
-            datasets: [{
-                label: 'Visit Count',
-                data: <?= json_encode($visitCounts) ?>,
-                backgroundColor: '#28a745'
-            }]
-        },
-        options: {
-            scales: {
-                y: {
-                    beginAtZero: true
+        const visitCtx = document.getElementById('visitChart');
+        new Chart(visitCtx, {
+            type: 'bar',
+            data: {
+                labels: <?= json_encode($visitLabels) ?>,
+                datasets: [{
+                    label: 'Visit Count',
+                    data: <?= json_encode($visitCounts) ?>,
+                    backgroundColor: '#28a745'
+                }]
+            },
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
                 }
             }
-        }
-    });
+        });
 
-    const orderCtx = document.getElementById('orderChart');
-    new Chart(orderCtx, {
-        type: 'bar',
-        data: {
-            labels: <?= json_encode($orderLabels) ?>,
-            datasets: [{
-                label: 'Order Count',
-                data: <?= json_encode($orderCounts) ?>,
-                backgroundColor: '#dc3545'
-            }]
-        },
-        options: {
-            scales: {
-                y: {
-                    beginAtZero: true
+        const orderCtx = document.getElementById('orderChart');
+        new Chart(orderCtx, {
+            type: 'bar',
+            data: {
+                labels: <?= json_encode($orderLabels) ?>,
+                datasets: [{
+                    label: 'Order Count',
+                    data: <?= json_encode($orderCounts) ?>,
+                    backgroundColor: '#dc3545'
+                }]
+            },
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
                 }
             }
-        }
-    });
+        });
     </script>
 
     <footer>

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- 主机： 127.0.0.1
--- 生成日期： 2025-05-06 14:55:02
+-- 生成日期： 2025-05-06 17:35:45
 -- 服务器版本： 10.4.32-MariaDB
 -- PHP 版本： 8.2.12
 
@@ -61,7 +61,6 @@ CREATE TABLE `analytics` (
   `product_id` int(11) DEFAULT NULL,
   `search_count` int(11) DEFAULT 0,
   `visit_count` int(11) DEFAULT 0,
-  `order_count` int(11) DEFAULT 0,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -69,20 +68,31 @@ CREATE TABLE `analytics` (
 -- 转存表中的数据 `analytics`
 --
 
-INSERT INTO `analytics` (`id`, `product_id`, `search_count`, `visit_count`, `order_count`, `created_at`) VALUES
-(1, 1, 0, 21, 0, '2025-04-02 13:04:18'),
-(2, 2, 0, 18, 0, '2025-04-02 13:05:09'),
-(3, 3, 0, 9, 0, '2025-04-02 13:11:44'),
-(4, 5, 0, 2, 0, '2025-04-03 06:03:42'),
-(5, 1, 1, 14, 0, '2025-04-03 06:53:24'),
-(6, 5, 1, 1, 0, '2025-04-03 06:53:24'),
-(7, 3, 1, 8, 0, '2025-04-03 06:53:24'),
-(8, 4, 1, 2, 0, '2025-04-03 06:53:24'),
-(9, 1, 1, 14, 0, '2025-04-03 06:53:42'),
-(10, 5, 1, 1, 0, '2025-04-03 06:53:42'),
-(11, 3, 1, 8, 0, '2025-04-03 06:53:42'),
-(12, 4, 1, 2, 0, '2025-04-03 06:53:42'),
-(13, 7, 0, 10, 0, '2025-05-06 04:25:20');
+INSERT INTO `analytics` (`id`, `product_id`, `search_count`, `visit_count`, `created_at`) VALUES
+(1, 1, 0, 4, '2025-05-06 15:01:46'),
+(2, 3, 0, 8, '2025-05-06 15:02:12'),
+(3, 7, 0, 4, '2025-05-06 15:04:07'),
+(4, 2, 0, 4, '2025-05-06 15:04:52'),
+(5, 5, 0, 1, '2025-05-06 15:05:04'),
+(6, 7, 1, 0, '2025-05-06 15:14:31'),
+(7, 1, 1, 0, '2025-05-06 15:14:31'),
+(8, 2, 1, 1, '2025-05-06 15:14:31'),
+(9, 5, 1, 0, '2025-05-06 15:14:31'),
+(10, 3, 1, 2, '2025-05-06 15:14:31'),
+(11, 4, 1, 1, '2025-05-06 15:14:31'),
+(12, 1, 1, 0, '2025-05-06 15:14:41'),
+(13, 1, 1, 0, '2025-05-06 15:14:51'),
+(14, 3, 1, 0, '2025-05-06 15:15:04'),
+(15, 3, 1, 0, '2025-05-06 15:16:40'),
+(16, 3, 1, 0, '2025-05-06 15:16:42'),
+(17, 3, 1, 0, '2025-05-06 15:16:57'),
+(18, 3, 1, 0, '2025-05-06 15:17:14'),
+(19, 3, 1, 0, '2025-05-06 15:17:14'),
+(20, 3, 1, 0, '2025-05-06 15:17:38'),
+(21, 4, 1, 0, '2025-05-06 15:17:53'),
+(22, 4, 1, 0, '2025-05-06 15:17:58'),
+(23, 4, 1, 0, '2025-05-06 15:18:03'),
+(24, 2, 1, 0, '2025-05-06 15:18:14');
 
 -- --------------------------------------------------------
 
@@ -102,7 +112,8 @@ CREATE TABLE `cart` (
 --
 
 INSERT INTO `cart` (`id`, `user_id`, `total_price`, `created_at`) VALUES
-(9, 9, 5109.49, '2025-05-06 05:08:37');
+(1, 9, 5229.98, '2025-05-06 15:01:57'),
+(2, 10, 5199.49, '2025-05-06 15:05:10');
 
 -- --------------------------------------------------------
 
@@ -154,8 +165,8 @@ CREATE TABLE `custom_dress_configurations` (
 
 INSERT INTO `custom_dress_configurations` (`id`, `color`, `design`, `length`, `sleeve`, `image`) VALUES
 (1, 'black', 'design3', 'midi', 'sleeveless', NULL),
-(2, 'black', 'design1', 'long', 'sleeves', NULL),
-(3, 'black', 'design1', 'long', 'sleeves', NULL);
+(2, 'black', 'design2', 'midi', 'sleeveless', NULL),
+(3, 'black', 'design3', 'midi', 'sleeveless', NULL);
 
 -- --------------------------------------------------------
 
@@ -177,15 +188,13 @@ CREATE TABLE `orders` (
 --
 
 INSERT INTO `orders` (`id`, `user_id`, `total_price`, `delivery_method`, `status`, `created_at`) VALUES
-(12, 9, 4399.50, 'Delivery', 'Pending', '2025-05-06 05:08:39'),
-(13, 9, 3249.00, 'Delivery', 'Pending', '2025-05-06 05:12:33'),
-(14, 9, 4329.50, 'Delivery', 'Pending', '2025-05-06 10:14:25'),
-(15, 9, 5109.49, 'Delivery', 'Pending', '2025-05-06 11:23:05'),
-(16, 9, 4399.50, 'Delivery', 'Pending', '2025-05-06 11:23:46'),
-(17, 9, 4399.50, 'Delivery', 'Pending', '2025-05-06 11:32:23'),
-(18, 9, 5179.00, 'Delivery', 'Pending', '2025-05-06 11:32:46'),
-(19, 9, 5049.50, 'Delivery', 'Pending', '2025-05-06 11:49:24'),
-(20, 9, 5109.49, 'Delivery', 'Pending', '2025-05-06 11:57:26');
+(1, 9, 4355.73, 'Collection', 'Delivered', '2025-05-06 15:02:01'),
+(2, 9, 3189.49, 'Delivery', 'Delivered', '2025-05-06 15:02:19'),
+(3, 9, 5229.98, 'Collection', 'Delivered', '2025-05-06 15:04:17'),
+(4, 10, 4939.49, 'Delivery', 'Delivered', '2025-05-06 15:05:11'),
+(5, 10, 4999.50, 'Delivery', 'Delivered', '2025-05-06 15:05:31'),
+(6, 10, 3149.49, 'Delivery', 'Delivered', '2025-05-06 15:05:42'),
+(7, 10, 5199.49, 'Collection', 'Delivered', '2025-05-06 15:06:18');
 
 -- --------------------------------------------------------
 
@@ -205,15 +214,20 @@ CREATE TABLE `order_accessories` (
 --
 
 INSERT INTO `order_accessories` (`id`, `order_id`, `order_item_id`, `accessory_id`) VALUES
-(29, 15, 19, 8),
-(30, 15, 19, 7),
-(32, 16, 20, 2),
-(33, 17, 21, 2),
-(34, 18, 22, 6),
-(35, 18, 22, 8),
-(37, 19, 23, 6),
-(38, 20, 24, 8),
-(39, 20, 24, 7);
+(1, 1, 1, 1),
+(2, 1, 1, 5),
+(3, 1, 1, 7),
+(4, 2, 2, 2),
+(5, 2, 2, 4),
+(7, 3, 3, 3),
+(8, 3, 3, 4),
+(10, 4, 4, 2),
+(11, 4, 4, 3),
+(13, 5, 5, 2),
+(14, 6, 6, 2),
+(15, 6, 6, 1),
+(17, 7, 7, 1),
+(18, 7, 7, 6);
 
 -- --------------------------------------------------------
 
@@ -237,15 +251,13 @@ CREATE TABLE `order_items` (
 --
 
 INSERT INTO `order_items` (`id`, `order_id`, `product_id`, `name`, `size`, `price`, `custom_config_id`, `quantity`) VALUES
-(16, 12, 2, '', 'M', 4399.50, NULL, 1),
-(17, 13, 3, '', 'XL', 3249.00, NULL, 1),
-(18, 14, 2, '', 'M', 4329.50, NULL, 1),
-(19, 15, 7, '', 'M', 5109.49, NULL, 1),
-(20, 16, 2, '', 'M', 4399.50, NULL, 1),
-(21, 17, 2, '', 'M', 4399.50, NULL, 1),
-(22, 18, 7, '', 'S', 5179.00, NULL, 1),
-(23, 19, 7, '', 'S', 5049.50, 2, 1),
-(24, 20, 7, '', 'S', 5109.49, 3, 1);
+(1, 1, 1, '', 'M', 4355.73, NULL, 1),
+(2, 2, 3, '', 'M', 3189.49, NULL, 1),
+(3, 3, 7, '', 'S', 5229.98, 1, 1),
+(4, 4, 5, '', 'M', 4939.49, NULL, 1),
+(5, 5, 7, '', 'S', 4999.50, 2, 1),
+(6, 6, 3, '', 'S', 3149.49, NULL, 1),
+(7, 7, 7, '', 'L', 5199.49, 3, 1);
 
 -- --------------------------------------------------------
 
@@ -268,14 +280,13 @@ CREATE TABLE `payments` (
 --
 
 INSERT INTO `payments` (`id`, `order_id`, `user_id`, `amount`, `payment_method`, `status`, `created_at`) VALUES
-(11, 12, 9, 4399.50, '', 'Pending', '2025-05-06 05:08:42'),
-(12, 13, 9, 3249.00, '', 'Pending', '2025-05-06 05:12:35'),
-(13, 14, 9, 4329.50, '', 'Pending', '2025-05-06 10:14:28'),
-(14, 15, 9, 5109.49, '', 'Pending', '2025-05-06 11:23:08'),
-(15, 17, 9, 4399.50, '', 'Pending', '2025-05-06 11:32:26'),
-(16, 18, 9, 5179.00, '', 'Pending', '2025-05-06 11:32:49'),
-(17, 19, 9, 5049.50, '', 'Pending', '2025-05-06 11:49:28'),
-(18, 20, 9, 5109.49, '', 'Pending', '2025-05-06 11:57:30');
+(1, 1, 9, 4355.73, 'Online Banking', 'Paid', '2025-05-06 15:02:05'),
+(2, 2, 9, 3189.49, 'e-Wallet', 'Paid', '2025-05-06 15:02:23'),
+(3, 3, 9, 5229.98, 'e-Wallet', 'Paid', '2025-05-06 15:04:22'),
+(4, 4, 10, 4939.49, 'Online Banking', 'Paid', '2025-05-06 15:05:15'),
+(5, 5, 10, 4999.50, 'Online Banking', 'Paid', '2025-05-06 15:05:33'),
+(6, 6, 10, 3149.49, 'Online Banking', 'Pending', '2025-05-06 15:05:45'),
+(7, 7, 10, 5199.49, 'Online Banking', 'Paid', '2025-05-06 15:06:20');
 
 -- --------------------------------------------------------
 
@@ -324,8 +335,13 @@ CREATE TABLE `reviews` (
 --
 
 INSERT INTO `reviews` (`id`, `user_id`, `product_id`, `rating`, `review_text`, `created_at`) VALUES
-(1, 6, 2, 5, 'test', '2025-05-04 03:17:31'),
-(2, 6, 2, 5, 'test2', '2025-05-04 03:18:20');
+(1, 9, 7, 5, 'Absolutely stunning! This gown made me feel like a true princess on my big day. The fit was perfect and the fabric felt so luxurious.', '2025-05-06 09:09:40'),
+(2, 9, 3, 3, 'I received so many compliments on my wedding dress! The lace details were breathtaking and it photographed beautifully.', '2025-05-06 09:09:53'),
+(3, 9, 1, 4, 'This gown exceeded my expectations. It was elegant, comfortable, and the craftsmanship was impeccable.', '2025-05-06 09:10:04'),
+(4, 10, 7, 4, 'The gown made my wedding unforgettable. Everyone kept asking where I got it!', '2025-05-06 09:12:00'),
+(5, 10, 7, 5, 'Classic, flattering, and beautifully made. I’ll treasure my wedding photos forever.', '2025-05-06 09:12:11'),
+(6, 10, 7, 5, 'Stunning design with just the right amount of glam. I felt like royalty.', '2025-05-06 09:12:21'),
+(7, 10, 5, 4, 'I was nervous buying online, but the dress was exactly like the photos and the sizing chart was accurate!', '2025-05-06 09:12:38');
 
 -- --------------------------------------------------------
 
@@ -356,7 +372,8 @@ INSERT INTO `users` (`id`, `username`, `first_name`, `last_name`, `email`, `phon
 (6, 'MonicaCheng', 'Lim', 'Chun Xin', 'moyasuxin@gmail.com', '+600129365933', 'Nilai University, Persiaran Kolej Bbn, Bandar Baru Nilai, Nilai, Negeri Sembilan, Malaysia', '$2y$10$OCVW64MA270S4tNLfDF1SOz4kG24ukjTtd9cal5lQ.1VRaITHwNPe', '2025-03-02 06:22:14', 'pet_name', '$2y$10$1wbKaaOP4pDXwvNo1XkF3elm9Q8kfwBGRkIcVm950MbUJ7qnrnTr.', 'user'),
 (7, '1', '1', '1', '1@1.1', '+601111111', '1111', '$2y$10$JcYcncGk/PhTerMOL3ufM.RDn6hwk2f2ZkyujtyGAUKuE7ZIj7c72', '2025-03-28 09:46:42', 'pet_name', '$2y$10$r7WdeXmBGzS4.QZYEEIzd.IQ.am6SBXNvfFWZ.fg.d6MzhRUYB7Xi', 'admin'),
 (8, 'Test', 'adasds', 'asdasd', 'asdasdas@fdfaasdfa.dasfsd', '+60131231232131232', 'jsadfjasdkfjadk@fasdfasd', '$2y$10$vQBYPx/fGonXuYYjqCUGZu3O/3ZkPdk1wVDA/p9/zsqtB5RmMZNxu', '2025-05-06 04:25:11', 'mother_birth', '$2y$10$VokhdQG9oA22eFpzoF3PE.zA5YtVnybIEU23pbn56U0jUsuOWidlO', 'user'),
-(9, 'sia', 'fsdfd', 'fsdfdsf', 'dsfsd@afsd.dasassd', '+60123123213213', 'dfasdfasdfadsfads', '$2y$10$KyjMIbLEn5YnBKCSwTxHRu0cI4RAEmd99UPyB2XaVwnWMXpYZWY0e', '2025-05-06 04:32:36', 'pet_name', '$2y$10$gQRvZEFhD51OdTKM16.43erLpauImZi9UUJIp48rfjdBa3AM.5yR.', 'user');
+(9, 'sia', 'fsdfd', 'fsdfdsf', 'dsfsd@afsd.dasassd', '+60123123213213', 'dfasdfasdfadsfads', '$2y$10$KyjMIbLEn5YnBKCSwTxHRu0cI4RAEmd99UPyB2XaVwnWMXpYZWY0e', '2025-05-06 04:32:36', 'pet_name', '$2y$10$gQRvZEFhD51OdTKM16.43erLpauImZi9UUJIp48rfjdBa3AM.5yR.', 'user'),
+(10, 'Chong', 'lim', 'lim', 'lim@lmi.lim', '+60792813798173', 'dasdasasdlfhkasdfkfaghsdkl', '$2y$10$mjFfvn1nDDJpo.as2llqCOWCfSZ932FjIRgA08e6M0BAHZqRrIrBq', '2025-05-06 15:04:50', 'pet_name', '$2y$10$RHsCM398X3UWLA1CYrX9EOzaD6IkEF9Lt/6dQdIsWWrvJtnCuTYVO', 'user');
 
 --
 -- 转储表的索引
@@ -473,25 +490,25 @@ ALTER TABLE `accessories`
 -- 使用表AUTO_INCREMENT `analytics`
 --
 ALTER TABLE `analytics`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
 
 --
 -- 使用表AUTO_INCREMENT `cart`
 --
 ALTER TABLE `cart`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- 使用表AUTO_INCREMENT `cart_accessories`
 --
 ALTER TABLE `cart_accessories`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=42;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- 使用表AUTO_INCREMENT `cart_items`
 --
 ALTER TABLE `cart_items`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- 使用表AUTO_INCREMENT `custom_dress_configurations`
@@ -503,25 +520,25 @@ ALTER TABLE `custom_dress_configurations`
 -- 使用表AUTO_INCREMENT `orders`
 --
 ALTER TABLE `orders`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- 使用表AUTO_INCREMENT `order_accessories`
 --
 ALTER TABLE `order_accessories`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=41;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 
 --
 -- 使用表AUTO_INCREMENT `order_items`
 --
 ALTER TABLE `order_items`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- 使用表AUTO_INCREMENT `payments`
 --
 ALTER TABLE `payments`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- 使用表AUTO_INCREMENT `products`
@@ -533,13 +550,13 @@ ALTER TABLE `products`
 -- 使用表AUTO_INCREMENT `reviews`
 --
 ALTER TABLE `reviews`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- 使用表AUTO_INCREMENT `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- 限制导出的表

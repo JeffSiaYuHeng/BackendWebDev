@@ -168,12 +168,11 @@ include "../../backend/user/product/profile.php"; // Include database connection
                 <?php endif; ?>
             </div>
 
-            <div id="settings" class="section" style="display: none;">
-                <h2>Settings</h2>
-                <p>Customize your profile settings and preferences.</p>
-            </div>
         </div>
     </div>
+    <footer>
+        <p>&copy; 2021 Eternal Elegant Bridal. All rights reserved.</p>
+    </footer>
 
 
     <script src="/BackendWebDev/userscript/profile.js"></script>

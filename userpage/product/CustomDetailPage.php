@@ -43,6 +43,19 @@ $review_query = "SELECT r.rating, r.review_text, u.username
                  WHERE r.product_id = ?
                  ORDER BY r.created_at DESC";
 
+$recommended_products = [];
+
+$recommend_stmt = $conn->prepare("SELECT id, name, price, image, type FROM products WHERE id != ? ORDER BY RAND() LIMIT 4");
+
+$recommend_stmt->bind_param("i", $productId);
+$recommend_stmt->execute();
+$recommend_result = $recommend_stmt->get_result();
+while ($row = $recommend_result->fetch_assoc()) {
+    $recommended_products[] = $row;
+}
+$recommend_stmt->close();
+
+
 if ($stmt = $conn->prepare($review_query)) {
     $stmt->bind_param("i", $productId);
     $stmt->execute();
@@ -78,7 +91,7 @@ $image_path = $product['image'];
             <button class="cart-btn" id="open-btn" onclick="window.location.href='../cart/CartPage.php'">
                 <i class="fa fa-shopping-cart" aria-hidden="true"></i>
                 <?php if ($cart_count > 0): ?>
-                    <span class="icon-button__badge"><?= $cart_count ?></span>
+                <span class="icon-button__badge"><?= $cart_count ?></span>
                 <?php endif; ?>
             </button>
             <div class="dropdown">
@@ -108,13 +121,14 @@ $image_path = $product['image'];
             <img id="dressImage" src="" alt="Dress Design" />
         </div>
         <div class="details-container">
-        <h2 id="bridalTitle"> <?= htmlspecialchars($product['name']) ?> </h2>
+            <h2 id="bridalTitle"> <?= htmlspecialchars($product['name']) ?> </h2>
 
             <form class="controls" action="accessoriesPage.php" method="POST">
                 <!-- Hidden fields for product info -->
                 <input type="hidden" name="product_name" value="<?= htmlspecialchars($product['name']) ?>">
                 <input type="hidden" name="product_type" value="custom">
-                <input type="hidden" name="product_price" value="<?= htmlspecialchars(number_format((float) $base_price, 2, '.', '')) ?>">
+                <input type="hidden" name="product_price"
+                    value="<?= htmlspecialchars(number_format((float) $base_price, 2, '.', '')) ?>">
 
                 <!-- User-selected fields -->
                 <label for="color">Color: </label>
@@ -160,47 +174,72 @@ $image_path = $product['image'];
     <div class="review-section">
         <h2>Customer Reviews</h2>
         <?php if (!empty($reviews)): ?>
-            <?php foreach ($reviews as $review): ?>
-                <div class="review">
-                    <p class="username"><strong><?= htmlspecialchars($review["username"]) ?></strong></p>
-                    <p class="stars"><?= str_repeat("★", $review["rating"]) . str_repeat("☆", 5 - $review["rating"]) ?></p>
-                    <p class="review-content"><?= htmlspecialchars($review["content"]) ?></p>
-                </div>
-            <?php endforeach; ?>
+        <?php foreach ($reviews as $review): ?>
+        <div class="review">
+            <p class="username"><strong><?= htmlspecialchars($review["username"]) ?></strong></p>
+            <p class="stars"><?= str_repeat("★", $review["rating"]) . str_repeat("☆", 5 - $review["rating"]) ?></p>
+            <p class="review-content"><?= htmlspecialchars($review["content"]) ?></p>
+        </div>
+        <?php endforeach; ?>
         <?php else: ?>
-            <p>No reviews yet. Be the first to review!</p>
+        <p>No reviews yet. Be the first to review!</p>
         <?php endif; ?>
     </div>
     <div class="box"></div>
 
+    <?php if (!empty($recommended_products)): ?>
+    <div class="recommendation-section">
+        <h2>You May Also Like</h2>
+        <div class="recommended-grid">
+            <?php foreach ($recommended_products as $rec): ?>
+            <div class="recommended-product">
+                <a
+                    href="<?= $rec['type'] === 'custom' ? 'customDetailPage.php' : 'ProductDetailPage.php' ?>?id=<?= $rec['id'] ?>">
+                    <img src="<?= htmlspecialchars($rec['image']) ?>" alt="<?= htmlspecialchars($rec['name']) ?>"
+                        class="recommended-img">
+                    <h3><?= htmlspecialchars($rec['name']) ?></h3>
+                    <p>Price: RM <?= number_format($rec['price'], 2) ?></p>
+                </a>
+            </div>
+            <?php endforeach; ?>
+        </div>
+    </div>
+
+    <?php endif; ?>
+
+
+    <footer>
+        <p>&copy; 2021 Eternal Elegant Bridal. All rights reserved.</p>
+    </footer>
+
     <script>
-        const image = document.getElementById("dressImage");
-        const selects = document.querySelectorAll("select");
+    const image = document.getElementById("dressImage");
+    const selects = document.querySelectorAll("select");
 
-        function updateImage() {
-            const color = document.getElementById("color").value;
-            const design = document.getElementById("design").value;
-            const length = document.getElementById("length").value;
-            const sleeve = document.getElementById("sleeve").value;
+    function updateImage() {
+        const color = document.getElementById("color").value;
+        const design = document.getElementById("design").value;
+        const length = document.getElementById("length").value;
+        const sleeve = document.getElementById("sleeve").value;
 
-            const filename = `${color}_${design}_${length}_${sleeve}.png`;
-            const imagePath = `/BackendWebDev/image/WeddingDressImage/${filename}`;
+        const filename = `${color}_${design}_${length}_${sleeve}.png`;
+        const imagePath = `/BackendWebDev/image/WeddingDressImage/${filename}`;
 
-            image.classList.remove("visible");
+        image.classList.remove("visible");
 
-            setTimeout(() => {
-                image.src = imagePath;
-                image.onload = () => {
-                    image.classList.add("visible");
-                };
-            }, 200);
-        }
+        setTimeout(() => {
+            image.src = imagePath;
+            image.onload = () => {
+                image.classList.add("visible");
+            };
+        }, 200);
+    }
 
-        selects.forEach(select => {
-            select.addEventListener("change", updateImage);
-        });
+    selects.forEach(select => {
+        select.addEventListener("change", updateImage);
+    });
 
-        window.onload = updateImage;
+    window.onload = updateImage;
     </script>
 
 </body>

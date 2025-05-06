@@ -63,13 +63,22 @@ $avg_rating = 0;
 $count_rating = 0;
 
 $avg_query = "SELECT AVG(rating) AS avg_rating, COUNT(*) AS total_reviews FROM reviews WHERE product_id = ?";
-if ($stmt = $conn->prepare($avg_query)) {
-    $stmt->bind_param("i", $product_id);
-    $stmt->execute();
-    $stmt->bind_result($avg_rating, $count_rating);
-    $stmt->fetch();
-    $stmt->close();
+
+$recommended_products = [];
+
+$recommend_stmt = $conn->prepare("SELECT id, name, price, image, type FROM products WHERE id != ? ORDER BY RAND() LIMIT 4");
+
+if ($recommend_stmt) {
+    $recommend_stmt->bind_param("i", $product_id);
+    $recommend_stmt->execute();
+    $result = $recommend_stmt->get_result();
+    while ($row = $result->fetch_assoc()) {
+        $recommended_products[] = $row;
+    }
+    $recommend_stmt->close();
 }
+
+
 
 ?>
 
@@ -172,6 +181,7 @@ if ($stmt = $conn->prepare($avg_query)) {
     </div>
 
 
+
     <div class="review-section">
         <h2>Customer Reviews</h2>
         <?php if (!empty($reviews)): ?>
@@ -188,7 +198,29 @@ if ($stmt = $conn->prepare($avg_query)) {
     </div>
     <div class="box"></div>
 
+    <?php if (!empty($recommended_products)): ?>
+    <div class="recommendation-section">
+        <h2>You May Also Like</h2>
+        <div class="recommended-grid">
+            <?php foreach ($recommended_products as $rec): ?>
+            <div class="recommended-product">
+                <a
+                    href="<?= $rec['type'] === 'custom' ? 'CustomDetailPage.php' : 'ProductDetailPage.php' ?>?id=<?= $rec['id'] ?>">
+                    <img src="<?= htmlspecialchars($rec['image']) ?>" alt="<?= htmlspecialchars($rec['name']) ?>"
+                        class="recommended-img">
+                    <h3><?= htmlspecialchars($rec['name']) ?></h3>
+                    <p>Price: RM <?= number_format($rec['price'], 2) ?></p>
+                </a>
+            </div>
+            <?php endforeach; ?>
+        </div>
+    </div>
 
+    <?php endif; ?>
+
+    <footer>
+        <p>&copy; 2021 Eternal Elegant Bridal. All rights reserved.</p>
+    </footer>
     <script>
     function changeImage(newSrc) {
         document.getElementById("gownImage").src = newSrc;

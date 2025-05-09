@@ -158,13 +158,14 @@ if ($recommend_stmt) {
                 </p>
                 <p class="stars">
                     <?= str_repeat("★", floor($avg_rating)) ?>
-                    <?= ($avg_rating - floor($avg_rating) >= 0.5) ? "½" : "" ?>
+                    <?= ($avg_rating - floor($avg_rating) >= 0.5) ? "⯨" : "" ?>
                     <?= str_repeat("☆", 5 - ceil($avg_rating)) ?>
                 </p>
                 <?php else: ?>
                 <p>No ratings yet</p>
                 <?php endif; ?>
             </div>
+
             <h3 id="bridalType">Type: <?= htmlspecialchars($product['type']) ?> </h3>
             <p id="bridalDescription"> <?= htmlspecialchars($product['description']) ?> </p>
             <p id="bridalPrice">Price: RM<span id="dynamicPrice"> <?= number_format($base_price, 2) ?> </span></p>

@@ -35,6 +35,23 @@ if (!$product) {
     exit();
 }
 
+// Fetch average rating
+$avg_rating = 0;
+$count_rating = 0;
+$avg_query = "SELECT AVG(rating) AS avg_rating, COUNT(*) AS count_rating FROM reviews WHERE product_id = ?";
+
+if ($stmt = $conn->prepare($avg_query)) {
+    $stmt->bind_param("i", $productId);
+    $stmt->execute();
+    $stmt->bind_result($avg_rating_result, $count_rating_result);
+    if ($stmt->fetch()) {
+        $avg_rating = round($avg_rating_result, 1);
+        $count_rating = $count_rating_result;
+    }
+    $stmt->close();
+}
+
+
 // 获取评论
 $reviews = [];
 $review_query = "SELECT r.rating, r.review_text, u.username
@@ -122,10 +139,27 @@ $image_path = $product['image'];
         </div>
         <div class="details-container">
             <h2 id="bridalTitle"> <?= htmlspecialchars($product['name']) ?> </h2>
+            <div class="average-rating">
+                <h2>Average Rating</h2>
+                <?php if ($count_rating > 0): ?>
+                <p>
+                    <?= number_format($avg_rating, 1) ?> / 5.0
+                    (<?= $count_rating ?> review<?= $count_rating > 1 ? 's' : '' ?>)
+                </p>
+                <p class="stars">
+                    <?= str_repeat("★", floor($avg_rating)) ?>
+                    <?= ($avg_rating - floor($avg_rating) >= 0.5) ? "⯨" : "" ?>
+                    <?= str_repeat("☆", 5 - ceil($avg_rating)) ?>
+                </p>
+                <?php else: ?>
+                <p>No ratings yet</p>
+                <?php endif; ?>
+            </div>
 
             <form class="controls" action="accessoriesPage.php" method="POST">
                 <!-- Hidden fields for product info -->
                 <input type="hidden" name="product_name" value="<?= htmlspecialchars($product['name']) ?>">
+
                 <input type="hidden" name="product_type" value="custom">
                 <input type="hidden" name="product_price"
                     value="<?= htmlspecialchars(number_format((float) $base_price, 2, '.', '')) ?>">

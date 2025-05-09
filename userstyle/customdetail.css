@@ -550,6 +550,21 @@ h1, h3 {
     border-radius: 8px;
     object-fit: cover;
 }
+.average-rating {
+    margin-top: 30px;
+    margin-bottom: 10px;
+    padding: 10px;
+    background-color: #fefefe;
+    color: #333;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.average-rating .stars {
+    color: gold;
+    font-size: 20px;
+    margin-top: 5px;
+}
 
 
 

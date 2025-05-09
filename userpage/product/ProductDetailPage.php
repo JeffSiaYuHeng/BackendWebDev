@@ -63,6 +63,16 @@ $avg_rating = 0;
 $count_rating = 0;
 
 $avg_query = "SELECT AVG(rating) AS avg_rating, COUNT(*) AS total_reviews FROM reviews WHERE product_id = ?";
+if ($stmt = $conn->prepare($avg_query)) {
+    $stmt->bind_param("i", $product_id);
+    $stmt->execute();
+    $stmt->bind_result($avg_rating_result, $count_rating_result);
+    if ($stmt->fetch()) {
+        $avg_rating = $avg_rating_result;
+        $count_rating = $count_rating_result;
+    }
+    $stmt->close();
+}
 
 $recommended_products = [];
 
